@@ -1,13 +1,7 @@
-//
-//  Created by Matt Greenfield on 24/05/12
-//  Copyright (c) 2012 Big Paua. All rights reserved
-//  http://bigpaua.com/
-//
-
 #import "MGBox.h"
 #import "MGBoxLine.h"
 
-#define DEFAULT_WIDTH     304.0
+#define DEFAULT_WIDTH     704.0
 #define DEFAULT_LEFT_MARGIN 8.0
 
 @interface MGBox ()

@@ -1,19 +1,8 @@
-//
-//  MenuViewController.m
-//  GHSidebarNav
-//
-//  Created by Greg Haines on 1/3/12.
-//  Copyright (c) 2012 Greg Haines. All rights reserved.
-//
-
 #import "MenuViewController.h"
 #import "MenuCell.h"
 #import "SideViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-
-#pragma mark -
-#pragma mark Implementation
 @implementation MenuViewController {
 	SideViewController *_sidebarVC;
 	UISearchBar *_searchBar;
@@ -34,8 +23,7 @@
 		_searchBar = searchBar;
 		_headers = headers;
 		_controllers = controllers;
-		_cellInfos = cellInfos;
-		
+		_cellInfos = cellInfos;		
 		_sidebarVC.sidebarViewController = self;
 		_sidebarVC.contentViewController = _controllers[0][0];
 	}

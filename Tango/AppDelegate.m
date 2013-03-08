@@ -3,20 +3,14 @@
 #import "MenuViewController.h"
 #import "ViewController.h"
 #import "SideViewController.h"
-#pragma mark -
-#pragma mark Private Interface
+
 @interface AppDelegate () <UISearchBarDelegate>
 @property (nonatomic, strong) SideViewController *revealController;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) MenuViewController *menuController;
 @end
 
-
-#pragma mark -
-#pragma mark Implementation
 @implementation AppDelegate
-
-#pragma mark Properties
 @synthesize window;
 @synthesize revealController, searchBar, menuController;
  
@@ -109,6 +103,4 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
-
-/**/
 @end

@@ -1,11 +1,3 @@
-//
-//  MPTransitionEnumerations.h
-//  MPFoldTransition (v1.0.1)
-//
-//  Created by Mark Pospesel on 5/14/12.
-//  Copyright (c) 2012 Mark Pospesel. All rights reserved.
-//
-
 #ifndef MPFoldTransition_MPTransitionEnumerations_h
 #define MPFoldTransition_MPTransitionEnumerations_h
 

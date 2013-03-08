@@ -21,11 +21,7 @@
 - (void)revealSidebar;
 @end
 
-
-#pragma mark -
-#pragma mark Implementation
-@implementation ViewController 
-#pragma mark Memory Management
+@implementation ViewController
 - (id)initWithTitle:(NSString *)title withRevealBlock:(RevealBlock)revealBlock {
     if (self = [super initWithNibName:nil bundle:nil]) {
 		self.title = title;
@@ -52,8 +48,6 @@
                           withImageArray:kImageArray
                                 delegate:self];
 }
-
-#pragma mark - PopoverViewDelegate Methods
 
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
 {

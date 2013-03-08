@@ -1,14 +1,8 @@
-//
-//  Created by Matt Greenfield on 24/05/12
-//  Copyright (c) 2012 Big Paua. All rights reserved
-//  http://bigpaua.com/
-//
-
 #import "MGBoxLine.h"
 #import "MGButton.h"
 
 #define DEFAULT_HEIGHT      40.0
-#define DEFAULT_WIDTH      304.0
+#define DEFAULT_WIDTH      704.0
 #define DEFAULT_LINE_PADDING 4.0
 #define DEFAULT_ITEM_PADDING 3.0
 
