@@ -15,7 +15,7 @@
 #pragma mark Private Interface
 @interface ViewController ()<PopoverViewDelegate,QBImagePickerControllerDelegate,UIScrollViewDelegate>{
     PopoverView *pv;  
-} 
+}                                                           
 @property (nonatomic, retain) QBPopupMenu *popupMenu;
 - (void)pushViewController;
 - (void)revealSidebar;
@@ -27,14 +27,13 @@
 		self.title = title;
 		_revealBlock = [revealBlock copy];
 		self.navigationItem.leftBarButtonItem =
-        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(revealSidebar)];
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(revealSidebar)];
 	}
 	return self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
-{
-    
+{    
     [super viewDidAppear:animated];
     [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation
                                            duration:1];
@@ -72,10 +71,6 @@
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     pv = nil;
-}
-- (void)push4ViewController
-{
-    [self performSegueWithIdentifier:@"full" sender:self];
 }
 
 - (void)push3ViewController
@@ -120,23 +115,20 @@
 	[pushButton sizeToFit];
     [self.view addSubview:pushButton]; 
      
-    UIButton *pushButton2 = [UIButton buttonWithType:UIButtonTypeRoundedRect]; 
+    UIButton *pushButton2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    pushButton2.frame = CGRectMake(0,100,pushButton2.frame.size.width,pushButton2.frame.size.height);
 	[pushButton2 setTitle:@"Push2" forState:UIControlStateNormal];
 	[pushButton2 addTarget:self action:@selector(push2ViewController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton2 sizeToFit];
-   // [self.view addSubview:pushButton2];
+    [self.view addSubview:pushButton2];
     
     UIButton *pushButton3= [UIButton buttonWithType:UIButtonTypeRoundedRect]; 
+	pushButton3.frame = CGRectMake(0,200,pushButton2.frame.size.width,pushButton2.frame.size.height);
 	[pushButton3 setTitle:@"Push3" forState:UIControlStateNormal];
 	[pushButton3 addTarget:self action:@selector(push3ViewController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton3 sizeToFit];
-   // [self.view addSubview:pushButton3];
+    [self.view addSubview:pushButton3];
     
-    UIButton *pushButton4= [UIButton buttonWithType:UIButtonTypeRoundedRect]; 
-	[pushButton4 setTitle:@"Push4" forState:UIControlStateNormal];
-	[pushButton4 addTarget:self action:@selector(push4ViewController) forControlEvents:UIControlEventTouchUpInside];
-	[pushButton4 sizeToFit];
-   // [self.view addSubview:pushButton4];
     // popupMenu
     QBPopupMenu *popupMenu = [[QBPopupMenu alloc] init];
     
