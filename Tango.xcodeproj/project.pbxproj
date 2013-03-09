@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84E1E00D16EADC870086DF15 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E00C16EADC870086DF15 /* Constants.m */; };
 		FE12774516EA2C17009BB9EB /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE12774316EA2C17009BB9EB /* home@2x.png */; };
 		FE12774616EA2C17009BB9EB /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = FE12774416EA2C17009BB9EB /* home.png */; };
 		FE12778716EA3040009BB9EB /* MGBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FE12777D16EA3040009BB9EB /* MGBox.m */; };
@@ -135,6 +136,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84E1E00B16EADC870086DF15 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		84E1E00C16EADC870086DF15 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		FE12774316EA2C17009BB9EB /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
 		FE12774416EA2C17009BB9EB /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		FE12777C16EA3040009BB9EB /* MGBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBox.h; sourceTree = "<group>"; };
@@ -290,6 +293,8 @@
 				FE12778416EA3040009BB9EB /* MGScrollView.m */,
 				FE12778516EA3040009BB9EB /* MGStyledBox.h */,
 				FE12778616EA3040009BB9EB /* MGStyledBox.m */,
+				84E1E00B16EADC870086DF15 /* Constants.h */,
+				84E1E00C16EADC870086DF15 /* Constants.m */,
 			);
 			path = MGBox;
 			sourceTree = "<group>";
@@ -759,6 +764,7 @@
 				FE12778B16EA3040009BB9EB /* MGButton.m in Sources */,
 				FE12778D16EA3040009BB9EB /* MGScrollView.m in Sources */,
 				FE12778F16EA3040009BB9EB /* MGStyledBox.m in Sources */,
+				84E1E00D16EADC870086DF15 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,6 +900,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tango/Tango-Prefix.pch";
 				INFOPLIST_FILE = "Tango/Tango-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -905,6 +912,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tango/Tango-Prefix.pch";
 				INFOPLIST_FILE = "Tango/Tango-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -1,8 +1,6 @@
 #import "MGBox.h"
 #import "MGBoxLine.h"
-
-#define DEFAULT_WIDTH     704.0
-#define DEFAULT_LEFT_MARGIN 8.0
+#import "Constants.h"
 
 @interface MGBox ()
 - (void)drawLine:(UIView *)line fromLines:(NSArray *)lines at:(CGFloat)y;

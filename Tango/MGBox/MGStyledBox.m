@@ -1,9 +1,5 @@
 #import "MGStyledBox.h"
-
-#define DEFAULT_WIDTH          704.0
-#define DEFAULT_TOP_MARGIN      10.0
-#define DEFAULT_LEFT_MARGIN      8.0
-#define CORNER_RADIUS            4.0
+#import "Constants.h"
 
 @implementation MGStyledBox
 

@@ -6,15 +6,8 @@
 //
 
 #import "SideViewController.h"
-#import <QuartzCore/QuartzCore.h>
-
-
-#pragma mark -
-#pragma mark Constants
-const NSTimeInterval kGHRevealSidebarDefaultAnimationDuration = 0.25;
-const CGFloat kGHRevealSidebarWidth = 260.0f;
-const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
-
+#import <QuartzCore/QuartzCore.h> 
+#import "Constants.h"
 
 #pragma mark -
 #pragma mark Private Interface

@@ -1,11 +1,6 @@
 #import "MGBoxLine.h"
 #import "MGButton.h"
-
-#define DEFAULT_HEIGHT      40.0
-#define DEFAULT_WIDTH      704.0
-#define DEFAULT_LINE_PADDING 4.0
-#define DEFAULT_ITEM_PADDING 3.0
-
+#import "Constants.h"
 @interface MGBoxLine ()
 
 - (UILabel *)makeLabel:(NSString *)text right:(BOOL)right;

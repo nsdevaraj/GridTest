@@ -26,11 +26,7 @@
       [super viewDidLoad];
      self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
-
-     UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
-     view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    
-     [self.view addSubview:view];
+ 
     UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect]; 
 	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
 	[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
@@ -41,6 +37,11 @@
 - (void)pushViewController {
     [self.navigationController popViewControllerWithFoldStyle:MPFoldStyleCubic];
     
+}
+
+-(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    scroller.frame = self.view.bounds;
+
 }
 
 - (void)MGLoad {

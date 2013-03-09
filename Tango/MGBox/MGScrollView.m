@@ -1,7 +1,6 @@
 #import "MGScrollView.h"
 #import "MGBoxProtocol.h"
-
-#define BOTTOM_MARGIN 10.0
+#import "Constants.h"
 
 @implementation MGScrollView
 
