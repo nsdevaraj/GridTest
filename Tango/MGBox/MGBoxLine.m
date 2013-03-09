@@ -1,5 +1,6 @@
 #import "MGBoxLine.h"
 #import "MGButton.h"
+#import "MGMushParser.h"
 #import "Constants.h"
 @interface MGBoxLine ()
 
@@ -61,6 +62,7 @@
     return [self multilineWithText:text font:font padding:padding width:0];
 }
 
+
 + (id)multilineWithText:(NSString *)text font:(UIFont *)font
                 padding:(CGFloat)padding width:(CGFloat)width {
     width = width ? width : DEFAULT_WIDTH;
@@ -72,7 +74,13 @@
     label.numberOfLines = 0;
     label.shadowColor = [UIColor whiteColor];
     label.shadowOffset = CGSizeMake(0, 1);
-    label.text = text;
+    if ([text isKindOfClass:NSString.class] && [text hasSuffix:@"|mush"]) {
+        text = [text substringToIndex:[text length] - 5];
+        label.attributedText = [MGMushParser attributedStringFromMush:text font:label.font
+                                                color:label.textColor];
+    }else{
+        label.text = text;
+    }
     CGSize fsize = [label.text sizeWithFont:label.font
             constrainedToSize:CGSizeMake(width - 24, 480)];
     label.frame = CGRectMake(0, 0, width - 24, fsize.height + padding);

@@ -40,7 +40,7 @@
 }
 
 -(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    scroller.frame = self.view.bounds;
+    scroller.frame = self.view.frame;
 
 }
 
@@ -82,10 +82,13 @@
     MGBoxLine *head2 = [MGBoxLine lineWithLeft:@"Multiline Content" right:nil];
     head2.font = headerFont;
     [box2.topLines addObject:head2];
+    id waffle1 = @"Similar to **UITableView**, but without the awkward "
+    "design patterns.\n\n"
+    "Create a table section, add some rows to it, and you're done.\n\n"
+    "Add or remove rows or sections simply by adding/removing them from their "
+    "containing box.|mush";
     
-    NSString *blah = @"Multiline content is automatically sized and formatted "
-    "given an NSString, UIFont, and desired padding.";
-    MGBoxLine *multi = [MGBoxLine multilineWithText:blah font:nil padding:24];
+    MGBoxLine *multi = [MGBoxLine multilineWithText:waffle1 font:nil padding:24];
     [box2.topLines addObject:multi];
     
     MGStyledBox *box3 = [MGStyledBox box];

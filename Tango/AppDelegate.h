@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
++(BOOL) deviceIsPhone;
 @property (strong, nonatomic) UIWindow *window;
 @end

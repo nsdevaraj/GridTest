@@ -1,14 +1,9 @@
-//
-//  GHSidebarViewController.m
-//  GHSidebarNav
-//
-//  Created by Greg Haines on 11/20/11.
-//
-
 #import "SideViewController.h"
 #import <QuartzCore/QuartzCore.h> 
-#import "Constants.h"
 
+const NSTimeInterval kGHRevealSidebarDefaultAnimationDuration = 0.25;
+const CGFloat kGHRevealSidebarWidth = 200.0f;
+const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
 #pragma mark -
 #pragma mark Private Interface
 @interface SideViewController ()

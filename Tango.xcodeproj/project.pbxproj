@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8433185016EAE66B0007E84B /* MGMushParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433184F16EAE66B0007E84B /* MGMushParser.m */; };
 		84E1E00D16EADC870086DF15 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E00C16EADC870086DF15 /* Constants.m */; };
 		FE12774516EA2C17009BB9EB /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE12774316EA2C17009BB9EB /* home@2x.png */; };
 		FE12774616EA2C17009BB9EB /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = FE12774416EA2C17009BB9EB /* home.png */; };
@@ -136,6 +137,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8433184F16EAE66B0007E84B /* MGMushParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMushParser.m; sourceTree = "<group>"; };
+		8433185116EAE6740007E84B /* MGMushParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMushParser.h; sourceTree = "<group>"; };
 		84E1E00B16EADC870086DF15 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		84E1E00C16EADC870086DF15 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		FE12774316EA2C17009BB9EB /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 				FE12778016EA3040009BB9EB /* MGBoxProtocol.h */,
 				FE12778116EA3040009BB9EB /* MGButton.h */,
 				FE12778216EA3040009BB9EB /* MGButton.m */,
+				8433184F16EAE66B0007E84B /* MGMushParser.m */,
+				8433185116EAE6740007E84B /* MGMushParser.h */,
 				FE12778316EA3040009BB9EB /* MGScrollView.h */,
 				FE12778416EA3040009BB9EB /* MGScrollView.m */,
 				FE12778516EA3040009BB9EB /* MGStyledBox.h */,
@@ -765,6 +770,7 @@
 				FE12778D16EA3040009BB9EB /* MGScrollView.m in Sources */,
 				FE12778F16EA3040009BB9EB /* MGStyledBox.m in Sources */,
 				84E1E00D16EADC870086DF15 /* Constants.m in Sources */,
+				8433185016EAE66B0007E84B /* MGMushParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

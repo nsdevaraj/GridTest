@@ -13,18 +13,23 @@
 @implementation AppDelegate
 @synthesize window;
 @synthesize revealController, searchBar, menuController;
- 
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)ssearchBar;
 {
     NSLog(@"%@",ssearchBar.text);
 	[ssearchBar resignFirstResponder];
 }
 
++(BOOL) deviceIsPhone{
+    UIDevice *device = UIDevice.currentDevice;
+    return device.userInterfaceIdiom == UIUserInterfaceIdiomPhone;
+}
+
 #pragma mark UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
 	
-	UIColor *bgColor = [UIColor colorWithRed:(50.0f/255.0f) green:(57.0f/255.0f) blue:(74.0f/255.0f) alpha:1.0f]; 
+	UIColor *bgColor = [UIColor colorWithRed:(50.0f/255.0f) green:(57.0f/255.0f) blue:(74.0f/255.0f) alpha:1.0f];
 	self.revealController = [[SideViewController alloc] initWithNibName:nil bundle:nil];
     
 	self.revealController.view.backgroundColor = bgColor;
