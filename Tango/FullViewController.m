@@ -76,8 +76,7 @@
     // sue me, Gruber!
     self.view.backgroundColor =
     [UIColor colorWithRed:0.29 green:0.32 blue:0.35 alpha:1];
-    
-    UIFont *headerFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+     
     CGSize asize = [UIApplication currentSize];
     CGRect sframe = CGRectMake( 0,0,asize.width,asize.height-50);
     
@@ -89,14 +88,13 @@
     // add a moveable box
     [self addBox:nil];
     
-    // add a new MGBox to the MGScrollView
+  // add a new MGBox to the MGScrollView
     MGStyledBox *box1 = [MGStyledBox box];
     [scroller.boxes addObject:box1];
     
     // add some MGBoxLines to the box
     MGBoxLine *head1 =
     [MGBoxLine lineWithLeft:@"Left And Right Content" right:nil];
-    head1.font = headerFont;
     [box1.topLines addObject:head1];
     
     UISwitch *toggle = [[UISwitch alloc] initWithFrame:CGRectZero];
@@ -104,12 +102,11 @@
     MGBoxLine *line1 =
     [MGBoxLine lineWithLeft:@"NSString and UISwitch" right:toggle];
     [box1.topLines addObject:line1];
-    
+      
     MGStyledBox *box2 = [MGStyledBox box];
     [scroller.boxes addObject:box2];
     
     MGBoxLine *head2 = [MGBoxLine lineWithLeft:@"Multiline Content" right:nil];
-    head2.font = headerFont;
     [box2.topLines addObject:head2];
     id waffle1 = @"Similar to **UITableView**, but without the awkward "
     "design patterns.\n\n"
@@ -126,7 +123,6 @@
     MGBoxLine *head3 =
     [MGBoxLine lineWithLeft:@"NSStrings, UIImages, and UIViews"
                       right:nil];
-    head3.font = headerFont;
     [box3.topLines addObject:head3];
     
     NSString *lineContentWords =

@@ -10,8 +10,8 @@
 
 // BOX GEOMETRY
 
-//Height/width of the actual arrow
-#define kArrowHeight 12.f
+//Height/width of the actual arrow 12
+#define kArrowHeight 0.f
 
 //padding within the box for the contentView
 #define kBoxPadding 10.f

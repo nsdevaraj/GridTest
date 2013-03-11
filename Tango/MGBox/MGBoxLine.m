@@ -87,25 +87,27 @@
                 padding:(CGFloat)padding width:(CGFloat)width {
     CGFloat dwidth = [self getLayoutWidth];
     width = width ? width : dwidth;
-    font = font ? font : [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
+    font = font ? font : [UIFont fontWithName:@"HelveticaNeue-Light" size:14];    
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.font = font;
+    
     label.backgroundColor = [UIColor clearColor];
     label.numberOfLines = 0;
     label.shadowColor = [UIColor whiteColor];
-    label.shadowOffset = CGSizeMake(0, 1);
+    label.shadowOffset = CGSizeMake(0, 1);    
+    label.font = font;
     if ([text isKindOfClass:NSString.class] && [text hasSuffix:@"|mush"]) {
         text = [text substringToIndex:[text length] - 5];
-        label.attributedText = [MGMushParser attributedStringFromMush:text font:label.font
-                                                                color:label.textColor];
-    }else{
+        //commented for leaks
+        //NSAttributedString *attTxt = [MGMushParser attributedStringFromMush:text font: font color:label.textColor];
+        //label.attributedText = attTxt;
+        label.text = text;
+    }else{ 
         label.text = text;
     }
-    CGSize fsize = [label.text sizeWithFont:label.font
+    CGSize fsize = [label.text sizeWithFont:font
                           constrainedToSize:CGSizeMake(width - 24, 480)];
-    label.frame = CGRectMake(0, 0, width - 24, fsize.height + padding);
-    
+    label.frame = CGRectMake(0, 0, width - 24, fsize.height + padding);    
     MGBoxLine *line = [self lineWithLeft:label right:nil width:width];
     line.height = label.frame.size.height;
     return line;

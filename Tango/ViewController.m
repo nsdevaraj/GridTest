@@ -38,9 +38,7 @@
     [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation
                                            duration:1];
     [self didRotateFromInterfaceOrientation:UIInterfaceOrientationPortrait];
-    CGPoint gpoint;
-    gpoint.x = 0;
-    gpoint.y = 0;
+    CGPoint gpoint =  CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     pv = [PopoverView showPopoverAtPoint:gpoint
                                   inView:self.view
                          withStringArray:kStringArray
