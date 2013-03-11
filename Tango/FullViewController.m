@@ -7,6 +7,35 @@
 
 #define ANIM_SPEED 0.6
 
+@interface UIApplication (AppDimensions)
++(CGSize) currentSize;
++(CGSize) sizeInOrientation:(UIInterfaceOrientation)orientation;
+@end
+
+@implementation UIApplication (AppDimensions)
+
++(CGSize) currentSize
+{
+    return [UIApplication sizeInOrientation:[UIApplication sharedApplication].statusBarOrientation];
+}
+
++(CGSize) sizeInOrientation:(UIInterfaceOrientation)orientation
+{
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    UIApplication *application = [UIApplication sharedApplication];
+    if (UIInterfaceOrientationIsLandscape(orientation))
+    {
+        size = CGSizeMake(size.height, size.width);
+    }
+    if (application.statusBarHidden == NO)
+    {
+        size.height -= MIN(application.statusBarFrame.size.width, application.statusBarFrame.size.height);
+    }
+    return size;
+}
+
+@end
+
 @implementation FullViewController {
     MGScrollView *scroller;
 }
@@ -21,15 +50,14 @@
 
 #pragma mark UIViewController
 - (void)viewDidLoad {
-      [super viewDidLoad];
-     self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    [super viewDidLoad];
+    self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
- 
-    UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect]; 
+    
+    UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
 	[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
-	[pushButton sizeToFit];
-	[self.view addSubview:pushButton];
+	[pushButton sizeToFit]; 
     [self MGLoad];
 }
 - (void)pushViewController {
@@ -37,9 +65,10 @@
     
 }
 
--(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    scroller.frame = self.view.frame;
-
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    scroller.boxes = [NSMutableArray new];
+    [scroller drawBoxesWithSpeed:0];
+    [self MGLoad]; 
 }
 
 - (void)MGLoad {
@@ -49,8 +78,10 @@
     [UIColor colorWithRed:0.29 green:0.32 blue:0.35 alpha:1];
     
     UIFont *headerFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
-     
-    scroller = [[MGScrollView alloc] initWithFrame:self.view.frame];
+    CGSize asize = [UIApplication currentSize];
+    CGRect sframe = CGRectMake( 0,0,asize.width,asize.height-50);
+    
+    scroller = [[MGScrollView alloc] initWithFrame:sframe];
     [self.view addSubview:scroller];
     scroller.alwaysBounceVertical = YES;
     scroller.delegate = self;

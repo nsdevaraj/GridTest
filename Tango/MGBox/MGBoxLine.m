@@ -1,3 +1,4 @@
+#import "AppDelegate.h"
 #import "MGBoxLine.h"
 #import "MGButton.h"
 #import "MGMushParser.h"
@@ -24,7 +25,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.contentsLeft = [NSMutableArray array];
         self.contentsRight = [NSMutableArray array];
-
+        
         CGSize size = frame.size;
         self.width = frame.size.width;
         CGRect inner = CGRectMake(0, 0, size.width, size.height);
@@ -34,7 +35,7 @@
         leftViews.backgroundColor = [UIColor clearColor];
         [self addSubview:rightViews];
         [self addSubview:leftViews];
-
+        
         self.height = DEFAULT_HEIGHT;
         self.linePadding = DEFAULT_LINE_PADDING;
         self.itemPadding = DEFAULT_ITEM_PADDING;
@@ -50,10 +51,29 @@
     return [self lineWithWidth:0];
 }
 
++ (CGFloat) getLayoutWidth{
+    CGFloat dwidth;
+    if([AppDelegate deviceIsPhone]){
+        if([AppDelegate orientationIsLandscape]){
+            dwidth= DEFAULT_WIDTH_L;
+        }else{
+            dwidth= DEFAULT_WIDTH_P;
+        }
+    }else{
+        if([AppDelegate orientationIsLandscape]){
+            dwidth= DEFAULT_IPAD_WIDTH_L;
+        }else{
+            dwidth= DEFAULT_IPAD_WIDTH_P;
+        }
+    }
+    return dwidth;
+}
+
 + (id)lineWithWidth:(CGFloat)width {
-    width = width ? width : DEFAULT_WIDTH;
+    CGFloat dwidth = [self getLayoutWidth];
+    width = width ? width : dwidth;
     MGBoxLine *line = [[self alloc] initWithFrame:CGRectMake(0, 0,
-            width, DEFAULT_HEIGHT)];
+                                                             width, DEFAULT_HEIGHT)];
     return line;
 }
 
@@ -65,9 +85,10 @@
 
 + (id)multilineWithText:(NSString *)text font:(UIFont *)font
                 padding:(CGFloat)padding width:(CGFloat)width {
-    width = width ? width : DEFAULT_WIDTH;
+    CGFloat dwidth = [self getLayoutWidth];
+    width = width ? width : dwidth;
     font = font ? font : [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
-
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.font = font;
     label.backgroundColor = [UIColor clearColor];
@@ -77,14 +98,14 @@
     if ([text isKindOfClass:NSString.class] && [text hasSuffix:@"|mush"]) {
         text = [text substringToIndex:[text length] - 5];
         label.attributedText = [MGMushParser attributedStringFromMush:text font:label.font
-                                                color:label.textColor];
+                                                                color:label.textColor];
     }else{
         label.text = text;
     }
     CGSize fsize = [label.text sizeWithFont:label.font
-            constrainedToSize:CGSizeMake(width - 24, 480)];
+                          constrainedToSize:CGSizeMake(width - 24, 480)];
     label.frame = CGRectMake(0, 0, width - 24, fsize.height + padding);
-
+    
     MGBoxLine *line = [self lineWithLeft:label right:nil width:width];
     line.height = label.frame.size.height;
     return line;
@@ -96,9 +117,10 @@
 
 + (id)lineWithLeft:(NSObject *)left right:(NSObject *)right
              width:(CGFloat)width {
-    width = width ? width : DEFAULT_WIDTH;
+    CGFloat dwidth = [self getLayoutWidth];
+    width = width ? width : dwidth;
     MGBoxLine *line = [[self alloc] initWithFrame:CGRectMake(0, 0,
-            width, DEFAULT_HEIGHT)];
+                                                             width, DEFAULT_HEIGHT)];
     if ([left isKindOfClass:[NSArray class]]) {
         line.contentsLeft = (NSMutableArray *)[left mutableCopy];
     } else {
@@ -108,7 +130,7 @@
         line.contentsRight = (NSMutableArray *)[right mutableCopy];
     } else {
         line.contentsRight =
-                right ? [NSMutableArray arrayWithObject:right] : nil;
+        right ? [NSMutableArray arrayWithObject:right] : nil;
     }
     return line;
 }
@@ -120,8 +142,8 @@
     label.font = right && rightFont ? rightFont : font;
     label.textColor = textColor;
     label.lineBreakMode = right
-            ? NSLineBreakByTruncatingHead
-            : NSLineBreakByTruncatingTail;
+    ? NSLineBreakByTruncatingHead
+    : NSLineBreakByTruncatingTail;
     label.shadowColor = [UIColor whiteColor];
     label.shadowOffset = CGSizeMake(0, 1);
     CGSize size = [label.text sizeWithFont:label.font];
@@ -166,11 +188,11 @@
 
 - (CGFloat)layoutLeftWithin:(CGFloat)widthLimit {
     CGFloat x = linePadding + itemPadding;
-
+    
     int i;
     for (i = 0; i < [contentsLeft count]; i++) {
         id piece = [contentsLeft objectAtIndex:i];
-
+        
         // wrap NSStrings in UILabels
         if ([piece isKindOfClass:[NSString class]]) {
             x += itemPadding;
@@ -182,7 +204,7 @@
             label.frame = CGRectMake(x, 0, size.width, size.height);
             [leftViews addSubview:label];
             x += size.width + itemPadding;
-
+            
             // MGButtons are special
         } else if ([piece isKindOfClass:[MGButton class]]) {
             MGButton *button = piece;
@@ -193,14 +215,14 @@
                 size = button.frame.size;
             }
             button.frame = CGRectMake(x, button.frame.origin.y, size.width,
-                    size.height);
+                                      size.height);
             [leftViews addSubview:button];
             x += button.frame.size.width;
-
+            
         } else { // hopefully is a UIView or UIImage then
             UIView *view =
-                    [piece isKindOfClass:[UIImage class]] ? [[UIImageView alloc]
-                           initWithImage:piece] : piece;
+            [piece isKindOfClass:[UIImage class]] ? [[UIImageView alloc]
+                                                     initWithImage:piece] : piece;
             CGSize size = view.frame.size;
             x += itemPadding; // left pad arbitrary views
             CGFloat y = height / 2 - view.frame.size.height / 2;
@@ -209,13 +231,13 @@
             [leftViews addSubview:view];
             x += view.frame.size.width;
         }
-
+        
         // out of room!
         if (x > widthLimit) {
             break;
         }
     }
-
+    
     // ditch leftovers if out of room
     if (i < [contentsLeft count]) {
         for (; i < [contentsLeft count]; i++) {
@@ -224,7 +246,7 @@
             }
         }
     }
-
+    
     leftViews.frame = CGRectMake(0, 0, x, height);
     return self.frame.size.width - x;
 }
@@ -235,7 +257,7 @@
     int i;
     for (i = 0; i < [contentsRight count]; i++) {
         id piece = [contentsRight objectAtIndex:i];
-
+        
         // wrap strings in UILabels
         if ([piece isKindOfClass:[NSString class]]) {
             x -= itemPadding; // right pad labels
@@ -251,7 +273,7 @@
             label.frame = CGRectMake(x, 0, size.width, size.height);
             [rightViews addSubview:label];
             x -= itemPadding;
-
+            
             // MGButtons are special
         } else if ([piece isKindOfClass:[MGButton class]]) {
             MGButton *view = piece;
@@ -265,13 +287,13 @@
                 x -= size.width;
             }
             view.frame =
-                    CGRectMake(x, view.frame.origin.y, size.width, size.height);
+            CGRectMake(x, view.frame.origin.y, size.width, size.height);
             [rightViews addSubview:view];
-
+            
         } else { // hopefully is a UIView or UIImage then
             UIView *view =
-                    [piece isKindOfClass:[UIImage class]] ? [[UIImageView alloc]
-                           initWithImage:piece] : piece;
+            [piece isKindOfClass:[UIImage class]] ? [[UIImageView alloc]
+                                                     initWithImage:piece] : piece;
             CGSize size = view.frame.size;
             x -= size.width;
             x -= itemPadding; // right pad arbitrary views
@@ -280,23 +302,23 @@
             x -= itemPadding; // left pad arbitrary views
             [rightViews addSubview:view];
         }
-
+        
         // out of room!
         if (x < minX) {
             break;
         }
     }
-
+    
     // ditch leftovers if out of room
     if (i < [contentsRight count]) {
         for (; i < [contentsRight count]; i++) {
             if ([[contentsRight objectAtIndex:i]
-                                isKindOfClass:[UIView class]]) {
+                 isKindOfClass:[UIView class]]) {
                 [[contentsRight objectAtIndex:i] removeFromSuperview];
             }
         }
     }
-
+    
     return x;
 }
 
@@ -312,19 +334,19 @@
     underlineType = type;
     CGSize size = self.frame.size;
     switch (underlineType) {
-    case MGUnderlineTop:
-        self.solidUnderline.frame = CGRectMake(0, 0, size.width, 2);
-        [self.layer addSublayer:self.solidUnderline];
-        break;
-    case MGUnderlineBottom:
-        self.solidUnderline.frame =
-                CGRectMake(0, size.height - 1, size.width, 2);
-        [self.layer addSublayer:self.solidUnderline];
-        break;
-    case MGUnderlineNone:
-    default:
-        [self.solidUnderline removeFromSuperlayer];
-        break;
+        case MGUnderlineTop:
+            self.solidUnderline.frame = CGRectMake(0, 0, size.width, 2);
+            [self.layer addSublayer:self.solidUnderline];
+            break;
+        case MGUnderlineBottom:
+            self.solidUnderline.frame =
+            CGRectMake(0, size.height - 1, size.width, 2);
+            [self.layer addSublayer:self.solidUnderline];
+            break;
+        case MGUnderlineNone:
+        default:
+            [self.solidUnderline removeFromSuperlayer];
+            break;
     }
     [self bringSubviewToFront:rightViews];
     [self bringSubviewToFront:leftViews];
@@ -337,7 +359,7 @@
     solidUnderline = [CALayer layer];
     solidUnderline.frame = CGRectMake(0, 0, self.frame.size.width, 2);
     solidUnderline.backgroundColor =
-            [UIColor colorWithWhite:0.87 alpha:1].CGColor;
+    [UIColor colorWithWhite:0.87 alpha:1].CGColor;
     CALayer *bot = [CALayer layer];
     bot.frame = CGRectMake(0, 1, self.frame.size.width, 1);
     bot.backgroundColor = [UIColor whiteColor].CGColor;

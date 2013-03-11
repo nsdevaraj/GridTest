@@ -1,6 +1,7 @@
 #import "MGBox.h"
 #import "MGBoxLine.h"
 #import "Constants.h"
+#import "AppDelegate.h"
 
 @interface MGBox ()
 - (void)drawLine:(UIView *)line fromLines:(NSArray *)lines at:(CGFloat)y;
@@ -23,7 +24,21 @@
 }
 
 + (id)box {
-    CGRect frame = CGRectMake(DEFAULT_LEFT_MARGIN, 0, DEFAULT_WIDTH, 0);
+    CGFloat dwidth;
+    if([AppDelegate deviceIsPhone]){
+        if([AppDelegate orientationIsLandscape]){
+            dwidth= DEFAULT_WIDTH_L;
+        }else{
+             dwidth= DEFAULT_WIDTH_P;
+        }
+    }else{
+        if([AppDelegate orientationIsLandscape]){
+            dwidth= DEFAULT_IPAD_WIDTH_L;
+        }else{
+            dwidth= DEFAULT_IPAD_WIDTH_P;
+        }
+    }
+    CGRect frame = CGRectMake(DEFAULT_LEFT_MARGIN, 0, dwidth, 0);
     MGBox *box = [[self alloc] initWithFrame:frame];
     [box addLayers];
     return box;

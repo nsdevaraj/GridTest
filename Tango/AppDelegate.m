@@ -20,6 +20,10 @@
 	[ssearchBar resignFirstResponder];
 }
 
++(BOOL) orientationIsLandscape{ 
+    return UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
+}
+
 +(BOOL) deviceIsPhone{
     UIDevice *device = UIDevice.currentDevice;
     return device.userInterfaceIdiom == UIUserInterfaceIdiomPhone;

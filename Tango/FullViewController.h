@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "GSSystem.h"
 @class MGBox;
 @interface FullViewController : UIViewController <UIScrollViewDelegate>{
 } 

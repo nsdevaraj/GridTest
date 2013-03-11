@@ -10,5 +10,6 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 +(BOOL) deviceIsPhone;
++(BOOL) orientationIsLandscape;
 @property (strong, nonatomic) UIWindow *window;
 @end

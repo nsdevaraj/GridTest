@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#define DEFAULT_WIDTH     304.0
+#define DEFAULT_WIDTH_P     304.0
+#define DEFAULT_WIDTH_L     454.0
+#define DEFAULT_IPAD_WIDTH_P     744.0
+#define DEFAULT_IPAD_WIDTH_L     1004.0
 #define DEFAULT_LEFT_MARGIN 8.0
 
 #define DEFAULT_HEIGHT      40.0 
