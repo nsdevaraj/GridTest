@@ -1,7 +1,3 @@
-//
-//  Created by matt on 7/11/12.
-//
-
 #import <CoreText/CoreText.h>
 
 @interface MGMushParser : NSObject
@@ -16,5 +12,4 @@
 - (void)parse;
 - (void)strip;
 - (NSAttributedString *)attributedString;
-
 @end

@@ -12,6 +12,8 @@
 
 @implementation AppDelegate
 @synthesize window;
+@synthesize rest;
+@synthesize myPosts,curPgId;
 @synthesize revealController, searchBar, menuController;
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)ssearchBar;
@@ -31,6 +33,10 @@
 
 #pragma mark UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    rest = [[RestAPI alloc]init];
+    rest.urlval = @"https://csocial.cognizant.com";
+    rest.appkey = @"b8a33356e2b9f30b";
+
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
 	
 	UIColor *bgColor = [UIColor colorWithRed:(50.0f/255.0f) green:(57.0f/255.0f) blue:(74.0f/255.0f) alpha:1.0f];
@@ -43,39 +49,64 @@
 	};
     
 	NSArray *headers = @[
-                      @"PAGES",
-                      @"FAVORITES",
-                      @"TAGS"
+                      @"STREAM",
+                      @"SPACES",
+                      @"ACTIVITY"/*,
+                      @"NOTIFICATIONS"*/
                       ];
 	NSArray *controllers = @[
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Profile" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Profile2" withRevealBlock:revealBlock]]
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Public" withRevealBlock:revealBlock]]
+                              //,[[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Polls" withRevealBlock:revealBlock]],
+                              //[[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Docs" withRevealBlock:revealBlock]]
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"News Feed" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Messages" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Nearby" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Events" withRevealBlock:revealBlock]]
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Pages" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Contacts" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Aspects" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Tags" withRevealBlock:revealBlock]]
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Friends" withRevealBlock:revealBlock]]
-                              ]
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Notifications" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Mentions" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Comments" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Likes" withRevealBlock:revealBlock]]
+                              ]/*,
+                          @[
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Mentioned" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Commented" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Also Commented" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Liked" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Reshared" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Page's Posts" withRevealBlock:revealBlock]]
+                              ]*/
                           ];
 	NSArray *cellInfos = @[
                         @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Profile", @"")},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Profile2", @"")}
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Stream", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Public", @"")}
                             ],
                         @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"News Feed", @"")},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Messages", @"")},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Nearby", @"")},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Events", @"")}
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Pages", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Contacts", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Aspects", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Tags", @"")}
                             ],
                         @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Friends", @"")}
-                            ]
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Notifications", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Mentions", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Comments", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Likes", @"")}
+                            ]/*,
+                        @[
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Mentioned", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Commented", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Also Commented", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Likes", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Reshared", @"")},
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Page's Posts", @"")}
+                            ]*/
                         ];
 	// Add drag feature to each root navigation controller
 	[controllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){

@@ -6,6 +6,7 @@
 #import "MPFoldTransition.h"
 #import "MPFlipTransition.h"
 #import "PopoverView.h"   
+#import "LoginViewController.h"
 
 #define FULL_VIEW_IDENTIFIER		@"FullViewController"
 #define kStringArray [NSArray arrayWithObjects:@"YES", @"NO", nil]
@@ -39,11 +40,14 @@
                                            duration:1];
     [self didRotateFromInterfaceOrientation:UIInterfaceOrientationPortrait];
     CGPoint gpoint =  CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-    pv = [PopoverView showPopoverAtPoint:gpoint
+   /* pv = [PopoverView showPopoverAtPoint:gpoint
                                   inView:self.view
                          withStringArray:kStringArray
                           withImageArray:kImageArray
-                                delegate:self];
+                                delegate:self];*/
+    LoginViewController *login = [[LoginViewController alloc]init];
+    
+    pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login.view delegate:self];
 }
 
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index

@@ -1,7 +1,3 @@
-//
-// Created by matt on 7/11/12.
-//
-
 #import "MGMushParser.h"
 
 @implementation MGMushParser {
