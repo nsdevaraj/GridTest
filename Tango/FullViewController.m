@@ -1,8 +1,6 @@
-#import "FullViewController.h"   
-
+#import "FullViewController.h"
 #import "MPFoldTransition.h"
 #import "MPFlipTransition.h"
-
 #import "MGScrollView.h"
 #import "MGStyledBox.h"
 #import "MGBoxLine.h"
