@@ -83,19 +83,27 @@
 -(void) loggedIn{ 
     [appDelegate.menuController._headers replaceObjectAtIndex:1 withObject:[appDelegate.rest.currentperson.name uppercaseString]];
     NSDictionary *dict = appDelegate.menuController._cellInfos[3][0];
-    NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:NSLocalizedString(@"Notifications (3)", @"")};
+    NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:@"Notifications - 3"}; 
+    [self infoArray:3 :0 :mobj];
+
+    NSDictionary *pdict = appDelegate.menuController._cellInfos[1][0];
+    NSObject *pobj =@{kSidebarCellImageKey:pdict[kSidebarCellImageKey],kSidebarCellTextKey:pdict[kSidebarCellTextKey]};
+    [self infoArray:1 :0 :pobj];
+    [appDelegate.menuController reloadData];
+}
+
+- (void) infoArray :(int)index :(int)row :(NSObject*)mobj{
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    NSArray *activArr= [appDelegate.menuController._cellInfos objectAtIndex:3];
+    NSArray *activArr= [appDelegate.menuController._cellInfos objectAtIndex:index];
     for(int i=0; i<[activArr count]; i++){
         NSObject *obj = [activArr objectAtIndex:i];
-        if(i==0) {
+        if(i==row) {
             [arr addObject:mobj];
         }else{
             [arr addObject:obj];
         }
     }
-    [appDelegate.menuController._cellInfos replaceObjectAtIndex:3 withObject:arr];
-    [appDelegate.menuController reloadData];
+   [appDelegate.menuController._cellInfos replaceObjectAtIndex:index withObject: arr];
 }
 
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
