@@ -9,15 +9,15 @@
 	UITableView *_menuTableView;
 	NSMutableArray *_headers;
 	NSArray *_controllers;
-	NSArray *_cellInfos;
+	NSMutableArray *_cellInfos;
 }
-@synthesize _headers;
+@synthesize _headers,_cellInfos;
 #pragma mark Memory Management
 - (id)initWithSidebarViewController:(SideViewController *)sidebarVC 
 					  withSearchBar:(UISearchBar *)searchBar 
 						withHeaders:(NSMutableArray *)headers
 					withControllers:(NSArray *)controllers 
-					  withCellInfos:(NSArray *)cellInfos {
+					  withCellInfos:(NSMutableArray *)cellInfos {
 	if (self = [super initWithNibName:nil bundle:nil]) {
 		_sidebarVC = sidebarVC;
 		_searchBar = searchBar;
@@ -76,8 +76,8 @@
         cell = [[MenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 	NSDictionary *info = _cellInfos[indexPath.section][indexPath.row];
-	cell.textLabel.text = info[kSidebarCellTextKey];
-	cell.imageView.image = info[kSidebarCellImageKey];
+	cell.textLabel.text =info[kSidebarCellTextKey]; //[info valueForKey:[NSString stringWithFormat:@"%@",  kSidebarCellTextKey]];
+	cell.imageView.image =info[kSidebarCellImageKey]; //[info valueForKey:[NSString stringWithFormat:@"%@", kSidebarCellImageKey]];
     return cell;
 }
 
@@ -122,6 +122,9 @@
         [headerView addTarget:self action:@selector(touch:) forControlEvents:capture];
 	}
 	return headerView;
+}
+- (void) reloadData{
+[_menuTableView reloadData];
 }
 - (void) touch:(UIControl *)sender { 
     NSLog(@"%@",sender.subviews);

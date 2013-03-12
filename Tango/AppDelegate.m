@@ -1,13 +1,11 @@
 #import "AppDelegate.h"
 #import "MenuCell.h"
-#import "MenuViewController.h"
 #import "ViewController.h"
 #import "SideViewController.h"
 
 @interface AppDelegate () <UISearchBarDelegate>
 @property (nonatomic, strong) SideViewController *revealController;
 @property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, strong) MenuViewController *menuController;
 @end
 
 @implementation AppDelegate
@@ -78,7 +76,7 @@
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Likes" withRevealBlock:revealBlock]]
                               ]
                           ];
-	NSArray *cellInfos = @[
+	NSMutableArray *cellInfos =  [NSMutableArray arrayWithArray:@[
                         @[
                             @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Stream", @"")},
                             @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Public", @"")}
@@ -107,7 +105,7 @@
                             @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Reshared", @"")},
                             @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: NSLocalizedString(@"Page's Posts", @"")}
                             ]*/
-                        ];
+                        ]];
 	// Add drag feature to each root navigation controller
 	[controllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
 		[((NSArray *)obj) enumerateObjectsUsingBlock:^(id obj2, NSUInteger idx2, BOOL *stop2){

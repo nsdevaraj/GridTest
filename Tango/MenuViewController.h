@@ -14,4 +14,6 @@
 			  scrollPosition:(UITableViewScrollPosition)scrollPosition;
 
 @property (nonatomic, strong) NSMutableArray *_headers;
+@property (nonatomic, strong) NSMutableArray *_cellInfos;
+- (void) reloadData;
 @end

@@ -7,7 +7,7 @@
 #import "MPFlipTransition.h"
 #import "PopoverView.h"
 #import "LoginView.h"
-
+#import "MenuCell.h"
 #define STAccountNumberKey		@"accountNumber"
 #define STPinNumberKey			@"AccessTokenKey"
 #define FULL_VIEW_IDENTIFIER		@"FullViewController"
@@ -15,6 +15,14 @@
 
 #pragma mark -
 #pragma mark Private Interface
+@interface NSDictionary(sdfsubscripts)
+- (id)objectForKeyedSubscript:(id)key;
+@end
+
+@interface NSMutableDictionary(sdfsubscripts)
+- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
+@end
+
 @interface ViewController ()<PopoverViewDelegate,QBImagePickerControllerDelegate,UIScrollViewDelegate>{
     PopoverView *pv;
     LoginView *login;
@@ -72,9 +80,24 @@
     if(pv==nil)pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login delegate:self];
 }
 
--(void) loggedIn{
-    
+-(void) loggedIn{ 
+    [appDelegate.menuController._headers replaceObjectAtIndex:1 withObject:[appDelegate.rest.currentperson.name uppercaseString]];
+    NSDictionary *dict = appDelegate.menuController._cellInfos[3][0];
+    NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:NSLocalizedString(@"Notifications (3)", @"")};
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    NSArray *activArr= [appDelegate.menuController._cellInfos objectAtIndex:3];
+    for(int i=0; i<[activArr count]; i++){
+        NSObject *obj = [activArr objectAtIndex:i];
+        if(i==0) {
+            [arr addObject:mobj];
+        }else{
+            [arr addObject:obj];
+        }
+    }
+    [appDelegate.menuController._cellInfos replaceObjectAtIndex:3 withObject:arr];
+    [appDelegate.menuController reloadData];
 }
+
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
 {
     [self performSelector:@selector(setHidden:) withObject:popoverView afterDelay:0.1];

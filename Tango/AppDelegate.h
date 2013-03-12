@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MenuViewController.h"
 #import "RestAPI.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     
@@ -19,5 +19,6 @@
 @property (nonatomic, strong) RestAPI *rest;
 @property (nonatomic, strong) NSMutableArray *myPosts; 
 @property (nonatomic, strong) NSString *curPgId;
+@property (nonatomic, strong) MenuViewController *menuController;
 @end
  
