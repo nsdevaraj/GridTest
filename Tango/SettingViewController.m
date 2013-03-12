@@ -55,7 +55,7 @@
     [largeButton setImage:[UIImage imageNamed:@"LoginButton_Nor"] forState:UIControlStateNormal];
     [largeButton setImage:[UIImage imageNamed:@"LoginButton_Hov"] forState:UIControlStateSelected];
     [largeButton addTarget:self action:@selector(ButtonReleased:) forControlEvents:UIControlEventTouchUpInside];
-	// Do any additional setup after loading the view.
+
     CSLinearLayoutItem *logout = [self newItem:largeButton];
     [linearLayoutView addItem:logout];
 }
@@ -70,6 +70,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:appDelegate.rest.authorization forKey:STPinNumberKey];
     [[NSUserDefaults standardUserDefaults] setObject:appDelegate.rest.currentuserid forKey:STAccountNumberKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDelegate.menuController relogin];
 }
 
 - (CSLinearLayoutItem *)newItem :(id)view{

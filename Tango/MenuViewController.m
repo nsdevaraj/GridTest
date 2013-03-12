@@ -6,10 +6,10 @@
 @implementation MenuViewController {
 	SideViewController *_sidebarVC;
 	UISearchBar *_searchBar;
-	UITableView *_menuTableView;
 	NSMutableArray *_headers;
 	NSArray *_controllers;
 	NSMutableArray *_cellInfos;
+    UITableView *_menuTableView;
 }
 @synthesize _headers,_cellInfos;
 #pragma mark Memory Management
@@ -123,6 +123,11 @@
 	}
 	return headerView;
 }
+
+- (void) relogin{
+    [self tableView:_menuTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
 - (void) reloadData{
 [_menuTableView reloadData];
 }

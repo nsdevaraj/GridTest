@@ -13,16 +13,6 @@
 #define FULL_VIEW_IDENTIFIER		@"FullViewController"
 #define kImageArray [NSArray arrayWithObjects:[UIImage imageNamed:@"success"], [UIImage imageNamed:@"error"], nil]
 
-#pragma mark -
-#pragma mark Private Interface
-@interface NSDictionary(sdfsubscripts)
-- (id)objectForKeyedSubscript:(id)key;
-@end
-
-@interface NSMutableDictionary(sdfsubscripts)
-- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
-@end
-
 @interface ViewController ()<PopoverViewDelegate,QBImagePickerControllerDelegate,UIScrollViewDelegate>{
     PopoverView *pv;
     LoginView *login;
@@ -59,7 +49,7 @@
     [super viewDidAppear:animated];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [self loginSuccess];
-    
+    login= [[LoginView alloc]init];
     if(appDelegate.rest.authorization.length <2 || [appDelegate.rest.authorization isEqual: @"no network"] ){
         [self displayLogin];
     }else{
@@ -75,7 +65,6 @@
 }
 
 -(void) displayLogin{
-    if(login==nil) login= [[LoginView alloc]init];
     CGPoint gpoint =  CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     if(pv==nil)pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login delegate:self];
 }
@@ -116,7 +105,7 @@
 
 -(void) setHidden:(PopoverView *)popoverView{
     if(appDelegate.rest.authorization.length >2 && ![appDelegate.rest.authorization isEqual: @"no network"] ){
-        [popoverView showImage:[UIImage imageNamed:@"success"] withMessage:@"YES"];
+        [popoverView showImage:[UIImage imageNamed:@"success"] withMessage:@"ST"];
         [popoverView performSelector:@selector(dismiss) withObject:nil afterDelay:0.5f];
         [self loggedIn];
     }
