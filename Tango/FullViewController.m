@@ -83,8 +83,7 @@
     [self MGLoad];
 }
 
-- (void)MGLoad {
-    
+- (void)MGLoad { 
     // sue me, Gruber!
     self.view.backgroundColor =
     [UIColor colorWithRed:0.29 green:0.32 blue:0.35 alpha:1];

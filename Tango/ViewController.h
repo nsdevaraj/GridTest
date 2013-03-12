@@ -13,7 +13,8 @@ typedef void (^RevealBlock)();
 @private
 	RevealBlock _revealBlock;
 }
-@property (nonatomic, strong) AppDelegate *appDelegate; 
+@property (nonatomic, strong) AppDelegate *appDelegate;
+- (id)initWithTitle:(NSString *)title;
 - (id)initWithTitle:(NSString *)title withRevealBlock:(RevealBlock)revealBlock;
 -(void) displayLogin;
 @end

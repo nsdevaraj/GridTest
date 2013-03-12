@@ -3,7 +3,7 @@
 #import "QBPopupMenu.h"
 #import "QBImagePickerController.h"
 #import "FullViewController.h"
-#import "MPFoldTransition.h" 
+#import "MPFoldTransition.h"
 #import "PopoverView.h"
 #import "LoginView.h"
 #import "MenuCell.h"
@@ -29,8 +29,36 @@
 		_revealBlock = [revealBlock copy];
 		self.navigationItem.leftBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(revealSidebar)];
+        self.navigationItem.rightBarButtonItem = [self composeButton];
 	}
 	return self;
+}
+
+#pragma mark Memory Management
+- (id)initWithTitle:(NSString *)title {
+	if (self = [super initWithNibName:nil bundle:nil]) {
+		self.title = title;
+        UIButton* backButton = [UIButton buttonWithType:101];
+        [backButton addTarget:self action:@selector(dismissView:) forControlEvents:UIControlEventTouchUpInside];
+        [backButton setTitle:[title substringToIndex:[title length] - 8] forState:UIControlStateNormal];
+        UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];        
+        self.navigationItem.leftBarButtonItem = backItem;
+        self.navigationItem.rightBarButtonItem = [self composeButton];
+	}
+	return self;
+}
+
+-(UIBarButtonItem*) composeButton{
+    UIButton* composeButton = [UIButton buttonWithType:102];
+    [composeButton addTarget:self action:@selector(composePost:) forControlEvents:UIControlEventTouchUpInside];
+    [composeButton setTitle:@"New Post" forState:UIControlStateNormal];
+    UIBarButtonItem* composeItem = [[UIBarButtonItem alloc] initWithCustomView:composeButton];
+    return composeItem;    
+}
+
+-(void) dismissView: (id)sender
+{
+    [self.navigationController popViewControllerWithFoldStyle:MPFoldStyleCubic];
 }
 
 - (void)loginSuccess
@@ -68,16 +96,16 @@
     if(pv==nil)pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login delegate:self];
 }
 
--(void) loggedIn{ 
+-(void) loggedIn{
     [appDelegate.menuController._headers replaceObjectAtIndex:1 withObject:[appDelegate.rest.currentperson.name uppercaseString]];
     NSDictionary *dict = appDelegate.menuController._cellInfos[3][0];
-    NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:@"Notifications - 3"}; 
+    NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:@"Notifications - 3"};
     [self infoArray:3 :0 :mobj];
-
-    NSDictionary *pdict = appDelegate.menuController._cellInfos[1][0]; 
+    
+    NSDictionary *pdict = appDelegate.menuController._cellInfos[1][0];
     UIImage *profieImg = [UIImage imageWithData:
-     [NSData dataWithContentsOfURL:
-      [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
+                          [NSData dataWithContentsOfURL:
+                           [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
     NSObject *pobj =@{kSidebarCellImageKey:profieImg,kSidebarCellTextKey:pdict[kSidebarCellTextKey]};
     [self infoArray:1 :0 :pobj];
     [appDelegate.menuController reloadData];
@@ -94,7 +122,7 @@
             [arr addObject:obj];
         }
     }
-   [appDelegate.menuController._cellInfos replaceObjectAtIndex:index withObject: arr];
+    [appDelegate.menuController._cellInfos replaceObjectAtIndex:index withObject: arr];
 }
 
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
@@ -116,8 +144,7 @@
     pv = nil;
 }
 
-- (void)push3ViewController
-{
+- (void)composePost :(id)sender{
     QBImagePickerController *imagePickerController = [[QBImagePickerController alloc] init];
     imagePickerController.delegate = self;
     imagePickerController.allowsMultipleSelection = YES;
@@ -126,18 +153,14 @@
     [self presentViewController:navigationController animated:YES completion:NULL];
 }
 
-- (void)push2ViewController {
+- (void)actionsController {
     [self.popupMenu showInView:self.view atPoint:CGPointMake(100,100)];
 }
 
 #pragma mark Private Methods
 - (void)pushViewController {
 	NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"];
-    
-	UIViewController *vc = [[FullViewController alloc] initWithTitle:vcTitle];
-	//[self.navigationController pushViewController:vc animated:YES];
-    
-    [self.navigationController pushViewController:vc foldStyle:MPFoldStyleFlipFoldBit(MPFoldStyleCubic)];
+    [self.navigationController pushViewController:[[FullViewController alloc] initWithTitle:vcTitle] foldStyle:MPFoldStyleFlipFoldBit(MPFoldStyleCubic)];
 }
 
 - (void)revealSidebar {
@@ -154,23 +177,11 @@
     
 	UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
-	[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
+	//[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
+	[pushButton addTarget:self action:@selector(actionsController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton sizeToFit];
     [self.view addSubview:pushButton];
-    
-    UIButton *pushButton2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    pushButton2.frame = CGRectMake(0,100,pushButton2.frame.size.width,pushButton2.frame.size.height);
-	[pushButton2 setTitle:@"Push2" forState:UIControlStateNormal];
-	[pushButton2 addTarget:self action:@selector(push2ViewController) forControlEvents:UIControlEventTouchUpInside];
-	[pushButton2 sizeToFit];
-    [self.view addSubview:pushButton2];
-    
-    UIButton *pushButton3= [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	pushButton3.frame = CGRectMake(0,200,pushButton2.frame.size.width,pushButton2.frame.size.height);
-	[pushButton3 setTitle:@"Push3" forState:UIControlStateNormal];
-	[pushButton3 addTarget:self action:@selector(push3ViewController) forControlEvents:UIControlEventTouchUpInside];
-	[pushButton3 sizeToFit];
-    [self.view addSubview:pushButton3];
+     
     
     // popupMenu
     QBPopupMenu *popupMenu = [[QBPopupMenu alloc] init];

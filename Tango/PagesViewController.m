@@ -8,7 +8,7 @@
 
 #import "PagesViewController.h"
 #import "Cell.h"
-#import "FullViewController.h"
+#import "ViewController.h"
 #import "MPFoldTransition.h" 
 @interface PagesViewController ()
 
@@ -30,7 +30,7 @@
     NSIndexPath* pinchedCellPath = [self.collectionView indexPathForItemAtPoint:[sender locationInView:self.collectionView]];
     NSLog(@"%@",pinchedCellPath);
     NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"];
-	UIViewController *vc = [[FullViewController alloc] initWithTitle:vcTitle];
+	UIViewController *vc = [[ViewController alloc] initWithTitle:vcTitle];
     [self.navigationController pushViewController:vc foldStyle:MPFoldStyleFlipFoldBit(MPFoldStyleCubic)];
 }
 

@@ -75,12 +75,12 @@
                               ],
                           @[
                               [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Pages" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Contacts" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Aspects" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Tags" withRevealBlock:revealBlock]]
+                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Contacts" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Aspects" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Tags" withRevealBlock:revealBlock]]
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Notifications" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Notifications" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Mentions" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Comments" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Likes" withRevealBlock:revealBlock]]

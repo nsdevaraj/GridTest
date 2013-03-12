@@ -803,6 +803,15 @@
 			name = PSTView;
 			sourceTree = "<group>";
 		};
+		FE88629F16EF2AC400162AA7 /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				FEB1D29216E9ACC100137C28 /* ViewController.h */,
+				FEB1D29616E9ACC100137C28 /* ViewController.m */,
+			);
+			name = Stream;
+			sourceTree = "<group>";
+		};
 		FEB1D22A16E9AC7400137C28 = {
 			isa = PBXGroup;
 			children = (
@@ -909,12 +918,11 @@
 		FEB1D28E16E9ACAF00137C28 /* Nav */ = {
 			isa = PBXGroup;
 			children = (
+				FE88629F16EF2AC400162AA7 /* Stream */,
 				FE88625216EF0B0000162AA7 /* Spaces */,
 				FE88624B16EEF22800162AA7 /* Settings */,
 				FE244FC016EDE818003E53A6 /* Login */,
 				FEB1D33316E9DAFF00137C28 /* FullView */,
-				FEB1D29216E9ACC100137C28 /* ViewController.h */,
-				FEB1D29616E9ACC100137C28 /* ViewController.m */,
 			);
 			name = Nav;
 			sourceTree = "<group>";
