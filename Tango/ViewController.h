@@ -6,14 +6,14 @@
 //
 
 #import <Foundation/Foundation.h> 
-#import "AppDelegate.h"
+#import "AppDelegate.h" 
 typedef void (^RevealBlock)();
 
 @interface ViewController : UIViewController {
 @private
 	RevealBlock _revealBlock;
 }
-@property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic, strong) AppDelegate *appDelegate; 
 - (id)initWithTitle:(NSString *)title withRevealBlock:(RevealBlock)revealBlock;
 -(void) displayLogin;
 @end

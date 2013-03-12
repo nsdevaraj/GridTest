@@ -86,8 +86,11 @@
     NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:@"Notifications - 3"}; 
     [self infoArray:3 :0 :mobj];
 
-    NSDictionary *pdict = appDelegate.menuController._cellInfos[1][0];
-    NSObject *pobj =@{kSidebarCellImageKey:pdict[kSidebarCellImageKey],kSidebarCellTextKey:pdict[kSidebarCellTextKey]};
+    NSDictionary *pdict = appDelegate.menuController._cellInfos[1][0]; 
+    UIImage *profieImg = [UIImage imageWithData:
+     [NSData dataWithContentsOfURL:
+      [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
+    NSObject *pobj =@{kSidebarCellImageKey:profieImg,kSidebarCellTextKey:pdict[kSidebarCellTextKey]};
     [self infoArray:1 :0 :pobj];
     [appDelegate.menuController reloadData];
 }

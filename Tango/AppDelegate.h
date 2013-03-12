@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MenuViewController.h"
 #import "RestAPI.h"
+#import "HJObjManager.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     
     NSMutableArray *myPosts;
@@ -20,5 +21,6 @@
 @property (nonatomic, strong) NSMutableArray *myPosts; 
 @property (nonatomic, strong) NSString *curPgId;
 @property (nonatomic, strong) MenuViewController *menuController;
+@property (nonatomic, retain) HJObjManager *imgMan;
 @end
  

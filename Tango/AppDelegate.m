@@ -34,7 +34,10 @@
     rest = [[RestAPI alloc]init];
     rest.urlval = @"https://csocial.cognizant.com";
     rest.appkey = @"b8a33356e2b9f30b";
-
+    self.imgMan = [[HJObjManager alloc] init];
+	NSString* cacheDirectory = [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/imgcache/imgtable/"] ;
+	HJMOFileCache* fileCache = [[HJMOFileCache alloc] initWithRootPath:cacheDirectory];
+    self.imgMan.fileCache = fileCache;
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
 	
 	UIColor *bgColor = [UIColor colorWithRed:(50.0f/255.0f) green:(57.0f/255.0f) blue:(74.0f/255.0f) alpha:1.0f];
