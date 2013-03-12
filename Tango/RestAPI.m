@@ -29,7 +29,7 @@
 @synthesize authorization;
 @synthesize currentuserid;
 @synthesize currentperson;
-@synthesize pageArr,aspectArr,tagArr,contactArr;
+@synthesize pageArr,aspectArr,tagArr,contactArr,notifyArr;
 - (id) jsonResponse:(NSString *) myServerUrl :(NSString *) postString :(NSString *) type{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[myServerUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:300.0];
@@ -553,7 +553,7 @@
         NSDictionary *myDicts =obj;
         ucontacts= [[NSMutableArray alloc]init];
         NSMutableArray *arr = [[myDicts objectForKey:@"result"]  objectForKey:@"entry"];
-        NSString *nextUrl; 
+        NSString *nextUrl;
         nextUrl = [myDicts objectForKey:@"next_page_link"];
         for (int i=0; i<[arr count]; i++ ){
             ST_People *person =[[ST_People alloc] init];

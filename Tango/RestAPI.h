@@ -23,6 +23,7 @@
 @property (strong, retain) NSMutableArray *pageArr;
 @property (strong, retain) NSMutableArray *aspectArr;
 @property (strong, retain) NSMutableArray *tagArr;
+@property (strong, retain) NSMutableArray *notifyArr;
 @property (strong, retain) NSMutableArray *contactArr;
 @property (strong, retain) NSString *urlval;
 @property (strong, retain) ST_People *currentperson;
