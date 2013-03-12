@@ -7,7 +7,6 @@
 //
 
 #import "PagesViewController.h"
-
 #import "Cell.h"
 @interface PagesViewController ()
 
@@ -19,6 +18,7 @@
 {
 	[super viewDidLoad];
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"MY_CELL"];
+    [self.collectionView setDelegate:self];
 }
 
 - (NSInteger)collectionView:(PSUICollectionView *)view numberOfItemsInSection:(NSInteger)section;
@@ -31,6 +31,10 @@
     Cell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"MY_CELL" forIndexPath:indexPath];
     cell.label.text = [NSString stringWithFormat:@"%d",indexPath.item];
     return cell;
+}
+
+- (void)selectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PSTCollectionViewScrollPosition)scrollPosition{
+    NSLog(@"%@",@"Here");
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {

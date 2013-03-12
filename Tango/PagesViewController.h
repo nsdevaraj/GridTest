@@ -10,7 +10,7 @@
 #import "PSTCollectionView.h"
 typedef void (^PRevealBlock)();
 
-@interface PagesViewController : PSUICollectionViewController{
+@interface PagesViewController : PSUICollectionViewController<PSTCollectionViewDelegate>{
 @private
 	PRevealBlock _revealBlock;
 }
