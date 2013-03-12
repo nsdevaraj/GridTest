@@ -118,6 +118,7 @@
     if(appDelegate.rest.authorization.length >2 && ![appDelegate.rest.authorization isEqual: @"no network"] ){
         [popoverView showImage:[UIImage imageNamed:@"success"] withMessage:@"YES"];
         [popoverView performSelector:@selector(dismiss) withObject:nil afterDelay:0.5f];
+        [self loggedIn];
     }
 }
 

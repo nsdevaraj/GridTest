@@ -52,6 +52,7 @@ const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
 	}
 }
 
+
 - (void)setContentViewController:(UIViewController *)cvc {
 	if (contentViewController == nil) {
 		cvc.view.frame = _contentView.bounds;

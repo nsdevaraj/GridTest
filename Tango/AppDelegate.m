@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 #import "MenuCell.h"
 #import "ViewController.h"
+#import "SettingViewController.h"
 #import "SideViewController.h"
 
 @interface AppDelegate () <UISearchBarDelegate>
@@ -34,10 +35,12 @@
     rest = [[RestAPI alloc]init];
     rest.urlval = @"https://csocial.cognizant.com";
     rest.appkey = @"b8a33356e2b9f30b";
+    
     self.imgMan = [[HJObjManager alloc] init];
 	NSString* cacheDirectory = [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/imgcache/imgtable/"] ;
 	HJMOFileCache* fileCache = [[HJMOFileCache alloc] initWithRootPath:cacheDirectory];
     self.imgMan.fileCache = fileCache;
+    
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
 	
 	UIColor *bgColor = [UIColor colorWithRed:(50.0f/255.0f) green:(57.0f/255.0f) blue:(74.0f/255.0f) alpha:1.0f];
@@ -64,7 +67,7 @@
                               ],
                           @[
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Profile" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Settings" withRevealBlock:revealBlock]]
+                              [[UINavigationController alloc] initWithRootViewController:[[[SettingViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Settings" withRevealBlock:revealBlock]]
                               ],
                           @[
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Pages" withRevealBlock:revealBlock]],

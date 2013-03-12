@@ -147,6 +147,8 @@
 		FE86FA2C16EA0AC700654414 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE86FA2816EA0AC700654414 /* arrow@2x.png */; };
 		FE88624416EEB5E000162AA7 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE88624316EEB5E000162AA7 /* LoginView.m */; };
 		FE88624516EEB5E000162AA7 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE88624316EEB5E000162AA7 /* LoginView.m */; };
+		FE88624F16EEF24200162AA7 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE88624E16EEF24200162AA7 /* SettingViewController.m */; };
+		FE88625016EEF24200162AA7 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE88624E16EEF24200162AA7 /* SettingViewController.m */; };
 		FEB1D23716E9AC7400137C28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB1D23616E9AC7400137C28 /* UIKit.framework */; };
 		FEB1D23916E9AC7400137C28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB1D23816E9AC7400137C28 /* Foundation.framework */; };
 		FEB1D23B16E9AC7400137C28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB1D23A16E9AC7400137C28 /* CoreGraphics.framework */; };
@@ -375,6 +377,8 @@
 		FE86FA2816EA0AC700654414 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		FE88624216EEB5E000162AA7 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		FE88624316EEB5E000162AA7 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		FE88624D16EEF24200162AA7 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		FE88624E16EEF24200162AA7 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		FEB1D23316E9AC7400137C28 /* Tango.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tango.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB1D23616E9AC7400137C28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FEB1D23816E9AC7400137C28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -669,6 +673,15 @@
 			name = MGBoxImages;
 			sourceTree = "<group>";
 		};
+		FE88624B16EEF22800162AA7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FE88624D16EEF24200162AA7 /* SettingViewController.h */,
+				FE88624E16EEF24200162AA7 /* SettingViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		FEB1D22A16E9AC7400137C28 = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +788,7 @@
 		FEB1D28E16E9ACAF00137C28 /* Nav */ = {
 			isa = PBXGroup;
 			children = (
+				FE88624B16EEF22800162AA7 /* Settings */,
 				FE244FC016EDE818003E53A6 /* Login */,
 				FEB1D27416E9ACA600137C28 /* SideView */,
 				FEB1D33316E9DAFF00137C28 /* FullView */,
@@ -924,10 +938,8 @@
 		FEB1D33216E9DA8A00137C28 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				FEB1D28F16E9ACC100137C28 /* MenuCell.h */,
 				FE244F7116EDA89C003E53A6 /* UIPlaceHolderTextView.h */,
 				FE244F7216EDA89C003E53A6 /* UIPlaceHolderTextView.m */,
-				FEB1D29316E9ACC100137C28 /* MenuCell.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -944,6 +956,8 @@
 		FEB1D33416E9DB4600137C28 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				FEB1D28F16E9ACC100137C28 /* MenuCell.h */,
+				FEB1D29316E9ACC100137C28 /* MenuCell.m */,
 				FEB1D29016E9ACC100137C28 /* MenuViewController.h */,
 				FEB1D29416E9ACC100137C28 /* MenuViewController.m */,
 			);
@@ -1221,6 +1235,7 @@
 				FE244FBA16EDA971003E53A6 /* ST_Tags.m in Sources */,
 				FE244FBC16EDA971003E53A6 /* ST_Teampages.m in Sources */,
 				FE88624416EEB5E000162AA7 /* LoginView.m in Sources */,
+				FE88624F16EEF24200162AA7 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1291,6 +1306,7 @@
 				FE244FBB16EDA971003E53A6 /* ST_Tags.m in Sources */,
 				FE244FBD16EDA971003E53A6 /* ST_Teampages.m in Sources */,
 				FE88624516EEB5E000162AA7 /* LoginView.m in Sources */,
+				FE88625016EEF24200162AA7 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
