@@ -10,6 +10,7 @@
 #import "GMGridViewLayoutStrategies.h"
 #import "MenuCell.h"
 #import "GSSystem.h"
+#import "PostFullView.h"
 #import <QuartzCore/QuartzCore.h>
 #define STAccountNumberKey		@"accountNumber"
 #define STPinNumberKey			@"AccessTokenKey"
@@ -26,6 +27,7 @@
     PopoverView *pv;
     LoginView *login;
     GSSystem *GSMainSystem;
+    PostFullView *fullView;
 }
 @property (nonatomic, retain) QBPopupMenu *popupMenu;
 - (void)pushViewController;
@@ -104,7 +106,7 @@
         [pv performSelector:@selector(dismiss) withObject:nil afterDelay:0];
         [self performSelector:@selector(displayLogin) withObject:self afterDelay:0.35];
     }
-    [GSMainSystem createPoints:self.view :false];
+    [GSMainSystem createPoints:self.view :false]; 
     [_gmGridView reloadData];
 }
 
@@ -339,7 +341,7 @@
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeInFullSizeForCell:(GMGridViewCell *)cell atIndex:(NSInteger)index inInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    return CGSizeMake([GSMainSystem elevenTwelfthsLeft], [GSMainSystem elevenTwelfthsTop]);
+    return CGSizeMake([GSMainSystem elevenTwelfthsLeft], [GSMainSystem elevenTwelfthsTop]);    
 }
 
 - (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
@@ -410,7 +412,7 @@
 
 - (UIView *)GMGridView:(GMGridView *)gridView fullSizeViewForCell:(GMGridViewCell *)cell atIndex:(NSInteger)index
 {
-    UIView *fullView = [[UIView alloc] init];
+    fullView = [[PostFullView alloc] init];
     fullView.backgroundColor = [UIColor yellowColor];
     fullView.layer.masksToBounds = NO;
     fullView.layer.cornerRadius = 8;
