@@ -7,11 +7,12 @@
 #import "CommentView.h"
 #import "PostImageView.h"
 #import "GSSystem.h"
+#import "ViewController.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 @interface  PostFullView()
 {
-    FullViewController *delegate;
+    ViewController *delegate;
     UILabel *_author;
     UILabel *_descriptionLabel;
     UILabel *_urlLabel;
@@ -73,14 +74,14 @@
     layout.orientation = orientation;
     layout.scrollEnabled = YES;
     layout.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-   // layout.backgroundColor = [UIColor whiteColor];
+    // layout.backgroundColor = [UIColor whiteColor];
     [self addSubview:layout];
 }
 
 - (void)setPostValues{
     _author.text        = post.author;
     if(post.wallurl.length>1) {
-         _imglabel.text  =  [@"  " stringByAppendingString: post.content];
+        _imglabel.text  =  [@"  " stringByAppendingString: post.content];
         [self addLinearItem : _imglabel : verticallinearLayoutView :CSLinearLayoutItemVerticalAlignmentTop];
     }else{
         if([post.oembed count]>0){
@@ -96,14 +97,14 @@
                 _descriptionLabel.text  = post.content;
                 [self addLinearItem : _descriptionLabel : fullLayoutView :CSLinearLayoutItemVerticalAlignmentCenter];
             }
-            _urlLabel.text = embed.Url; 
+            _urlLabel.text = embed.Url;
             _linkImageView.image = [UIImage imageNamed:@"connect"];
         }else{
             _postImageView.image = nil;
             _descriptionLabel.text  = post.content;
             [self addLinearItem : _descriptionLabel : fullLayoutView :CSLinearLayoutItemVerticalAlignmentCenter];
         }
-    } 
+    }
     
     _likeImageView.image = [UIImage imageNamed:@"likeGreen"];
     NSString *unlike = post.unlike;
@@ -112,7 +113,7 @@
         _likeImageView.image = [UIImage imageNamed:@"unlikeGreen"];
     }
     [self addLinearItem : _likeImageView : horizontalStatuslinearLayoutView :CSLinearLayoutItemHorizontalAlignmentLeft];
-   _likes.text =[NSString stringWithFormat:@"%d %s",post.likeCount , " likes"];
+    _likes.text =[NSString stringWithFormat:@"%d %s",post.likeCount , " likes"];
     [self addLinearItem : _likes : horizontalStatuslinearLayoutView :CSLinearLayoutItemHorizontalAlignmentLeft];
     
     _commentImageView.image = [UIImage imageNamed:@"commentGreen"];
@@ -139,29 +140,29 @@
     }
 }
 - (void) setPostEmpty{
-    _author.text = nil; 
+    _author.text = nil;
     _descriptionLabel.text  = nil;
     _urlLabel.text = nil;
     _likes.text = nil;
     _comments.text = nil;
     _reshares.text = nil;
     _imglabel.text =nil;
-    _postImageView.image = nil; 
-    _linkImageView.image = nil; 
+    _postImageView.image = nil;
+    _linkImageView.image = nil;
     _likeImageView.image=nil;
     _commentImageView.image=nil;
     _reshareImageView.image=nil;
     _authorThumbView.image=nil;
 }
- 
+
 - (void) setPostLayout:(BOOL)isPortrait{
-    [GSMainSystem createPoints:self:true]; 
+    [GSMainSystem createPoints:self:true];
     if(isPortrait){
         cgrcontent = CGRectMake(0, 0, [GSMainSystem twelveTwelfthsLeft] , [GSMainSystem oneTwentyFourTop]);
         cgrimage= CGRectMake(0, [GSMainSystem oneTwentyFourTop], [GSMainSystem twelveTwelfthsLeft] , [GSMainSystem nineTwelfthsTop] );
         cgrc = CGRectMake(0, [GSMainSystem tenTwelfthsTop],  [GSMainSystem twelveTwelfthsLeft], [GSMainSystem twoTwelfthsTop]);
         cgrstatus= CGRectMake(0, [GSMainSystem nineTwelfthsTop],[GSMainSystem twelveTwelfthsLeft],[GSMainSystem oneTwentyFourTop]);
-        verticalcommentLayoutView.orientation = CSLinearLayoutViewOrientationHorizontal;        
+        verticalcommentLayoutView.orientation = CSLinearLayoutViewOrientationHorizontal;
         imgframe = CGRectMake(0, 0, [GSMainSystem twelveTwelfthsLeft], [GSMainSystem nineTwelfthsTop] );
     }else{
         cgrcontent = CGRectMake(0, 0, [GSMainSystem tenTwelfthsLeft], [GSMainSystem oneTwelfthTop]);
@@ -213,7 +214,7 @@
     _descriptionLabel.textColor         = [UIColor blackColor];
     _descriptionLabel.numberOfLines = 0;
     _descriptionLabel.backgroundColor   = [UIColor clearColor];
-
+    
     _postImageView = [[UIImageView alloc] initWithFrame:imgframe];
     _postImageView.layer.masksToBounds = YES;
     _postImageView.layer.cornerRadius  = 20.0;
@@ -223,7 +224,7 @@
     _imglabel.font              = [UIFont systemFontOfSize:12.0];
     _imglabel.numberOfLines = 0;
     _imglabel.textColor         = [UIColor blackColor];
-    _imglabel.backgroundColor   = [UIColor clearColor];    
+    _imglabel.backgroundColor   = [UIColor clearColor];
     
     _likeImageView  = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, textHeight, textHeight)];
     _likes =  [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [GSMainSystem twoTwelfthsLeft], textHeight)];
@@ -250,29 +251,29 @@
     _urlLabel.backgroundColor = [UIColor clearColor];
 }
 
-- (void)setComments{    
+- (void)setComments{
     commentviews = [[NSMutableArray alloc] init];
     for(ST_Comments *comment in post.commentsArr){
         [self setCommentView:comment];
     }
     NSString *cmturl = post.allCommentsUrl;
     if ((NSNull *)cmturl == [NSNull null]) { cmturl=@""; }
-
-    if(cmturl.length>0){ 
+    
+    if(cmturl.length>0){
         CGRect cframe = CGRectMake(0, 0, [GSMainSystem twelveTwelfthsLeft], [GSMainSystem twelveTwelfthsTop]);
         morecview = [[CommentView alloc]initWithFrame:cframe];
         morecview.delegate =self;
-        morecview.moreurl = cmturl;         
+        morecview.moreurl = cmturl;
         [morecview setMore :postisPortrait];
         [commentviews addObject:morecview];
         [self addLinearItem : morecview : verticalcommentLayoutView :CSLinearLayoutItemVerticalAlignmentTop];
-
+        
     }
     for(ST_Attachments *img in post.images){
-            PostImageView *postImage= [[PostImageView alloc]initWithFrame:imgframe];
-            [postImage setImageURL:img.Url];
-            [self addLinearItem : postImage : fullLayoutView :CSLinearLayoutItemHorizontalAlignmentCenter];
-        }
+        PostImageView *postImage= [[PostImageView alloc]initWithFrame:imgframe];
+        [postImage setImageURL:img.Url];
+        [self addLinearItem : postImage : fullLayoutView :CSLinearLayoutItemHorizontalAlignmentCenter];
+    }
     
 }
 - (void)setCommentView:(ST_Comments*)comment
@@ -288,49 +289,49 @@
 
 - (void)clikeAction: (NSString*)likeurl
 {
-    //[self.delegate commentlikeAction:likeurl];
+    [self.delegate commentlikeAction:likeurl];
 }
 
 - (void)cunlikeAction: (NSString*)likeurl
 {
-   // [self.delegate commentunLikeAction:likeurl];
+    [self.delegate commentunLikeAction:likeurl];
 }
 
 - (void)handleTapView:(UITapGestureRecognizer*)recognizer {
     for(CSLinearLayoutItem *item in self.verticallinearLayoutView.items) {
         if(item.view == recognizer.view) {
             if(item.view == _author){
-               // [self.delegate loadProfile: post.authorUrl];
+                // [self.delegate loadProfile: post.authorUrl];
             }else if(item.view != _author){
-               
+                
             }
         }
     }
-     for(CSLinearLayoutItem *item in self.verticalcommentLayoutView.items) {
-         if(item.view == recognizer.view) {
-             if(item.view == morecview ){
-                 [commentviews removeLastObject];
-                 //for(ST_Comments *comment in [self.delegate getMoreComments:morecview.moreurl]){
-                 //    [self setCommentView:comment];
-                 //}
-             }
-         }
-     }
+    for(CSLinearLayoutItem *item in self.verticalcommentLayoutView.items) {
+        if(item.view == recognizer.view) {
+            if(item.view == morecview ){
+                [commentviews removeLastObject];
+                for(ST_Comments *comment in [self.delegate getMoreComments:morecview.moreurl]){
+                    [self setCommentView:comment];
+                }
+            }
+        }
+    }
     
     for(CSLinearLayoutItem *item in self.horizontalStatuslinearLayoutView.items) {
         if(item.view == recognizer.view) {
             if(item.view == _urlLabel || item.view == _linkImageView){
-                //[self.delegate loadWebURL: _urlLabel.text];
+                [self.delegate loadWebURL: _urlLabel.text];
             }else if(item.view == _likeImageView || item.view == _likes){
                 NSString *unlike = post.unlike;
                 if ((NSNull *)unlike == [NSNull null]) { unlike=@""; }
                 if(unlike.length>0){
-                    //[self.delegate likeAction:post.unlike ];
+                    [self.delegate likeAction:post.unlike ];
                 }else{
-                  //  [self.delegate likeAction:post.likeUrl ];
+                    [self.delegate likeAction:post.likeUrl ];
                 }
             }else if(item.view == _reshareImageView|| item.view == _reshares){
-             //   [self.delegate reshareAction:post.reshareUrl ];
+                [self.delegate reshareAction:post.reshareUrl ];
             }else if(item.view == _commentImageView|| item.view == _comments){
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Social Tango" message:@"Enter your comment:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
                 alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -344,8 +345,8 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-  //  NSString *ctxt = [[alertView textFieldAtIndex:0] text];
-    //[self.delegate createComment:post.postId :ctxt];
+    NSString *ctxt = [[alertView textFieldAtIndex:0] text];
+    [self.delegate createComment:post.postId :ctxt];
 }
 
 - (void)addLinearItem : (UIView*)view :(CSLinearLayoutView*)layout :(int)alignment{
@@ -353,7 +354,7 @@
     item.padding = CSLinearLayoutMakePadding(5.0, 5.0, 0.0, 5.0);
     view.userInteractionEnabled = YES;
     if(alignment==CSLinearLayoutItemHorizontalAlignmentCenter || alignment==CSLinearLayoutItemHorizontalAlignmentLeft ||
-       alignment==CSLinearLayoutItemHorizontalAlignmentRight){ 
+       alignment==CSLinearLayoutItemHorizontalAlignmentRight){
         item.horizontalAlignment = alignment;
     }else{
         item.verticalAlignment = alignment;

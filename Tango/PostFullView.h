@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "ST_Posts.h"
 #import "ST_Comments.h"
-#import "FullViewController.h"
+#import "ViewController.h"
 @class CSLinearLayoutView;
 @interface PostFullView : UIView
 @property (nonatomic,strong) ST_Posts* post;
@@ -9,7 +9,7 @@
 @property (nonatomic, retain) CSLinearLayoutView *horizontalStatuslinearLayoutView;
 @property (nonatomic, retain) CSLinearLayoutView *verticalcommentLayoutView;
 @property (nonatomic, retain) CSLinearLayoutView *fullLayoutView;
-@property (nonatomic, retain) FullViewController *delegate;
+@property (nonatomic, retain) ViewController *delegate;
 - (void) setPost:(ST_Posts *) post :(BOOL) isPortrait;
 - (void)clikeAction: (NSString*)likeurl;
 - (void)cunlikeAction: (NSString*)likeurl;

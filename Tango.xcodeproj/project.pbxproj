@@ -887,6 +887,8 @@
 		FE88629F16EF2AC400162AA7 /* Stream */ = {
 			isa = PBXGroup;
 			children = (
+				FE8862D116EF445600162AA7 /* GMGridViewCell.h */,
+				FE8862D716EF445600162AA7 /* GMGridViewCell.m */,
 				FEB1D29216E9ACC100137C28 /* ViewController.h */,
 				FEB1D29616E9ACC100137C28 /* ViewController.m */,
 			);
@@ -898,13 +900,11 @@
 			children = (
 				FE8862CF16EF445600162AA7 /* GMGridView-Constants.h */,
 				FE8862D016EF445600162AA7 /* GMGridView.h */,
-				FE8862D116EF445600162AA7 /* GMGridViewCell.h */,
 				FE8862D216EF445600162AA7 /* GMGridViewCell+Extended.h */,
 				FE8862D316EF445600162AA7 /* GMGridViewLayoutStrategies.h */,
 				FE8862D416EF445600162AA7 /* UIGestureRecognizer+GMGridViewAdditions.h */,
 				FE8862D516EF445600162AA7 /* UIView+GMGridViewAdditions.h */,
 				FE8862D616EF445600162AA7 /* GMGridView.m */,
-				FE8862D716EF445600162AA7 /* GMGridViewCell.m */,
 				FE8862D816EF445600162AA7 /* GMGridViewLayoutStrategies.m */,
 				FE8862D916EF445600162AA7 /* UIGestureRecognizer+GMGridViewAdditions.m */,
 				FE8862DA16EF445600162AA7 /* UIView+GMGridViewAdditions.m */,

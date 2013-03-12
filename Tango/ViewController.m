@@ -39,7 +39,7 @@
 @end
 
 @implementation ViewController
-@synthesize appDelegate;
+@synthesize appDelegate,myPost;
 - (id)initWithTitle:(NSString *)title withRevealBlock:(RevealBlock)revealBlock {
     if (self = [super initWithNibName:nil bundle:nil]) {
 		self.title = title;
@@ -215,7 +215,7 @@
 	//[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton addTarget:self action:@selector(actionsController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton sizeToFit];
-    [self.view addSubview:pushButton];
+//    [self.view addSubview:pushButton];
     
     // popupMenu
     QBPopupMenu *popupMenu = [[QBPopupMenu alloc] init];
@@ -381,9 +381,7 @@
     return YES;
 }
 
-//////////////////////////////////////////////////////////////
 #pragma mark GMGridViewActionDelegate
-//////////////////////////////////////////////////////////////
 
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
@@ -405,10 +403,8 @@
         [_gmGridView removeObjectAtIndex:_lastDeleteItemIndexAsked withAnimation:GMGridViewItemAnimationFade];
     }
 }
-//////////////////////////////////////////////////////////////
-#pragma mark DraggableGridViewTransformingDelegate
-//////////////////////////////////////////////////////////////
 
+#pragma mark DraggableGridViewTransformingDelegate
 
 - (UIView *)GMGridView:(GMGridView *)gridView fullSizeViewForCell:(GMGridViewCell *)cell atIndex:(NSInteger)index
 {
@@ -495,6 +491,69 @@
 {
     _currentData =  _data;
     [_gmGridView reloadData];
+}
+#pragma mark delegate
+- (void)loadWebURL: (NSString*)url
+{
+//    myurl = url;
+    [self performSegueWithIdentifier:@"web" sender:self];
+}
+
+- (void)commentlikeAction: (NSString*)likeurl
+{
+    [appDelegate.rest createLike:likeurl];
+}
+- (void)commentunLikeAction: (NSString*)likeurl
+{
+    [appDelegate.rest unLike:likeurl];
+}
+
+- (void)reshareAction: (NSString*)reshare
+{
+    [appDelegate.rest createReshare:reshare];
+    UIAlertView *alertsView = [[UIAlertView alloc] initWithTitle:@"Social Tango" message:@"Post Reshared"   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertsView show];
+}
+
+- (void)likeAction: (NSString*)likeurl
+{
+    NSString *unlike = myPost.unlike;
+    if ((NSNull *)unlike == [NSNull null]) { unlike=@""; }
+    if(unlike.length>0){
+        [appDelegate.rest unLike:likeurl];
+        myPost.likeCount = myPost.likeCount - 1;
+        myPost.unlike = @"";
+        [fullView  setlikecount:myPost.likeCount :FALSE];
+    }else{
+        myPost.likeCount = myPost.likeCount + 1;
+        myPost.unlike = @"liked";
+        [appDelegate.rest createLike:likeurl];
+        [fullView  setlikecount:myPost.likeCount :TRUE];
+    }
+}
+
+- (void)loadProfile: (NSString*)profileid
+{
+    NSString *usrlink  = @"https://csocial.cognizant.com/u/";
+    profileid = [profileid stringByReplacingOccurrencesOfString:usrlink withString:@""];
+    appDelegate.myPosts = [appDelegate.rest getUserPosts:profileid];
+    [self performSegueWithIdentifier:@"center" sender:self];
+}
+
+- (NSMutableArray*)getMoreComments: (NSString*)commenturl
+{
+    return [appDelegate.rest getComments:commenturl];
+}
+
+- (void)createComment : (NSString*)postid : (NSString*)commentTxt
+{
+    NSString *ctxt = commentTxt;
+    if ((NSNull *)ctxt == [NSNull null]) { ctxt=@""; }
+    if(ctxt.length >0){
+        ST_Comments *comment = [appDelegate.rest createComment:postid :ctxt];
+        [myPost.commentsArr addObject: comment];
+        [fullView setCommentView:comment];
+    }
 }
 
 @end
