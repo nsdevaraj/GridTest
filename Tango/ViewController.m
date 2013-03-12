@@ -5,24 +5,27 @@
 #import "FullViewController.h"
 #import "MPFoldTransition.h"
 #import "MPFlipTransition.h"
-#import "PopoverView.h"   
-#import "LoginViewController.h"
+#import "PopoverView.h"
+#import "LoginView.h"
 
+#define STAccountNumberKey		@"accountNumber"
+#define STPinNumberKey			@"AccessTokenKey"
 #define FULL_VIEW_IDENTIFIER		@"FullViewController"
-#define kStringArray [NSArray arrayWithObjects:@"YES", @"NO", nil]
 #define kImageArray [NSArray arrayWithObjects:[UIImage imageNamed:@"success"], [UIImage imageNamed:@"error"], nil]
 
 #pragma mark -
 #pragma mark Private Interface
 @interface ViewController ()<PopoverViewDelegate,QBImagePickerControllerDelegate,UIScrollViewDelegate>{
-    PopoverView *pv;  
-}                                                           
+    PopoverView *pv;
+    LoginView *login;
+}
 @property (nonatomic, retain) QBPopupMenu *popupMenu;
 - (void)pushViewController;
 - (void)revealSidebar;
 @end
 
 @implementation ViewController
+@synthesize appDelegate;
 - (id)initWithTitle:(NSString *)title withRevealBlock:(RevealBlock)revealBlock {
     if (self = [super initWithNibName:nil bundle:nil]) {
 		self.title = title;
@@ -33,45 +36,53 @@
 	return self;
 }
 
+- (void)loginSuccess
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:STPinNumberKey]) {
+        appDelegate.rest.authorization = [defaults objectForKey:STPinNumberKey];
+        appDelegate.rest.currentuserid = [defaults objectForKey:STAccountNumberKey];
+        appDelegate.rest.currentperson = [appDelegate.rest getUserProfile :appDelegate.rest.currentuserid];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated
-{    
+{
     [super viewDidAppear:animated];
-    [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation
-                                           duration:1];
-    [self didRotateFromInterfaceOrientation:UIInterfaceOrientationPortrait];
-    CGPoint gpoint =  CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-   /* pv = [PopoverView showPopoverAtPoint:gpoint
-                                  inView:self.view
-                         withStringArray:kStringArray
-                          withImageArray:kImageArray
-                                delegate:self];*/
-    LoginViewController *login = [[LoginViewController alloc]init];
     
-    pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login.view delegate:self];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [self loginSuccess];
+    if(appDelegate.rest.authorization.length >2 && ![appDelegate.rest.authorization isEqual: @"no network"] ){
+        login= [[LoginView alloc]init];
+        [self displayLogin];
+    }
+}
+
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{    
+    [pv performSelector:@selector(dismiss) withObject:nil afterDelay:0];
+    [self performSelector:@selector(displayLogin) withObject:self afterDelay:0.35];
+}
+
+-(void) displayLogin{
+    CGPoint gpoint =  CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    if(pv==nil)pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login delegate:self];
 }
 
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
 {
-    NSLog(@"%s item:%d", __PRETTY_FUNCTION__, index);
-    
-    // Figure out which string was selected, store in "string"
-    NSString *string = [kStringArray objectAtIndex:index];
-    
-    // Show a success image, with the string from the array
-    [popoverView showImage:[UIImage imageNamed:@"success"] withMessage:string];
-    
-    // alternatively, you can use
-    // [popoverView showSuccess];
-    // or
-    // [popoverView showError];
-    
-    // Dismiss the PopoverView after 0.5 seconds
-    [popoverView performSelector:@selector(dismiss) withObject:nil afterDelay:0.5f];
+    [self performSelector:@selector(setHidden:) withObject:popoverView afterDelay:0.1];
+}
+
+-(void) setHidden:(PopoverView *)popoverView{
+    if(appDelegate.rest.authorization.length >2 && ![appDelegate.rest.authorization isEqual: @"no network"] ){
+        [popoverView showImage:[UIImage imageNamed:@"success"] withMessage:@"YES"];
+        [popoverView performSelector:@selector(dismiss) withObject:nil afterDelay:0.5f];
+    }
 }
 
 - (void)popoverViewDidDismiss:(PopoverView *)popoverView
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    // NSLog(@"%s", __PRETTY_FUNCTION__);
     pv = nil;
 }
 
@@ -91,7 +102,7 @@
 
 #pragma mark Private Methods
 - (void)pushViewController {
-	NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"]; 
+	NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"];
     
 	UIViewController *vc = [[FullViewController alloc] initWithTitle:vcTitle];
 	//[self.navigationController pushViewController:vc animated:YES];
@@ -106,17 +117,17 @@
 #pragma mark UIViewController
 - (void)viewDidLoad {
     
-    [super viewDidLoad]; 
-   
+    [super viewDidLoad];
+    
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
-	UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect]; 
+	UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
 	[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton sizeToFit];
-    [self.view addSubview:pushButton]; 
-     
+    [self.view addSubview:pushButton];
+    
     UIButton *pushButton2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     pushButton2.frame = CGRectMake(0,100,pushButton2.frame.size.width,pushButton2.frame.size.height);
 	[pushButton2 setTitle:@"Push2" forState:UIControlStateNormal];
@@ -124,7 +135,7 @@
 	[pushButton2 sizeToFit];
     [self.view addSubview:pushButton2];
     
-    UIButton *pushButton3= [UIButton buttonWithType:UIButtonTypeRoundedRect]; 
+    UIButton *pushButton3= [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	pushButton3.frame = CGRectMake(0,200,pushButton2.frame.size.width,pushButton2.frame.size.height);
 	[pushButton3 setTitle:@"Push3" forState:UIControlStateNormal];
 	[pushButton3 addTarget:self action:@selector(push3ViewController) forControlEvents:UIControlEventTouchUpInside];
@@ -144,7 +155,7 @@
     item3.width = 64;
     
     popupMenu.items = [NSArray arrayWithObjects:item1, item2, item3, nil];
-    self.popupMenu = popupMenu; 
+    self.popupMenu = popupMenu;
     
 }
 #pragma mark - QBImagePickerControllerDelegate

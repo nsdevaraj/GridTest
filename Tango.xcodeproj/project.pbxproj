@@ -83,8 +83,6 @@
 		FE244FBB16EDA971003E53A6 /* ST_Tags.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9816EDA971003E53A6 /* ST_Tags.m */; };
 		FE244FBC16EDA971003E53A6 /* ST_Teampages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9916EDA971003E53A6 /* ST_Teampages.m */; };
 		FE244FBD16EDA971003E53A6 /* ST_Teampages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9916EDA971003E53A6 /* ST_Teampages.m */; };
-		FE244FC716EDF7B7003E53A6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244FC616EDF7B7003E53A6 /* LoginViewController.m */; };
-		FE244FC816EDF7B7003E53A6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244FC616EDF7B7003E53A6 /* LoginViewController.m */; };
 		FE244FE816EDF8E2003E53A6 /* Cam.png in Resources */ = {isa = PBXBuildFile; fileRef = FE244FCB16EDF8E2003E53A6 /* Cam.png */; };
 		FE244FE916EDF8E2003E53A6 /* Cam.png in Resources */ = {isa = PBXBuildFile; fileRef = FE244FCB16EDF8E2003E53A6 /* Cam.png */; };
 		FE244FEA16EDF8E2003E53A6 /* Csocial-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FE244FCC16EDF8E2003E53A6 /* Csocial-logo.png */; };
@@ -147,6 +145,8 @@
 		FE86FA2A16EA0AC700654414 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE86FA2616EA0AC700654414 /* add@2x.png */; };
 		FE86FA2B16EA0AC700654414 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = FE86FA2716EA0AC700654414 /* arrow.png */; };
 		FE86FA2C16EA0AC700654414 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE86FA2816EA0AC700654414 /* arrow@2x.png */; };
+		FE88624416EEB5E000162AA7 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE88624316EEB5E000162AA7 /* LoginView.m */; };
+		FE88624516EEB5E000162AA7 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE88624316EEB5E000162AA7 /* LoginView.m */; };
 		FEB1D23716E9AC7400137C28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB1D23616E9AC7400137C28 /* UIKit.framework */; };
 		FEB1D23916E9AC7400137C28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB1D23816E9AC7400137C28 /* Foundation.framework */; };
 		FEB1D23B16E9AC7400137C28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB1D23A16E9AC7400137C28 /* CoreGraphics.framework */; };
@@ -340,8 +340,6 @@
 		FE244F9716EDA971003E53A6 /* ST_ProfileList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_ProfileList.m; sourceTree = "<group>"; };
 		FE244F9816EDA971003E53A6 /* ST_Tags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Tags.m; sourceTree = "<group>"; };
 		FE244F9916EDA971003E53A6 /* ST_Teampages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Teampages.m; sourceTree = "<group>"; };
-		FE244FC516EDF7B7003E53A6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		FE244FC616EDF7B7003E53A6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FE244FCB16EDF8E2003E53A6 /* Cam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cam.png; sourceTree = "<group>"; };
 		FE244FCC16EDF8E2003E53A6 /* Csocial-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Csocial-logo.png"; sourceTree = "<group>"; };
 		FE244FCD16EDF8E2003E53A6 /* Header_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Header_Icon.png; sourceTree = "<group>"; };
@@ -375,6 +373,8 @@
 		FE86FA2616EA0AC700654414 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		FE86FA2716EA0AC700654414 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		FE86FA2816EA0AC700654414 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
+		FE88624216EEB5E000162AA7 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		FE88624316EEB5E000162AA7 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		FEB1D23316E9AC7400137C28 /* Tango.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tango.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB1D23616E9AC7400137C28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FEB1D23816E9AC7400137C28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -614,8 +614,8 @@
 		FE244FC016EDE818003E53A6 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				FE244FC516EDF7B7003E53A6 /* LoginViewController.h */,
-				FE244FC616EDF7B7003E53A6 /* LoginViewController.m */,
+				FE88624216EEB5E000162AA7 /* LoginView.h */,
+				FE88624316EEB5E000162AA7 /* LoginView.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1220,7 +1220,7 @@
 				FE244FB816EDA971003E53A6 /* ST_ProfileList.m in Sources */,
 				FE244FBA16EDA971003E53A6 /* ST_Tags.m in Sources */,
 				FE244FBC16EDA971003E53A6 /* ST_Teampages.m in Sources */,
-				FE244FC716EDF7B7003E53A6 /* LoginViewController.m in Sources */,
+				FE88624416EEB5E000162AA7 /* LoginView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1290,7 +1290,7 @@
 				FE244FB916EDA971003E53A6 /* ST_ProfileList.m in Sources */,
 				FE244FBB16EDA971003E53A6 /* ST_Tags.m in Sources */,
 				FE244FBD16EDA971003E53A6 /* ST_Teampages.m in Sources */,
-				FE244FC816EDF7B7003E53A6 /* LoginViewController.m in Sources */,
+				FE88624516EEB5E000162AA7 /* LoginView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
