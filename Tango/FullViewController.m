@@ -40,10 +40,22 @@
     MGScrollView *scroller;
 }
 
+-(void) dismissView: (id)sender
+{
+    [self.navigationController popViewControllerWithFoldStyle:MPFoldStyleCubic];
+}
+
 #pragma mark Memory Management
 - (id)initWithTitle:(NSString *)title {
 	if (self = [super initWithNibName:nil bundle:nil]) {
 		self.title = title;
+        UIButton* backButton = [UIButton buttonWithType:101];
+        [backButton addTarget:self action:@selector(dismissView:) forControlEvents:UIControlEventTouchUpInside];
+        [backButton setTitle:[title substringToIndex:[title length] - 8] forState:UIControlStateNormal];
+        
+        UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        self.navigationItem.leftBarButtonItem = backItem;
 	}
 	return self;
 }
@@ -57,7 +69,7 @@
     UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
 	[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
-	[pushButton sizeToFit]; 
+	[pushButton sizeToFit];
     [self MGLoad];
 }
 - (void)pushViewController {
@@ -68,7 +80,7 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
     scroller.boxes = [NSMutableArray new];
     [scroller drawBoxesWithSpeed:0];
-    [self MGLoad]; 
+    [self MGLoad];
 }
 
 - (void)MGLoad {
@@ -76,7 +88,7 @@
     // sue me, Gruber!
     self.view.backgroundColor =
     [UIColor colorWithRed:0.29 green:0.32 blue:0.35 alpha:1];
-     
+    
     CGSize asize = [UIApplication currentSize];
     CGRect sframe = CGRectMake( 0,0,asize.width,asize.height-50);
     
@@ -88,7 +100,7 @@
     // add a moveable box
     [self addBox:nil];
     
-  // add a new MGBox to the MGScrollView
+    // add a new MGBox to the MGScrollView
     MGStyledBox *box1 = [MGStyledBox box];
     [scroller.boxes addObject:box1];
     
@@ -102,7 +114,7 @@
     MGBoxLine *line1 =
     [MGBoxLine lineWithLeft:@"NSString and UISwitch" right:toggle];
     [box1.topLines addObject:line1];
-      
+    
     MGStyledBox *box2 = [MGStyledBox box];
     [scroller.boxes addObject:box2];
     
@@ -256,6 +268,4 @@
         [(MGScrollView *)scrollView snapToNearestBox];
     }
 }
-
-
 @end
