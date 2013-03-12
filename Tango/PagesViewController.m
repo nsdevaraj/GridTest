@@ -7,7 +7,9 @@
 //
 
 #import "PagesViewController.h"
-#import "Cell.h" 
+#import "Cell.h"
+#import "FullViewController.h"
+#import "MPFoldTransition.h" 
 @interface PagesViewController ()
 
 @end
@@ -17,6 +19,7 @@
 -(void)viewDidLoad
 {
 	[super viewDidLoad];
+    self.collectionView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.collectionView addGestureRecognizer:tap];
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"MY_CELL"];
@@ -26,6 +29,9 @@
 {
     NSIndexPath* pinchedCellPath = [self.collectionView indexPathForItemAtPoint:[sender locationInView:self.collectionView]];
     NSLog(@"%@",pinchedCellPath);
+    NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"];
+	UIViewController *vc = [[FullViewController alloc] initWithTitle:vcTitle];
+    [self.navigationController pushViewController:vc foldStyle:MPFoldStyleFlipFoldBit(MPFoldStyleCubic)];
 }
 
 - (NSInteger)collectionView:(PSUICollectionView *)view numberOfItemsInSection:(NSInteger)section;
@@ -37,6 +43,7 @@
 {
     Cell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"MY_CELL" forIndexPath:indexPath];
     cell.label.text = [NSString stringWithFormat:@"%d",indexPath.item];
+    cell.imgView.image = [UIImage imageNamed:@"user.png"];
     return cell;
 }
 

@@ -751,10 +751,6 @@
 		FE88625216EF0B0000162AA7 /* Spaces */ = {
 			isa = PBXGroup;
 			children = (
-				FE88628E16EF0B7800162AA7 /* Cell.h */,
-				FE88628F16EF0B7800162AA7 /* LineLayout.h */,
-				FE88629016EF0B7800162AA7 /* Cell.m */,
-				FE88629116EF0B7800162AA7 /* LineLayout.m */,
 				FE88625316EF0B1500162AA7 /* PagesViewController.h */,
 				FE88625416EF0B1500162AA7 /* PagesViewController.m */,
 			);
@@ -794,6 +790,17 @@
 				FE88627316EF0B3800162AA7 /* PSTGridLayoutSection.m */,
 			);
 			path = PSTCollectionView;
+			sourceTree = "<group>";
+		};
+		FE88629B16EF1EA900162AA7 /* PSTView */ = {
+			isa = PBXGroup;
+			children = (
+				FE88628E16EF0B7800162AA7 /* Cell.h */,
+				FE88628F16EF0B7800162AA7 /* LineLayout.h */,
+				FE88629016EF0B7800162AA7 /* Cell.m */,
+				FE88629116EF0B7800162AA7 /* LineLayout.m */,
+			);
+			name = PSTView;
 			sourceTree = "<group>";
 		};
 		FEB1D22A16E9AC7400137C28 = {
@@ -905,9 +912,7 @@
 				FE88625216EF0B0000162AA7 /* Spaces */,
 				FE88624B16EEF22800162AA7 /* Settings */,
 				FE244FC016EDE818003E53A6 /* Login */,
-				FEB1D27416E9ACA600137C28 /* SideView */,
 				FEB1D33316E9DAFF00137C28 /* FullView */,
-				FEB1D33216E9DA8A00137C28 /* UI */,
 				FEB1D29216E9ACC100137C28 /* ViewController.h */,
 				FEB1D29616E9ACC100137C28 /* ViewController.m */,
 			);
@@ -954,6 +959,7 @@
 		FEB1D2E016E9B6A000137C28 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				FEB1D33216E9DA8A00137C28 /* UI */,
 				FE88625716EF0B3800162AA7 /* PSTCollectionView */,
 				FE244F6C16EDA859003E53A6 /* STRest */,
 				FE244F6316EDA835003E53A6 /* ResponsiveUI */,
@@ -1054,6 +1060,8 @@
 		FEB1D33216E9DA8A00137C28 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				FE88629B16EF1EA900162AA7 /* PSTView */,
+				FEB1D27416E9ACA600137C28 /* SideView */,
 				FE244F7116EDA89C003E53A6 /* UIPlaceHolderTextView.h */,
 				FE244F7216EDA89C003E53A6 /* UIPlaceHolderTextView.m */,
 			);
