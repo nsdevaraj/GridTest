@@ -188,7 +188,7 @@
     if (editing != _editing) {
         _editing = editing;
         if (animated) {
-            [UIView animateWithDuration:0.2f
+            [UIView animateWithDuration:0.1f
                                   delay:0.f
                                 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseOut
                              animations:^{
@@ -310,7 +310,7 @@
         self.fullSizeView.alpha = MAX(self.fullSizeView.alpha, self.contentView.alpha);
         self.contentView.alpha  = 0;
         
-        [UIView animateWithDuration:0.3 
+        [UIView animateWithDuration:0.1
                          animations:^{
                              self.fullSizeView.alpha = 1;
                              self.fullSizeView.frame = CGRectMake(self.fullSizeView.frame.origin.x, self.fullSizeView.frame.origin.y, self.fullSize.width, self.fullSize.height);
@@ -329,7 +329,7 @@
         self.fullSizeView.alpha = 0;
         self.contentView.alpha  = 0.6;
         
-        [UIView animateWithDuration:0.3 
+        [UIView animateWithDuration:0.1
                          animations:^{
                              self.contentView.alpha  = 1;
                              self.fullSizeView.frame = self.bounds;
