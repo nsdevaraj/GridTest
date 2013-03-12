@@ -4,6 +4,8 @@
 #import "SettingViewController.h"
 #import "SideViewController.h"
 
+#import "PagesViewController.h"
+#import "LineLayout.h"
 @interface AppDelegate () <UISearchBarDelegate>
 @property (nonatomic, strong) SideViewController *revealController;
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -45,7 +47,9 @@
 	
 	UIColor *bgColor = [UIColor colorWithRed:(50.0f/255.0f) green:(57.0f/255.0f) blue:(74.0f/255.0f) alpha:1.0f];
 	self.revealController = [[SideViewController alloc] initWithNibName:nil bundle:nil];
-    
+    LineLayout* lineLayout = [[LineLayout alloc] init];
+
+
 	self.revealController.view.backgroundColor = bgColor;
 	RevealBlock revealBlock = ^(){
 		[self.revealController toggleSidebar:!self.revealController.sidebarShowing
@@ -70,7 +74,7 @@
                               [[UINavigationController alloc] initWithRootViewController:[[[SettingViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Settings" withRevealBlock:revealBlock]]
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Pages" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Pages" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Contacts" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Aspects" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Tags" withRevealBlock:revealBlock]]
