@@ -20,6 +20,10 @@
 }
 
 @property (strong, retain) NSMutableArray *myPosts;
+@property (strong, retain) NSMutableArray *pageArr;
+@property (strong, retain) NSMutableArray *aspectArr;
+@property (strong, retain) NSMutableArray *tagArr;
+@property (strong, retain) NSMutableArray *contactArr;
 @property (strong, retain) NSString *urlval;
 @property (strong, retain) ST_People *currentperson;
 @property (strong, retain) NSString *currentuserid;
@@ -29,7 +33,7 @@
 - (void) login :  (NSString *)  userid :  (NSString *) pwd;
 - (NSMutableArray*) getComments: (NSString *) url;
 - (void) createGroup:(NSString *) groupname;
-- (void) getallGroups;
+- (NSMutableArray*) getallGroups;
 - (void) getGroup:(NSString *) groupid;
 - (void) updateGroup:(NSString *) groupid :(NSString *) groupname;
 - (void) deleteGroup:(NSString *) groupid;
@@ -38,6 +42,8 @@
 - (void) getTeampage:(NSString *) spaceid;
 - (NSMutableArray*) getPagePosts:(NSString*)space_id;
 - (NSMutableArray*) getallPages;
+- (NSMutableArray*) getallContacts;
+- (NSMutableArray*) getallTags;
 - (NSMutableArray*) search:(NSString *) searchText;
 - (NSMutableArray*) paginatedPosts: (NSString *) url;
 - (NSMutableArray*) getUserPosts:(NSString *) userid;

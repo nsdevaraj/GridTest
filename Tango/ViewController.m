@@ -103,12 +103,19 @@
     [self infoArray:3 :0 :mobj];
     
     NSDictionary *pdict = appDelegate.menuController._cellInfos[1][0];
-    UIImage *profieImg = [UIImage imageWithData:
-                          [NSData dataWithContentsOfURL:
-                           [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
-    NSObject *pobj =@{kSidebarCellImageKey:profieImg,kSidebarCellTextKey:pdict[kSidebarCellTextKey]};
+    UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]]; 
+    NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:pdict[kSidebarCellTextKey]};
     [self infoArray:1 :0 :pobj];
     [appDelegate.menuController reloadData];
+    [self performSelectorInBackground:@selector(loadUserData) withObject:nil];
+}
+
+-(void) loadUserData{
+    appDelegate.rest.pageArr = [appDelegate.rest getallPages];
+    appDelegate.rest.aspectArr = [appDelegate.rest getallGroups];
+    appDelegate.rest.tagArr= [appDelegate.rest getallTags];
+    appDelegate.rest.contactArr= [appDelegate.rest getallContacts];
+    NSLog(@"%d %d %d %d" , [appDelegate.rest.pageArr count],[appDelegate.rest.aspectArr count],[appDelegate.rest.tagArr count],    [appDelegate.rest.contactArr count]);    
 }
 
 - (void) infoArray :(int)index :(int)row :(NSObject*)mobj{
@@ -169,9 +176,7 @@
 
 #pragma mark UIViewController
 - (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    
+    [super viewDidLoad];    
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     

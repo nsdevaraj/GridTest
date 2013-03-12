@@ -29,6 +29,7 @@
 @synthesize authorization;
 @synthesize currentuserid;
 @synthesize currentperson;
+@synthesize pageArr,aspectArr,tagArr,contactArr;
 - (id) jsonResponse:(NSString *) myServerUrl :(NSString *) postString :(NSString *) type{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[myServerUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:300.0];
@@ -158,6 +159,7 @@
     }
     return fanpages;
 }
+
 - (NSMutableArray*) getallPages{
     NSMutableArray *fapages = [self getallFanpages];
     NSMutableArray *tempages = [self getallTeampages];
@@ -170,6 +172,47 @@
     }
     return pages;
 }
+
+- (NSMutableArray*) getallGroups{
+    NSString *type = GETMETHOD;
+    NSString *myServerUrl = [[urlval stringByAppendingString:@"/api/v2/groups/"]stringByAppendingString:currentuserid] ;
+    NSString *postString = @"";
+    id obj =  [self jsonResponse :myServerUrl :postString  :type ];
+    
+    NSMutableArray *aspects = [[NSMutableArray alloc] init];
+    if(obj != nil){
+        NSDictionary *groupsDict =obj;
+        NSMutableArray *arr = [[groupsDict objectForKey:@"result"]  objectForKey:@"entry"];
+        for (int i=0; i<[arr count]; i++ ){
+            ST_AspectList *aspect =[[ST_AspectList alloc] init];
+            aspect.groupName = [[arr objectAtIndex:i] objectForKey:@"title"];
+            aspect.aspectID = [[arr objectAtIndex:i] objectForKey:@"id"];
+            [aspects addObject:aspect];
+        }
+    }
+    return aspects;
+}
+
+- (NSMutableArray*) getallTags{
+    NSString *type = GETMETHOD;
+    NSString *myServerUrl = [[urlval stringByAppendingString:@"/api/v2/tag_followings/"]  stringByAppendingString:currentuserid];
+    NSString *postString = @"";
+    id obj =  [self jsonResponse :myServerUrl :postString  :type ];
+    NSMutableArray *tags;
+    if(obj != nil){
+        NSDictionary *myDicts = obj;
+        tags = [[NSMutableArray alloc]init];
+        NSMutableArray *arr = [myDicts objectForKey:@"followed_tags"] ;
+        for (int i=0; i<[arr count]; i++ ){
+            ST_Tags *tag =[[ST_Tags alloc] init];
+            tag.id = [[arr objectAtIndex:i] objectForKey:@"id"];
+            tag.name= [[arr objectAtIndex:i] objectForKey:@"name"];
+            [tags addObject:tag];
+        }
+    }
+    return tags;
+}
+
 
 - (void) getFanpage:(NSString *) spaceid{
     NSString *type = GETMETHOD;
@@ -297,23 +340,6 @@
         }
     }
 }
-
-- (void) getallGroups{
-    NSString *type = GETMETHOD;
-    NSString *myServerUrl = [[urlval stringByAppendingString:@"/api/v2/groups/"]stringByAppendingString:currentuserid] ;
-    NSString *postString = @"";
-    id obj =  [self jsonResponse :myServerUrl :postString  :type ];
-    if(obj != nil){
-        NSDictionary *groupsDict =obj;
-        NSMutableArray *arr = [[groupsDict objectForKey:@"result"]  objectForKey:@"entry"];
-        for (int i=0; i<[arr count]; i++ ){
-            ST_AspectList *aspect =[[ST_AspectList alloc] init];
-            aspect.groupName = [[arr objectAtIndex:i] objectForKey:@"title"];
-            aspect.aspectID = [[arr objectAtIndex:i] objectForKey:@"id"];
-        }
-    }
-}
-
 
 - (void) getGroup:(NSString *) groupid{
     NSString *type = GETMETHOD;
@@ -508,6 +534,11 @@
     return [self getPosts:arr :prevUrl :nextUrl];
 }
 
+- (NSMutableArray*) getallContacts{
+    NSMutableArray *contacts = [self contacts:currentuserid];
+    return contacts;
+}
+
 - (NSMutableArray*) contacts:(NSString *) userid{
     NSString *type = GETMETHOD;
     NSString *myServerUrl = [[[urlval stringByAppendingString:@"/api/v2/people/"] stringByAppendingString:userid] stringByAppendingString: @"/@followers"];
@@ -578,6 +609,16 @@
         post.rauthorImageSmallUrl = [[[[[origPost objectForKey:@"object"] objectForKey:@"actor"] objectForKey:@"image"] objectForKey:@"thumbnail"] objectForKey:@"url"];
     }
     post.content = [[origPost objectForKey:@"object"] objectForKey:@"raw_content"];
+    post.images = [[NSMutableArray alloc] init];
+    NSMutableArray *imagelinks = [self getRegExImgLinks: post.content];
+    if ([imagelinks count] > 0){
+        for (int il=0; il<[imagelinks count]; il++ ){
+            ST_Attachments *attachment =[[ST_Attachments alloc] init];
+            attachment.smallUrl = [imagelinks objectAtIndex:il] ;
+            attachment.type = @"image";
+            [post.images addObject:attachment];
+        }
+    }
     //post.Attachments = [origPost objectForKey:@""];
     //post.Oembed = [origPost objectForKey:@""];
     NSMutableArray *links = [origPost objectForKey:@"links"];
@@ -690,26 +731,6 @@
     return [self getPosts:arr :prevUrl :nextUrl];
 }
 
-- (NSMutableArray*) tags{
-    NSString *type = GETMETHOD;
-    NSString *myServerUrl = [[urlval stringByAppendingString:@"/api/v2/tag_followings/"]  stringByAppendingString:currentuserid];
-    NSString *postString = @"";
-    id obj =  [self jsonResponse :myServerUrl :postString  :type ];
-    NSMutableArray *tags;
-    if(obj != nil){
-        NSDictionary *myDicts = obj;
-        tags = [[NSMutableArray alloc]init];
-        NSMutableArray *arr = [myDicts objectForKey:@"followed_tags"] ;
-        for (int i=0; i<[arr count]; i++ ){
-            ST_Tags *tag =[[ST_Tags alloc] init];
-            tag.id = [[arr objectAtIndex:i] objectForKey:@"id"];
-            tag.name= [[arr objectAtIndex:i] objectForKey:@"name"];
-            [tags addObject:tag];
-        }
-    }
-    return tags;
-}
-
 - (ST_Tags *) createTag: (NSString *) name{
     NSString *type = POSTMETHOD;
     NSString *myServerUrl = [[[urlval stringByAppendingString:@"/api/v2/tags/"] stringByAppendingString:name] stringByAppendingString:@"/follow"];
@@ -801,4 +822,48 @@
     return images;
 }
 
+- (NSMutableArray*)getRegExImgLinks : (NSString *) text {
+    NSMutableArray* urlArr = [NSMutableArray new];
+    NSString *string = text;
+    NSString *regexp = @"http[s]?://(?:([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w\?\\.-]+\\.(jpg|png|jpeg)))+";
+    NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingAllSystemTypes error:nil];
+    NSArray *matches = [linkDetector matchesInString:string options:0 range:NSMakeRange(0, [string length])];
+    for (NSTextCheckingResult *match in matches) {
+        if ([match resultType] == NSTextCheckingTypeLink) {
+            NSURL *url = [match URL];
+            NSString *urlstring = [NSString stringWithFormat:@"%@",url];
+            NSRegularExpression *regex = [NSRegularExpression
+                                          regularExpressionWithPattern:regexp
+                                          options:0
+                                          error:nil];
+            
+            NSUInteger count = [regex numberOfMatchesInString:urlstring
+                                                      options:0
+                                                        range:NSMakeRange(0, [urlstring length])];
+            if(count>=1){
+                [urlArr addObject:urlstring];
+            }
+        }
+    }
+    return urlArr;
+}
+
+//stream_type=mentions, likes, comments
+- (NSMutableArray*) getUserStreams : (NSString *) stream_type{
+    NSString *type = GETMETHOD;
+    NSString *myServerUrl =[[[[urlval stringByAppendingString:@"/api/v2/stream/"] stringByAppendingString:currentuserid] stringByAppendingString:@"/"] stringByAppendingString:stream_type];
+    NSString *postString = @"";
+    NSString *prevUrl;
+    NSString *nextUrl;
+    NSMutableArray *arr;
+    
+    id obj =  [self jsonResponse :myServerUrl :postString  :type ];
+    if(obj != nil){
+        NSDictionary *myDicts = obj;
+        arr = [myDicts objectForKey:@"posts"];
+        prevUrl = [myDicts objectForKey:@"prev_page_link"];
+        nextUrl = [myDicts objectForKey:@"next_page_link"];
+    }
+    return [self getPosts:arr :prevUrl :nextUrl];
+}
 @end
