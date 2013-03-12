@@ -449,14 +449,17 @@
     return [self getPosts:arr :prevUrl :nextUrl];
 }
 
-- (void) getNotifications{
+- (NSMutableArray*) getNotifications{
     NSString *type = GETMETHOD;
     NSString *myServerUrl = [[urlval stringByAppendingString:@"/api/v2/notifications/"] stringByAppendingString:currentuserid];
     NSString *postString = @"";
     id obj =  [self jsonResponse :myServerUrl :postString  :type ];
+    NSMutableArray *notifications = [[NSMutableArray alloc] init];
     if(obj != nil){
         NSDictionary *groupsDict =obj;
         NSMutableArray *arr = [[groupsDict objectForKey:@"result"]  objectForKey:@"entry"];
+        NSString *unread_count = [[groupsDict objectForKey:@"result"]  objectForKey:@"unread_count"];
+        [notifications addObject:unread_count];
         for (int i=0; i<[arr count]; i++ ){
             ST_Notifications *notification =[[ST_Notifications alloc] init];
             notification.id = [[arr objectAtIndex:i] objectForKey:@"id"];
@@ -477,10 +480,11 @@
                 actor.displayName =  [[actors objectAtIndex:a] objectForKey:@"displayName"];
                 [notification.actors addObject:actor];
             }
+            [notifications addObject:notification];
         }
     }
+    return notifications;
 }
-
 - (NSMutableArray*) getPagePosts:(NSString*)space_id{
     NSString *type = GETMETHOD;
     NSString *myServerUrl =[[[urlval stringByAppendingString:@"/api/v2/spaces/"] stringByAppendingString:[NSString stringWithFormat:@"%@", space_id]] stringByAppendingString: @"/posts/"];
@@ -549,6 +553,8 @@
         NSDictionary *myDicts =obj;
         ucontacts= [[NSMutableArray alloc]init];
         NSMutableArray *arr = [[myDicts objectForKey:@"result"]  objectForKey:@"entry"];
+        NSString *nextUrl; 
+        nextUrl = [myDicts objectForKey:@"next_page_link"];
         for (int i=0; i<[arr count]; i++ ){
             ST_People *person =[[ST_People alloc] init];
             person.aboutMe = [[arr objectAtIndex:i] objectForKey:@"aboutMe"];

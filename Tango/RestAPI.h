@@ -47,7 +47,7 @@
 - (NSMutableArray*) search:(NSString *) searchText;
 - (NSMutableArray*) paginatedPosts: (NSString *) url;
 - (NSMutableArray*) getUserPosts:(NSString *) userid;
-- (void) getNotifications;
+- (NSMutableArray*) getNotifications;
 - (void) createLike: (NSString *) url;
 - (void) unLike: (NSString *) url;
 - (void) createReshare: (NSString *) url;

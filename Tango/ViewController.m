@@ -6,7 +6,7 @@
 #import "MPFoldTransition.h"
 #import "PopoverView.h"
 #import "LoginView.h"
-#import "GMGridView.h" 
+#import "GMGridView.h"
 #import "GMGridViewLayoutStrategies.h"
 #import "MenuCell.h"
 #import "GSSystem.h"
@@ -14,10 +14,10 @@
 #define STAccountNumberKey		@"accountNumber"
 #define STPinNumberKey			@"AccessTokenKey"
 #define FULL_VIEW_IDENTIFIER		@"FullViewController"
-#define NUMBER_ITEMS_ON_LOAD 250 
+#define NUMBER_ITEMS_ON_LOAD 250
 
 #define kImageArray [NSArray arrayWithObjects:[UIImage imageNamed:@"success"], [UIImage imageNamed:@"error"], nil]
- 
+
 @interface ViewController ()<PopoverViewDelegate,QBImagePickerControllerDelegate,UIScrollViewDelegate,GMGridViewDataSource, GMGridViewTransformationDelegate, GMGridViewActionDelegate>{
     __gm_weak GMGridView *_gmGridView;
     NSMutableArray *_data;
@@ -56,7 +56,7 @@
         UIButton* backButton = [UIButton buttonWithType:101];
         [backButton addTarget:self action:@selector(dismissView:) forControlEvents:UIControlEventTouchUpInside];
         [backButton setTitle:[title substringToIndex:[title length] - 8] forState:UIControlStateNormal];
-        UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];        
+        UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         self.navigationItem.leftBarButtonItem = backItem;
         self.navigationItem.rightBarButtonItem = [self composeButton];
 	}
@@ -68,7 +68,7 @@
     [composeButton addTarget:self action:@selector(composePost:) forControlEvents:UIControlEventTouchUpInside];
     [composeButton setTitle:@"New Post" forState:UIControlStateNormal];
     UIBarButtonItem* composeItem = [[UIBarButtonItem alloc] initWithCustomView:composeButton];
-    return composeItem;    
+    return composeItem;
 }
 
 -(void) dismissView: (id)sender
@@ -104,6 +104,8 @@
         [pv performSelector:@selector(dismiss) withObject:nil afterDelay:0];
         [self performSelector:@selector(displayLogin) withObject:self afterDelay:0.35];
     }
+    [GSMainSystem createPoints:self.view :false];
+    [_gmGridView reloadData];
 }
 
 -(void) displayLogin{
@@ -112,13 +114,16 @@
 }
 
 -(void) loggedIn{
+    
+    [GSMainSystem createPoints:self.view :false];
+    [_gmGridView reloadData];
     [appDelegate.menuController._headers replaceObjectAtIndex:1 withObject:[appDelegate.rest.currentperson.name uppercaseString]];
     NSDictionary *dict = appDelegate.menuController._cellInfos[3][0];
     NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:@"Notifications - 3"};
     [self infoArray:3 :0 :mobj];
     
     NSDictionary *pdict = appDelegate.menuController._cellInfos[1][0];
-    UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]]; 
+    UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
     NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:pdict[kSidebarCellTextKey]};
     [self infoArray:1 :0 :pobj];
     [appDelegate.menuController reloadData];
@@ -130,7 +135,7 @@
     appDelegate.rest.aspectArr = [appDelegate.rest getallGroups];
     appDelegate.rest.tagArr= [appDelegate.rest getallTags];
     appDelegate.rest.contactArr= [appDelegate.rest getallContacts];
-    NSLog(@"%d %d %d %d" , [appDelegate.rest.pageArr count],[appDelegate.rest.aspectArr count],[appDelegate.rest.tagArr count],    [appDelegate.rest.contactArr count]);    
+    NSLog(@"%d %d %d %d" , [appDelegate.rest.pageArr count],[appDelegate.rest.aspectArr count],[appDelegate.rest.tagArr count],    [appDelegate.rest.contactArr count]);
 }
 
 - (void) infoArray :(int)index :(int)row :(NSObject*)mobj{
@@ -193,8 +198,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     GSMainSystem = [[GSSystem alloc]init];
-     [GSMainSystem createPoints:self.view :false];
-    [self setloadView];    
+    
+    [GSMainSystem createPoints:self.view :false];
+    [self setloadView];
     _gmGridView.mainSuperView = self.view;
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
@@ -301,12 +307,12 @@
     _gmGridView.dataSource = self;
     _gmGridView.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
 }
- 
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     _gmGridView = nil;
-} 
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -320,54 +326,17 @@
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
+    if (UIInterfaceOrientationIsLandscape(orientation))
     {
-        if (UIInterfaceOrientationIsLandscape(orientation))
-        {
-            return CGSizeMake(170, 135);
-        }
-        else
-        {
-            return CGSizeMake(140, 110);
-        }
-    }
-    else
-    {
-        if (UIInterfaceOrientationIsLandscape(orientation))
-        {
-            return CGSizeMake(285, 205);
-        }
-        else
-        {
-            return CGSizeMake(230, 175);
-        }
+        return CGSizeMake([GSMainSystem elevenTwelfthsLeft], [GSMainSystem fiveTwelfthsTop]);
+    }else{
+        return CGSizeMake([GSMainSystem elevenTwelfthsLeft], [GSMainSystem fourTwelfthsTop]);
     }
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeInFullSizeForCell:(GMGridViewCell *)cell atIndex:(NSInteger)index inInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
-    {
-        if (UIInterfaceOrientationIsLandscape(orientation))
-        {
-            return CGSizeMake(320, 210);
-        }
-        else
-        {
-            return CGSizeMake(300, 310);
-        }
-    }
-    else
-    {
-        if (UIInterfaceOrientationIsLandscape(orientation))
-        {
-            return CGSizeMake(700, 530);
-        }
-        else
-        {
-            return CGSizeMake(600, 500);
-        }
-    }
+    return CGSizeMake([GSMainSystem elevenTwelfthsLeft], [GSMainSystem elevenTwelfthsTop]);
 }
 
 - (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
