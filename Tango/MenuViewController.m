@@ -7,15 +7,15 @@
 	SideViewController *_sidebarVC;
 	UISearchBar *_searchBar;
 	UITableView *_menuTableView;
-	NSArray *_headers;
+	NSMutableArray *_headers;
 	NSArray *_controllers;
 	NSArray *_cellInfos;
 }
-
+@synthesize _headers;
 #pragma mark Memory Management
 - (id)initWithSidebarViewController:(SideViewController *)sidebarVC 
 					  withSearchBar:(UISearchBar *)searchBar 
-						withHeaders:(NSArray *)headers 
+						withHeaders:(NSMutableArray *)headers
 					withControllers:(NSArray *)controllers 
 					  withCellInfos:(NSArray *)cellInfos {
 	if (self = [super initWithNibName:nil bundle:nil]) {

@@ -12,4 +12,6 @@
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath 
 					animated:(BOOL)animated 
 			  scrollPosition:(UITableViewScrollPosition)scrollPosition;
+
+@property (nonatomic, strong) NSMutableArray *_headers;
 @end

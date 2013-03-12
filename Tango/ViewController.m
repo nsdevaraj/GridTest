@@ -49,25 +49,32 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [self loginSuccess];
-    if(appDelegate.rest.authorization.length >2 && ![appDelegate.rest.authorization isEqual: @"no network"] ){
-        login= [[LoginView alloc]init];
+    
+    if(appDelegate.rest.authorization.length <2 || [appDelegate.rest.authorization isEqual: @"no network"] ){
         [self displayLogin];
+    }else{
+        [self loggedIn];
     }
 }
 
--(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{    
-    [pv performSelector:@selector(dismiss) withObject:nil afterDelay:0];
-    [self performSelector:@selector(displayLogin) withObject:self afterDelay:0.35];
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    if(appDelegate.rest.authorization.length <2 || [appDelegate.rest.authorization isEqual: @"no network"] ){
+        [pv performSelector:@selector(dismiss) withObject:nil afterDelay:0];
+        [self performSelector:@selector(displayLogin) withObject:self afterDelay:0.35];
+    }
 }
 
 -(void) displayLogin{
+    if(login==nil) login= [[LoginView alloc]init];
     CGPoint gpoint =  CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     if(pv==nil)pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login delegate:self];
 }
 
+-(void) loggedIn{
+    
+}
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
 {
     [self performSelector:@selector(setHidden:) withObject:popoverView afterDelay:0.1];
