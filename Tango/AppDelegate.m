@@ -8,7 +8,6 @@
 #import "PagesViewController.h"
 #import "LineLayout.h"
 @interface AppDelegate () <UISearchBarDelegate>
-@property (nonatomic, strong) SideViewController *revealController;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @end
 

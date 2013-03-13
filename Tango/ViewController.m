@@ -132,10 +132,18 @@
         for(int i=0; i<[appDelegate.rest.aspectArr count]; i++){
             ST_AspectList *aspect = [appDelegate.rest.aspectArr objectAtIndex:i];
             [arr addObject: aspectcontrol];            
-            NSObject *mobj =@{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"],kSidebarCellTextKey:aspect.groupName};
+            NSObject *mobj =@{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"],kSidebarCellTextKey:aspect.groupName,kSidebarImgSettingKey:@"Post"};
             [carr addObject:mobj];
         }
     }
+    [appDelegate.menuController._controllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+		[((NSArray *)obj) enumerateObjectsUsingBlock:^(id obj2, NSUInteger idx2, BOOL *stop2){
+			UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:appDelegate.revealController
+																						 action:@selector(dragContentView:)];
+			panGesture.cancelsTouchesInView = YES;
+			[((UINavigationController *)obj2).navigationBar addGestureRecognizer:panGesture];
+		}];
+	}];
     UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
     NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name};
     [self infoArray:0 :0 :pobj];

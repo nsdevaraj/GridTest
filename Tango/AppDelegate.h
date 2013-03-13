@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString *curPgId;
 @property (nonatomic, strong) MenuViewController *menuController;
 @property (nonatomic, retain) HJObjManager *imgMan;
+@property (nonatomic, strong) SideViewController *revealController;
 @end
  

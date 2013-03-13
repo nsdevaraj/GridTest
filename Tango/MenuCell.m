@@ -13,7 +13,7 @@
 NSString const *kSidebarCellTextKey = @"CellText";
 NSString const *kSidebarCellImageKey = @"CellImage";
 NSString const *kSidebarSettingKey = @"CellSetting";
-
+NSString const *kSidebarImgSettingKey = @"CellImgSetting";
 #pragma mark -
 #pragma mark Implementation
 @implementation MenuCell

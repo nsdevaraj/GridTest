@@ -89,7 +89,24 @@
         [button addTarget:self action:@selector(actionSelector) forControlEvents:UIControlEventTouchDown]; 
         cell.accessoryView =button;
     }
+    if(info[kSidebarImgSettingKey] != nil){
+        UIImage *btnImage = [UIImage imageNamed:info[kSidebarImgSettingKey]];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGRect frame = CGRectMake(0.0, 0.0, btnImage.size.width,btnImage.size.height);
+        button.frame = frame;
+        [button setImage:btnImage forState:UIControlStateSelected];
+        [button setImage:[UIImage imageNamed:@"Cam"] forState:UIControlStateNormal];
+        button.tag = indexPath.row;
+        [button addTarget:self action:@selector(aspectSelector:) forControlEvents:UIControlEventTouchDown];
+        cell.accessoryView =button;
+    }
     return cell;
+}
+
+-(void) aspectSelector : (id) sender{
+    UIButton *clicked = (UIButton *) sender;
+    clicked.selected = !clicked.selected;
+    [self tableView:_menuTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:clicked.tag inSection:4]];
 }
 
 -(void) actionSelector{
