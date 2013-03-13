@@ -1,14 +1,6 @@
-//
-//  DMViewController.m
-//  DMLazyScrollViewExample
-//
-//  Created by Daniele Margutti (me@danielemargutti.com) on 24/11/12.
-//  Copyright (c) 2012 http://www.danielemargutti.com. All rights reserved.
-//
-
 #import "DMViewController.h"
 #import "DMLazyScrollView.h"
-#import "DMDViewController.h"
+#import "ViewController.h"
 
 #define ARC4RANDOM_MAX	0x100000000
 @interface DMViewController () <DMLazyScrollViewDelegate> {
@@ -35,7 +27,7 @@
     }
     viewControllerArray = [[NSMutableArray alloc] initWithCapacity:numberOfPages];
     for (NSUInteger k = 0; k < numberOfPages; ++k) {
-        DMDViewController *vc=[[DMDViewController alloc]init];
+        ViewController *vc=[[ViewController alloc]init];
         [viewControllerArray addObject:vc];//[NSNull null]];
     }
     // PREPARE LAZY VIEW
@@ -84,20 +76,24 @@
 -(void)setInitPages{
     for (NSUInteger k = 0; k < numberOfPages; ++k) {
         id res = [viewControllerArray objectAtIndex:k];
-        [res setTitle:[NSString stringWithFormat:@"%d", k]];
+        [self setPage:res :k];
     }
     lazyScrollView.backScrollEnabled = NO;
+}
+
+-(void)setPage: (id) res : (NSUInteger)vpgno{
+    //[res setPageNo: vpgno];
 }
 
 - (void) virtualControllerAtIndex:(NSInteger) index {
     if(lazyScrollView.movesForward){
         currentVPgNo = currentVPgNo+1;
         id res = [viewControllerArray objectAtIndex:lazyScrollView.nextPg];
-        [res setTitle:[NSString stringWithFormat:@"%d", currentVPgNo+1]];        
+        [self setPage:res :currentVPgNo+1];
     }else{
         currentVPgNo = currentVPgNo-1;
         id res = [viewControllerArray objectAtIndex:lazyScrollView.prevPg];
-        [res setTitle:[NSString stringWithFormat:@"%d", currentVPgNo-1]];
+        [self setPage:res :currentVPgNo-1];
     }
     if(currentVPgNo == 0){
         lazyScrollView.backScrollEnabled =  NO;

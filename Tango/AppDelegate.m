@@ -71,8 +71,7 @@
                               //[[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Docs" withRevealBlock:revealBlock]]
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Profile" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[SettingViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Settings" withRevealBlock:revealBlock]]
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Profile" withRevealBlock:revealBlock]]
                               ],
                           @[
                               [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Pages" withRevealBlock:revealBlock]],
@@ -93,8 +92,7 @@
                             @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Public"}
                             ],
                         @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Profile"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Settings"}
+                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Profile"}
                             ],
                         @[
                             @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Pages"},
@@ -126,6 +124,7 @@
 			[((UINavigationController *)obj2).navigationBar addGestureRecognizer:panGesture];
 		}];
 	}];
+    revealBlock();
 	searchBar = [[UISearchBar alloc] init];
 	searchBar.delegate = self;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;

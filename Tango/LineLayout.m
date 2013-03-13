@@ -1,13 +1,15 @@
 #import "LineLayout.h"
 
-#define ITEM_SIZEW 450.0
-#define ITEM_SIZEH 300.0
-#define ITEM_PHONE_SIZEW 170.0
-#define ITEM_PHONE_SIZEH 150.0
+#define ITEM_SIZEW 225.0
+#define ITEM_SIZEH 150.0
+#define ITEM_PHONE_SIZEW 140.0
+#define ITEM_PHONE_SIZEH 120.0
+#define ITEM_SPACING 25.0
+#define ITEM_PHONE_SPACING 15.0
 @implementation LineLayout
 
 #define ACTIVE_DISTANCE 200
-#define ZOOM_FACTOR 0.3
+#define ZOOM_FACTOR 0.0
 
 -(id)init
 {
@@ -15,12 +17,13 @@
     if (self) {
         if(AppDelegate.deviceIsPhone){
             self.itemSize = CGSizeMake(ITEM_PHONE_SIZEW, ITEM_PHONE_SIZEH);
-        }else{            
+            self.sectionInset = UIEdgeInsetsMake(ITEM_PHONE_SPACING, ITEM_PHONE_SPACING, ITEM_PHONE_SPACING, ITEM_PHONE_SPACING);
+        }else{
             self.itemSize = CGSizeMake(ITEM_SIZEW, ITEM_SIZEH);
+            self.sectionInset = UIEdgeInsetsMake(ITEM_SPACING, ITEM_SPACING, ITEM_SPACING, ITEM_SPACING);
         }
         self.scrollDirection = UICollectionViewScrollDirectionVertical;
-        self.sectionInset = UIEdgeInsetsMake(50.0, 50.0, 0.0, 50.0);
-        self.minimumLineSpacing = 100.0;
+        self.minimumLineSpacing = 40.0;
     }
     return self;
 }

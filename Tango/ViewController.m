@@ -106,7 +106,7 @@
 
 -(void) loggedIn{    
     [GSMainSystem createPoints:self.view :false]; 
-    [self performSelectorInBackground:@selector(loadUserData) withObject:nil];
+    //[self performSelectorInBackground:@selector(loadUserData) withObject:nil];
 }
 
 -(void) loadUserData{
