@@ -5,9 +5,7 @@
 #import "FullViewController.h"
 #import "MPFoldTransition.h"
 #import "PopoverView.h"
-#import "LoginView.h"
-#import "GMGridView.h"
-#import "GMGridViewLayoutStrategies.h"
+#import "LoginView.h" 
 #import "MenuCell.h"
 #import "GSSystem.h"
 #import "PostFullView.h"
@@ -19,11 +17,7 @@
 
 #define kImageArray [NSArray arrayWithObjects:[UIImage imageNamed:@"success"], [UIImage imageNamed:@"error"], nil]
 
-@interface ViewController ()<PopoverViewDelegate,QBImagePickerControllerDelegate,UIScrollViewDelegate,GMGridViewDataSource, GMGridViewTransformationDelegate, GMGridViewActionDelegate>{
-    __gm_weak GMGridView *_gmGridView;
-    NSMutableArray *_data;
-    __gm_weak NSMutableArray *_currentData;
-    NSInteger _lastDeleteItemIndexAsked;
+@interface ViewController ()<PopoverViewDelegate,QBImagePickerControllerDelegate,UIScrollViewDelegate>{
     PopoverView *pv;
     LoginView *login;
     GSSystem *GSMainSystem;
@@ -31,11 +25,7 @@
 }
 @property (nonatomic, retain) QBPopupMenu *popupMenu;
 - (void)pushViewController;
-- (void)revealSidebar;
-- (void)addMoreItem;
-- (void)removeItem;
-- (void)refreshItem;
-- (void)dataSetChange:(UISegmentedControl *)control;
+- (void)revealSidebar; 
 @end
 
 @implementation ViewController
@@ -106,8 +96,7 @@
         [pv performSelector:@selector(dismiss) withObject:nil afterDelay:0];
         [self performSelector:@selector(displayLogin) withObject:self afterDelay:0.35];
     }
-    [GSMainSystem createPoints:self.view :false]; 
-    [_gmGridView reloadData];
+    [GSMainSystem createPoints:self.view :false];  
 }
 
 -(void) displayLogin{
@@ -115,10 +104,8 @@
     if(pv==nil)pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login delegate:self];
 }
 
--(void) loggedIn{
-    
-    [GSMainSystem createPoints:self.view :false];
-    [_gmGridView reloadData];
+-(void) loggedIn{    
+    [GSMainSystem createPoints:self.view :false]; 
     [self performSelectorInBackground:@selector(loadUserData) withObject:nil];
 }
 
@@ -205,17 +192,15 @@
     GSMainSystem = [[GSSystem alloc]init];
     
     [GSMainSystem createPoints:self.view :false];
-    [self setloadView];
-    _gmGridView.mainSuperView = self.view;
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
 	UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
-	//[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
+	 [pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton addTarget:self action:@selector(actionsController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton sizeToFit];
-//    [self.view addSubview:pushButton];
+     [self.view addSubview:pushButton];
     
     // popupMenu
     QBPopupMenu *popupMenu = [[QBPopupMenu alloc] init];
@@ -280,218 +265,6 @@
     return [NSString stringWithFormat:@"%d %d", numberOfPhotos, numberOfVideos];
 }
 
-#pragma mark - gmgridview
-
-
-- (void)loadView
-{
-    _data = [[NSMutableArray alloc] init];
-    
-    for (int i = 0; i < NUMBER_ITEMS_ON_LOAD; i ++)
-    {
-        [_data addObject:[NSString stringWithFormat:@"A %d", i]];
-    }
-    _currentData = _data;
-    [super loadView];
-    self.view.backgroundColor = [UIColor whiteColor];
-}
-- (void)setloadView{
-    NSInteger spacing =  5;
-    GMGridView *gmGridView = [[GMGridView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, self.view.bounds.size.height)];
-    gmGridView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    gmGridView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:gmGridView];
-    [self.view sendSubviewToBack:gmGridView];
-    _gmGridView = gmGridView;
-    _gmGridView.style = GMGridViewStyleSwap;
-    _gmGridView.itemSpacing = spacing;
-    _gmGridView.minEdgeInsets = UIEdgeInsetsMake(spacing, spacing, spacing, spacing);
-    _gmGridView.centerGrid = YES;
-    _gmGridView.actionDelegate = self;
-    _gmGridView.transformDelegate = self;
-    _gmGridView.dataSource = self;
-    _gmGridView.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    _gmGridView = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
-}
-
-- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
-{
-    return [_currentData count];
-}
-
-- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-    if (UIInterfaceOrientationIsLandscape(orientation))
-    {
-        return CGSizeMake([GSMainSystem elevenTwelfthsLeft], [GSMainSystem fiveTwelfthsTop]);
-    }else{
-        return CGSizeMake([GSMainSystem elevenTwelfthsLeft], [GSMainSystem fourTwelfthsTop]);
-    }
-}
-
-- (CGSize)GMGridView:(GMGridView *)gridView sizeInFullSizeForCell:(GMGridViewCell *)cell atIndex:(NSInteger)index inInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-    return CGSizeMake([GSMainSystem elevenTwelfthsLeft], [GSMainSystem elevenTwelfthsTop]);    
-}
-
-- (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
-{
-    CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
-    GMGridViewCell *cell = [gridView dequeueReusableCell];
-    if (!cell)
-    {
-        cell = [[GMGridViewCell alloc] init];
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        view.backgroundColor = [UIColor blueColor];
-        view.layer.masksToBounds = NO;
-        view.layer.cornerRadius = 8;
-        cell.contentView = view;
-    }
-    [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    UILabel *label = [[UILabel alloc] initWithFrame:cell.contentView.bounds];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    label.text = (NSString *)[_currentData objectAtIndex:index];
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
-    label.highlightedTextColor = [UIColor blackColor];
-    label.font = [UIFont systemFontOfSize:15];
-    [cell.contentView addSubview:label];
-    
-    
-    UIButton *largeButton2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [largeButton2 setTitle:@"Back" forState:UIControlStateNormal];
-    [largeButton2 setFrame:CGRectMake(20, 10, 133, 50)];
-    [cell.contentView addSubview:largeButton2];
-    return cell;
-}
-
-- (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index
-{
-    return YES;
-}
-
-#pragma mark GMGridViewActionDelegate
-
-- (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
-{
-    NSLog(@"Did tap at index %d", position);
-    if(position ==0){
-    }
-}
-
-- (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView
-{
-    NSLog(@"Tap on empty space");
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        [_currentData removeObjectAtIndex:_lastDeleteItemIndexAsked];
-        [_gmGridView removeObjectAtIndex:_lastDeleteItemIndexAsked withAnimation:GMGridViewItemAnimationFade];
-    }
-}
-
-#pragma mark DraggableGridViewTransformingDelegate
-
-- (UIView *)GMGridView:(GMGridView *)gridView fullSizeViewForCell:(GMGridViewCell *)cell atIndex:(NSInteger)index
-{
-    fullView = [[PostFullView alloc] init];
-    fullView.backgroundColor = [UIColor yellowColor];
-    fullView.layer.masksToBounds = NO;
-    fullView.layer.cornerRadius = 8;
-    CGSize size = [self GMGridView:gridView sizeInFullSizeForCell:cell atIndex:index inInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
-    fullView.bounds = CGRectMake(0, 0, size.width, size.height);
-    UILabel *label = [[UILabel alloc] initWithFrame:fullView.bounds];
-    label.text = [NSString stringWithFormat:@"Fullscreen View for cell at index %d", index];
-    label.backgroundColor = [UIColor clearColor];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    label.font = [UIFont boldSystemFontOfSize:20];
-    [fullView addSubview:label];
-    
-    UIButton *largeButton2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [largeButton2 setTitle:@"Back" forState:UIControlStateNormal];
-    [largeButton2 setFrame:CGRectMake(20, 100, 133, 50)];
-    [fullView addSubview:largeButton2];
-    return fullView;
-}
-
-- (void)GMGridView:(GMGridView *)gridView didStartTransformingCell:(GMGridViewCell *)cell
-{
-    [UIView animateWithDuration:0.2
-                          delay:0
-                        options:UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         cell.contentView.backgroundColor = [UIColor blueColor];
-                         cell.contentView.layer.shadowOpacity = 0.7;
-                     }
-                     completion:nil];
-}
-
-- (void)GMGridView:(GMGridView *)gridView didEndTransformingCell:(GMGridViewCell *)cell
-{
-    [UIView animateWithDuration:0.5
-                          delay:0
-                        options:UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         cell.contentView.backgroundColor = [UIColor blueColor];
-                         cell.contentView.layer.shadowOpacity = 0;
-                     }
-                     completion:nil];
-}
-
-- (void)GMGridView:(GMGridView *)gridView didEnterFullSizeForCell:(UIView *)cell
-{
-}
-
-- (void)addMoreItem
-{
-    // Example: adding object at the last position
-    NSString *newItem = [NSString stringWithFormat:@"%d", (int)(arc4random() % 1000)];
-    [_currentData addObject:newItem];
-    [_gmGridView insertObjectAtIndex:[_currentData count] - 1 withAnimation:GMGridViewItemAnimationFade | GMGridViewItemAnimationScroll];
-}
-
-- (void)removeItem
-{
-    // Example: removing last item
-    if ([_currentData count] > 0)
-    {
-        NSInteger index = [_currentData count] - 1;
-        [_gmGridView removeObjectAtIndex:index withAnimation:GMGridViewItemAnimationFade | GMGridViewItemAnimationScroll];
-        [_currentData removeObjectAtIndex:index];
-    }
-}
-
-- (void)refreshItem
-{
-    // Example: reloading last item
-    if ([_currentData count] > 0)
-    {
-        int index = [_currentData count] - 1;
-        NSString *newMessage = [NSString stringWithFormat:@"%d", (arc4random() % 1000)];
-        [_currentData replaceObjectAtIndex:index withObject:newMessage];
-        [_gmGridView reloadObjectAtIndex:index withAnimation:GMGridViewItemAnimationFade | GMGridViewItemAnimationScroll];
-    }
-}
-
-- (void)dataSetChange:(UISegmentedControl *)control
-{
-    _currentData =  _data;
-    [_gmGridView reloadData];
-}
 #pragma mark delegate
 - (void)loadWebURL: (NSString*)url
 {

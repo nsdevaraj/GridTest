@@ -8,8 +8,7 @@
 
 #import "CommentView.h"
 #import "ST_Comments.h"
-#import "GSSystem.h"
-#import "SDWebImage/UIImageView+WebCache.h"
+#import "GSSystem.h" 
 #import "CSLinearLayoutView.h"
 #import <QuartzCore/QuartzCore.h>
 @interface  CommentView()
@@ -70,7 +69,7 @@
         _likeImageView.image = [UIImage imageNamed:@"unlikeGreen"];
     }
     [self addLinearItem : _likeImageView : verticalLayoutView :CSLinearLayoutItemHorizontalAlignmentLeft];
-    [_authorThumbView setImageWithURL:[NSURL URLWithString:comment.cauthorImageMediumUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+   // [_authorThumbView setImageWithURL:[NSURL URLWithString:comment.cauthorImageMediumUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
 
 - (void) setLayout:(BOOL)isPortrait{

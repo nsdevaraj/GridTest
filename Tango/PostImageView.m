@@ -7,8 +7,7 @@
 //
 
 #import "PostImageView.h"
-
-#import "SDWebImage/UIImageView+WebCache.h"
+ 
 #import <QuartzCore/QuartzCore.h>
 @implementation PostImageView
 
@@ -30,6 +29,6 @@
 
 - (void)setImageURL: (NSString*)url
 {
-    [self setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"Image_Holder"]];
+   // [self setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"Image_Holder"]];
 }
 @end

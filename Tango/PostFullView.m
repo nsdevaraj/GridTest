@@ -7,8 +7,7 @@
 #import "CommentView.h"
 #import "PostImageView.h"
 #import "GSSystem.h"
-#import "ViewController.h"
-#import "SDWebImage/UIImageView+WebCache.h"
+#import "ViewController.h" 
 #import <QuartzCore/QuartzCore.h>
 @interface  PostFullView()
 {
@@ -89,7 +88,7 @@
             NSString *imgurl = embed.imageUrl;
             if ((NSNull *)imgurl == [NSNull null]) { imgurl=@""; }
             if(imgurl.length > 7) {
-                [_postImageView setImageWithURL:[NSURL URLWithString:imgurl] placeholderImage:[UIImage imageNamed:@"Image_Holder"]];
+              //  [_postImageView setImageWithURL:[NSURL URLWithString:imgurl] placeholderImage:[UIImage imageNamed:@"Image_Holder"]];
                 [self addLinearItem : _postImageView : fullLayoutView :CSLinearLayoutItemVerticalAlignmentCenter];
                 _imglabel.text  = [@"  " stringByAppendingString: post.content];
                 [self addLinearItem : _imglabel : verticallinearLayoutView :CSLinearLayoutItemVerticalAlignmentBottom];
@@ -129,7 +128,7 @@
     [self addLinearItem : _linkImageView : horizontalStatuslinearLayoutView :CSLinearLayoutItemHorizontalAlignmentLeft];
     [self addLinearItem : _urlLabel : horizontalStatuslinearLayoutView :CSLinearLayoutItemHorizontalAlignmentLeft];
     
-    [_authorThumbView setImageWithURL:[NSURL URLWithString:post.authorImageMediumUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+   // [_authorThumbView setImageWithURL:[NSURL URLWithString:post.authorImageMediumUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
 - (void) setlikecount:(int)count :(BOOL)liked{
     _likes.text = [NSString stringWithFormat:@"%d %s",count , " likes"];
