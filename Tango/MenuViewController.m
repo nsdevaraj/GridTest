@@ -80,11 +80,12 @@
 	cell.imageView.image =info[kSidebarCellImageKey];
     cell.accessoryView =nil;
     if(info[kSidebarSettingKey] != nil){         
-        UIImage *btnImage = [UIImage imageNamed:info[kSidebarSettingKey]]; 
+        //UIImage *btnImage = [UIImage imageNamed:info[kSidebarSettingKey]];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect frame = CGRectMake(0.0, 0.0, btnImage.size.width, btnImage.size.height);
+        CGRect frame = CGRectMake(0.0, 0.0, 15,15);
         button.frame = frame;
-        [button setImage:btnImage forState:UIControlStateNormal];
+        //[button setImage:btnImage forState:UIControlStateNormal];
+        [button setTitle:info[kSidebarSettingKey] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(actionSelector) forControlEvents:UIControlEventTouchDown]; 
         cell.accessoryView =button;
     }

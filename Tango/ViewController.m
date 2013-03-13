@@ -121,7 +121,7 @@
     if([appDelegate.rest.notifyArr objectAtIndex:0]>0){
         // [appDelegate.menuController._headers replaceObjectAtIndex:1 withObject:[appDelegate.rest.currentperson.name uppercaseString]];
         NSDictionary *dict = appDelegate.menuController._cellInfos[3][0];
-        NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:[@"Notifications " stringByAppendingString:[NSString stringWithFormat:@"- %@", [appDelegate.rest.notifyArr objectAtIndex:0]]]};
+        NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:dict[kSidebarCellTextKey], kSidebarSettingKey:[NSString stringWithFormat:@"%@", [appDelegate.rest.notifyArr objectAtIndex:0]]};
         [self infoArray:3 :0 :mobj];
     }
     // fill aspects    
@@ -137,7 +137,7 @@
         }
     }
     UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
-    NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name,kSidebarSettingKey:@"Post"};
+    NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name};
     [self infoArray:0 :0 :pobj];
     [appDelegate.menuController reloadData];
     NSLog(@"%d %d %d %d %@" , [appDelegate.rest.pageArr count],[appDelegate.rest.aspectArr count],[appDelegate.rest.tagArr count],    [appDelegate.rest.contactArr count],[appDelegate.rest.notifyArr objectAtIndex:0]);
