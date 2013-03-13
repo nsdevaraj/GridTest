@@ -35,6 +35,10 @@
 	return self;
 }
 
+- (void)revealSidebar {
+	_revealBlock();
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -60,9 +64,6 @@
     [linearLayoutView addItem:logout];
 }
 
-- (void)revealSidebar {
-	_revealBlock();
-}
 
 - (IBAction) ButtonReleased:(id)sender {
     appDelegate.rest.authorization = nil;

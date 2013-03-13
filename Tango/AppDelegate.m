@@ -3,6 +3,7 @@
 #import "ViewController.h"
 #import "SettingViewController.h"
 #import "SideViewController.h"
+#import "DMViewController.h"
 
 #import "PagesViewController.h"
 #import "LineLayout.h"
@@ -64,7 +65,7 @@
                       ]];
 	NSArray *controllers = @[
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock]],
+                              [[UINavigationController alloc] initWithRootViewController:[[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Public" withRevealBlock:revealBlock]]
                               //,[[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Polls" withRevealBlock:revealBlock]],
                               //[[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Docs" withRevealBlock:revealBlock]]
