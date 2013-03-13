@@ -137,7 +137,7 @@
         }
     }
     UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
-    NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name};
+    NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name,kSidebarSettingKey:@"Post"};
     [self infoArray:0 :0 :pobj];
     [appDelegate.menuController reloadData];
     NSLog(@"%d %d %d %d %@" , [appDelegate.rest.pageArr count],[appDelegate.rest.aspectArr count],[appDelegate.rest.tagArr count],    [appDelegate.rest.contactArr count],[appDelegate.rest.notifyArr objectAtIndex:0]);

@@ -78,11 +78,21 @@
 	NSDictionary *info = _cellInfos[indexPath.section][indexPath.row];
 	cell.textLabel.text =info[kSidebarCellTextKey];
 	cell.imageView.image =info[kSidebarCellImageKey];
-    if(info[kSidebarSettingKey] != nil){
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:info[kSidebarSettingKey]]];
-        cell.accessoryView =imageView;
+    cell.accessoryView =nil;
+    if(info[kSidebarSettingKey] != nil){         
+        UIImage *btnImage = [UIImage imageNamed:info[kSidebarSettingKey]]; 
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGRect frame = CGRectMake(0.0, 0.0, btnImage.size.width, btnImage.size.height);
+        button.frame = frame;
+        [button setImage:btnImage forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(actionSelector) forControlEvents:UIControlEventTouchDown]; 
+        cell.accessoryView =button;
     }
     return cell;
+}
+
+-(void) actionSelector{
+    [self tableView:_menuTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
 }
 
 #pragma mark UITableViewDelegate
