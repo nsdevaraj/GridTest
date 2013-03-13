@@ -124,14 +124,14 @@
         NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:[@"Notifications " stringByAppendingString:[NSString stringWithFormat:@"- %@", [appDelegate.rest.notifyArr objectAtIndex:0]]]};
         [self infoArray:3 :0 :mobj];
     }
-    // fill aspects
-    if([appDelegate.rest.aspectArr count]>0){
-        NSMutableArray *arr= appDelegate.menuController._controllers[4];
-        NSMutableArray *carr= appDelegate.menuController._cellInfos[4];
+    // fill aspects    
+    NSMutableArray *arr= appDelegate.menuController._controllers[4];
+    NSMutableArray *carr= appDelegate.menuController._cellInfos[4];
+    if([appDelegate.rest.aspectArr count]>0 && [arr count]==0){
+        UINavigationController *aspectcontrol = [[UINavigationController alloc] initWithRootViewController:[[[SettingViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Aspects" withRevealBlock:_revealBlock]];
         for(int i=0; i<[appDelegate.rest.aspectArr count]; i++){
-            [arr addObject: [[UINavigationController alloc] initWithRootViewController:[[[SettingViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Mentions" withRevealBlock:_revealBlock]]];
-            
             ST_AspectList *aspect = [appDelegate.rest.aspectArr objectAtIndex:i];
+            [arr addObject: aspectcontrol];            
             NSObject *mobj =@{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"],kSidebarCellTextKey:aspect.groupName};
             [carr addObject:mobj];
         }

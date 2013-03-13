@@ -12,6 +12,7 @@
 #pragma mark Constants
 NSString const *kSidebarCellTextKey = @"CellText";
 NSString const *kSidebarCellImageKey = @"CellImage";
+NSString const *kSidebarSettingKey = @"CellSetting";
 
 #pragma mark -
 #pragma mark Implementation
@@ -28,6 +29,11 @@ NSString const *kSidebarCellImageKey = @"CellImage";
 		self.imageView.layer.masksToBounds = YES;
         self.imageView.layer.cornerRadius  = 15.0;
 		self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+		self.accessoryView.layer.masksToBounds = YES;
+        self.accessoryView.layer.cornerRadius  = 15.0;
+		self.accessoryView.contentMode = UIViewContentModeScaleAspectFit;
+        
         self.textLabel.font = [UIFont fontWithName:@"Helvetica" size:([UIFont systemFontSize] * 1.2f)];
 		self.textLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		self.textLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.25f];

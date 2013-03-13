@@ -9,6 +9,7 @@
 
 extern NSString const *kSidebarCellTextKey;
 extern NSString const *kSidebarCellImageKey;
+extern NSString const *kSidebarSettingKey;
 
 @interface MenuCell : UITableViewCell
 

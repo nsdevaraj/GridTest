@@ -76,8 +76,12 @@
         cell = [[MenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 	NSDictionary *info = _cellInfos[indexPath.section][indexPath.row];
-	cell.textLabel.text =info[kSidebarCellTextKey]; //[info valueForKey:[NSString stringWithFormat:@"%@",  kSidebarCellTextKey]];
-	cell.imageView.image =info[kSidebarCellImageKey]; //[info valueForKey:[NSString stringWithFormat:@"%@", kSidebarCellImageKey]];
+	cell.textLabel.text =info[kSidebarCellTextKey];
+	cell.imageView.image =info[kSidebarCellImageKey];
+    if(info[kSidebarSettingKey] != nil){
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:info[kSidebarSettingKey]]];
+        cell.accessoryView =imageView;
+    }
     return cell;
 }
 

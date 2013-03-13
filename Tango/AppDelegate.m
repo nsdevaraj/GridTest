@@ -90,7 +90,7 @@
                           ];
 	NSMutableArray *cellInfos =  [NSMutableArray arrayWithArray:@[
                                   @[
-                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Profile"}
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Profile", kSidebarSettingKey:@"Post"}
                                   ],
                                   @[
                                   @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Stream"},

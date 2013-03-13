@@ -31,37 +31,34 @@
 		_revealBlock = [revealBlock copy];
 		self.navigationItem.leftBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(revealSidebar)];
+		self.navigationItem.rightBarButtonItem = [self logoutButton];
 	}
 	return self;
 }
 
+-(UIBarButtonItem*) logoutButton{
+    UIButton* logoutButton = [UIButton buttonWithType:102];
+    [logoutButton addTarget:self action:@selector(ButtonReleased:) forControlEvents:UIControlEventTouchUpInside];
+    [logoutButton setTitle:@"Logout" forState:UIControlStateNormal];
+    UIBarButtonItem* composeItem = [[UIBarButtonItem alloc] initWithCustomView:logoutButton];
+    return composeItem;
+}
+
+
 - (void)revealSidebar {
 	_revealBlock();
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"her");
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
+    [super viewDidLoad];    
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
-    self.linearLayoutView = [[CSLinearLayoutView alloc] initWithFrame:self.view.frame];
-    linearLayoutView.orientation = CSLinearLayoutViewOrientationVertical;
-    linearLayoutView.scrollEnabled = YES;
-    linearLayoutView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    linearLayoutView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:linearLayoutView];
-    
-    largeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    CGRect cframe =CGRectMake(200, 0, 270, 73);
-    [largeButton setFrame:cframe];
-    [largeButton setImage:[UIImage imageNamed:@"LoginButton_Nor"] forState:UIControlStateNormal];
-    [largeButton setImage:[UIImage imageNamed:@"LoginButton_Hov"] forState:UIControlStateSelected];
-    [largeButton addTarget:self action:@selector(ButtonReleased:) forControlEvents:UIControlEventTouchUpInside];
-
-    CSLinearLayoutItem *logout = [self newItem:largeButton];
-    [linearLayoutView addItem:logout];
+    self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];    
 }
 
 
