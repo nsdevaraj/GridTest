@@ -5,10 +5,12 @@
 #import "FullViewController.h"
 #import "MPFoldTransition.h"
 #import "PopoverView.h"
-#import "LoginView.h" 
+#import "LoginView.h"
 #import "MenuCell.h"
 #import "GSSystem.h"
 #import "PostFullView.h"
+#import "SettingViewController.h"
+#import "ST_AspectList.h"
 #import <QuartzCore/QuartzCore.h>
 #define STAccountNumberKey		@"accountNumber"
 #define STPinNumberKey			@"AccessTokenKey"
@@ -25,7 +27,7 @@
 }
 @property (nonatomic, retain) QBPopupMenu *popupMenu;
 - (void)pushViewController;
-- (void)revealSidebar; 
+- (void)revealSidebar;
 @end
 
 @implementation ViewController
@@ -96,7 +98,7 @@
         [pv performSelector:@selector(dismiss) withObject:nil afterDelay:0];
         [self performSelector:@selector(displayLogin) withObject:self afterDelay:0.35];
     }
-    [GSMainSystem createPoints:self.view :false];  
+    [GSMainSystem createPoints:self.view :false];
 }
 
 -(void) displayLogin{
@@ -104,9 +106,9 @@
     if(pv==nil)pv=[PopoverView showPopoverAtPoint:gpoint inView:self.view withTitle:@"Login" withContentView:login delegate:self];
 }
 
--(void) loggedIn{    
-    [GSMainSystem createPoints:self.view :false]; 
-    //[self performSelectorInBackground:@selector(loadUserData) withObject:nil];
+-(void) loggedIn{
+    [GSMainSystem createPoints:self.view :false];
+    [self performSelectorInBackground:@selector(loadUserData) withObject:nil];
 }
 
 -(void) loadUserData{
@@ -117,15 +119,26 @@
     appDelegate.rest.notifyArr= [appDelegate.rest getNotifications];
     
     if([appDelegate.rest.notifyArr objectAtIndex:0]>0){
-        [appDelegate.menuController._headers replaceObjectAtIndex:1 withObject:[appDelegate.rest.currentperson.name uppercaseString]];
+        // [appDelegate.menuController._headers replaceObjectAtIndex:1 withObject:[appDelegate.rest.currentperson.name uppercaseString]];
         NSDictionary *dict = appDelegate.menuController._cellInfos[3][0];
         NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:[@"Notifications " stringByAppendingString:[NSString stringWithFormat:@"- %@", [appDelegate.rest.notifyArr objectAtIndex:0]]]};
         [self infoArray:3 :0 :mobj];
     }
-    NSDictionary *pdict = appDelegate.menuController._cellInfos[1][0];
+    // fill aspects
+    if([appDelegate.rest.aspectArr count]>0){
+        NSMutableArray *arr= appDelegate.menuController._controllers[4];
+        NSMutableArray *carr= appDelegate.menuController._cellInfos[4];
+        for(int i=0; i<[appDelegate.rest.aspectArr count]; i++){
+            [arr addObject: [[UINavigationController alloc] initWithRootViewController:[[[SettingViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Mentions" withRevealBlock:_revealBlock]]];
+            
+            ST_AspectList *aspect = [appDelegate.rest.aspectArr objectAtIndex:i];
+            NSObject *mobj =@{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"],kSidebarCellTextKey:aspect.groupName};
+            [carr addObject:mobj];
+        }
+    }
     UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
-    NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:pdict[kSidebarCellTextKey]};
-    [self infoArray:1 :0 :pobj];
+    NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name};
+    [self infoArray:0 :0 :pobj];
     [appDelegate.menuController reloadData];
     NSLog(@"%d %d %d %d %@" , [appDelegate.rest.pageArr count],[appDelegate.rest.aspectArr count],[appDelegate.rest.tagArr count],    [appDelegate.rest.contactArr count],[appDelegate.rest.notifyArr objectAtIndex:0]);
 }
@@ -197,10 +210,10 @@
     
 	UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
-	 [pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
+    [pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton addTarget:self action:@selector(actionsController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton sizeToFit];
-     [self.view addSubview:pushButton];
+    [self.view addSubview:pushButton];
     
     // popupMenu
     QBPopupMenu *popupMenu = [[QBPopupMenu alloc] init];
@@ -268,7 +281,7 @@
 #pragma mark delegate
 - (void)loadWebURL: (NSString*)url
 {
-//    myurl = url;
+    //    myurl = url;
     [self performSegueWithIdentifier:@"web" sender:self];
 }
 

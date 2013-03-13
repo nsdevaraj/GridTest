@@ -545,7 +545,7 @@
 
 - (NSMutableArray*) contacts:(NSString *) userid{
     NSString *type = GETMETHOD;
-    NSString *myServerUrl = [[[urlval stringByAppendingString:@"/api/v2/people/"] stringByAppendingString:userid] stringByAppendingString: @"/@followers"];
+    NSString *myServerUrl = [[[urlval stringByAppendingString:@"/api/v2/people/"] stringByAppendingString:userid] stringByAppendingString: @"/@following"];
     NSString *postString = @"";
     id obj =  [self jsonResponse :myServerUrl :postString  :type ];
     NSMutableArray *ucontacts;

@@ -24,7 +24,7 @@
 	[ssearchBar resignFirstResponder];
 }
 
-+(BOOL) orientationIsLandscape{ 
++(BOOL) orientationIsLandscape{
     return UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
 }
 
@@ -49,8 +49,8 @@
 	UIColor *bgColor = [UIColor colorWithRed:(50.0f/255.0f) green:(57.0f/255.0f) blue:(74.0f/255.0f) alpha:1.0f];
 	self.revealController = [[SideViewController alloc] initWithNibName:nil bundle:nil];
     LineLayout* lineLayout = [[LineLayout alloc] init];
-
-
+    
+    
 	self.revealController.view.backgroundColor = bgColor;
 	RevealBlock revealBlock = ^(){
 		[self.revealController toggleSidebar:!self.revealController.sidebarShowing
@@ -58,12 +58,16 @@
 	};
     
 	NSMutableArray *headers = [NSMutableArray arrayWithArray:@[
-                      @"STREAM",
-                      @"USER",
-                      @"SPACES",
-                      @"ACTIVITY"
-                      ]];
+                               [NSNull null],
+                               @"STREAM",
+                               @"SPACES",
+                               @"ACTIVITY",
+                               @"ASPECTS"
+                               ]];
 	NSArray *controllers = @[
+                          @[
+                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Profile" withRevealBlock:revealBlock]]
+                              ],
                           @[
                               [[UINavigationController alloc] initWithRootViewController:[[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Public" withRevealBlock:revealBlock]]
@@ -71,12 +75,8 @@
                               //[[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Docs" withRevealBlock:revealBlock]]
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Profile" withRevealBlock:revealBlock]]
-                              ],
-                          @[
                               [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Pages" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Contacts" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Aspects" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Tags" withRevealBlock:revealBlock]]
                               ],
                           @[
@@ -84,37 +84,33 @@
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Mentions" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Comments" withRevealBlock:revealBlock]],
                               [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Likes" withRevealBlock:revealBlock]]
-                              ]
+                              ],
+                          [NSMutableArray arrayWithArray:@[
+                           ]]
                           ];
 	NSMutableArray *cellInfos =  [NSMutableArray arrayWithArray:@[
-                        @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Stream"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Public"}
-                            ],
-                        @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Profile"}
-                            ],
-                        @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Pages"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Contacts"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Aspects"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Tags"}
-                            ],
-                        @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Notifications"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Mentions"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Comments"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Likes"}
-                            ]/*,
-                        @[
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Mentioned"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Commented"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Also Commented"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Likes"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Reshared"},
-                            @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Page's Posts"}
-                            ]*/
-                        ]];
+                                  @[
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Profile"}
+                                  ],
+                                  @[
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Stream"},
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Public"}
+                                  ],
+                                  @[
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Pages"},
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Contacts"},
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Tags"}
+                                  ],
+                                  @[
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Notifications"},
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Mentions"},
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Comments"},
+                                  @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Likes"}
+                                  ],
+                                  [NSMutableArray arrayWithArray:@[
+                                   ]]
+                                  ]];
+    //@"Mentioned", @"Commented", @"Also Commented", @"Likes", @"Reshared", @"Page's Posts"
 	// Add drag feature to each root navigation controller
 	[controllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
 		[((NSArray *)obj) enumerateObjectsUsingBlock:^(id obj2, NSUInteger idx2, BOOL *stop2){

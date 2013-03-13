@@ -83,10 +83,8 @@
     [self MGLoad];
 }
 
-- (void)MGLoad { 
-    // sue me, Gruber!
-    self.view.backgroundColor =
-    [UIColor colorWithRed:0.29 green:0.32 blue:0.35 alpha:1];
+- (void)MGLoad {  
+    self.view.backgroundColor = [UIColor colorWithRed:0.29 green:0.32 blue:0.35 alpha:1];
     
     CGSize asize = [UIApplication currentSize];
     CGRect sframe = CGRectMake( 0,0,asize.width,asize.height-50);
