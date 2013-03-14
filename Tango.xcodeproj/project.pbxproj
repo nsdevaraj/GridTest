@@ -49,8 +49,6 @@
 		FE244F7416EDA89C003E53A6 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F7216EDA89C003E53A6 /* UIPlaceHolderTextView.m */; };
 		FE244F9A16EDA971003E53A6 /* ST_Actors.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8816EDA971003E53A6 /* ST_Actors.m */; };
 		FE244F9B16EDA971003E53A6 /* ST_Actors.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8816EDA971003E53A6 /* ST_Actors.m */; };
-		FE244F9C16EDA971003E53A6 /* ST_AllFanPageList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8916EDA971003E53A6 /* ST_AllFanPageList.m */; };
-		FE244F9D16EDA971003E53A6 /* ST_AllFanPageList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8916EDA971003E53A6 /* ST_AllFanPageList.m */; };
 		FE244F9E16EDA971003E53A6 /* ST_AspectList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8A16EDA971003E53A6 /* ST_AspectList.m */; };
 		FE244F9F16EDA971003E53A6 /* ST_AspectList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8A16EDA971003E53A6 /* ST_AspectList.m */; };
 		FE244FA016EDA971003E53A6 /* ST_Attachments.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8B16EDA971003E53A6 /* ST_Attachments.m */; };
@@ -59,26 +57,18 @@
 		FE244FA316EDA971003E53A6 /* ST_Comments.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8C16EDA971003E53A6 /* ST_Comments.m */; };
 		FE244FA416EDA971003E53A6 /* ST_Fanpages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8D16EDA971003E53A6 /* ST_Fanpages.m */; };
 		FE244FA516EDA971003E53A6 /* ST_Fanpages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8D16EDA971003E53A6 /* ST_Fanpages.m */; };
-		FE244FA616EDA971003E53A6 /* ST_MemberList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8E16EDA971003E53A6 /* ST_MemberList.m */; };
-		FE244FA716EDA971003E53A6 /* ST_MemberList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8E16EDA971003E53A6 /* ST_MemberList.m */; };
 		FE244FA816EDA971003E53A6 /* ST_Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8F16EDA971003E53A6 /* ST_Messages.m */; };
 		FE244FA916EDA971003E53A6 /* ST_Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F8F16EDA971003E53A6 /* ST_Messages.m */; };
 		FE244FAA16EDA971003E53A6 /* ST_Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9016EDA971003E53A6 /* ST_Notifications.m */; };
 		FE244FAB16EDA971003E53A6 /* ST_Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9016EDA971003E53A6 /* ST_Notifications.m */; };
-		FE244FAC16EDA971003E53A6 /* ST_Notify.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9116EDA971003E53A6 /* ST_Notify.m */; };
-		FE244FAD16EDA971003E53A6 /* ST_Notify.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9116EDA971003E53A6 /* ST_Notify.m */; };
 		FE244FAE16EDA971003E53A6 /* ST_Oembed.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9216EDA971003E53A6 /* ST_Oembed.m */; };
 		FE244FAF16EDA971003E53A6 /* ST_Oembed.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9216EDA971003E53A6 /* ST_Oembed.m */; };
 		FE244FB016EDA971003E53A6 /* ST_Pages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9316EDA971003E53A6 /* ST_Pages.m */; };
 		FE244FB116EDA971003E53A6 /* ST_Pages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9316EDA971003E53A6 /* ST_Pages.m */; };
 		FE244FB216EDA971003E53A6 /* ST_People.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9416EDA971003E53A6 /* ST_People.m */; };
 		FE244FB316EDA971003E53A6 /* ST_People.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9416EDA971003E53A6 /* ST_People.m */; };
-		FE244FB416EDA971003E53A6 /* ST_PostCategoryList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9516EDA971003E53A6 /* ST_PostCategoryList.m */; };
-		FE244FB516EDA971003E53A6 /* ST_PostCategoryList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9516EDA971003E53A6 /* ST_PostCategoryList.m */; };
 		FE244FB616EDA971003E53A6 /* ST_Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9616EDA971003E53A6 /* ST_Posts.m */; };
 		FE244FB716EDA971003E53A6 /* ST_Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9616EDA971003E53A6 /* ST_Posts.m */; };
-		FE244FB816EDA971003E53A6 /* ST_ProfileList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9716EDA971003E53A6 /* ST_ProfileList.m */; };
-		FE244FB916EDA971003E53A6 /* ST_ProfileList.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9716EDA971003E53A6 /* ST_ProfileList.m */; };
 		FE244FBA16EDA971003E53A6 /* ST_Tags.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9816EDA971003E53A6 /* ST_Tags.m */; };
 		FE244FBB16EDA971003E53A6 /* ST_Tags.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9816EDA971003E53A6 /* ST_Tags.m */; };
 		FE244FBC16EDA971003E53A6 /* ST_Teampages.m in Sources */ = {isa = PBXBuildFile; fileRef = FE244F9916EDA971003E53A6 /* ST_Teampages.m */; };
@@ -351,39 +341,29 @@
 		FE244F7116EDA89C003E53A6 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		FE244F7216EDA89C003E53A6 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		FE244F7616EDA94D003E53A6 /* ST_Actors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Actors.h; sourceTree = "<group>"; };
-		FE244F7716EDA94D003E53A6 /* ST_AllFanPageList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_AllFanPageList.h; sourceTree = "<group>"; };
 		FE244F7816EDA94D003E53A6 /* ST_AspectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_AspectList.h; sourceTree = "<group>"; };
 		FE244F7916EDA94D003E53A6 /* ST_Attachments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Attachments.h; sourceTree = "<group>"; };
 		FE244F7A16EDA94D003E53A6 /* ST_Comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Comments.h; sourceTree = "<group>"; };
 		FE244F7B16EDA94D003E53A6 /* ST_Fanpages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Fanpages.h; sourceTree = "<group>"; };
-		FE244F7C16EDA94D003E53A6 /* ST_MemberList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_MemberList.h; sourceTree = "<group>"; };
 		FE244F7D16EDA94D003E53A6 /* ST_Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Messages.h; sourceTree = "<group>"; };
 		FE244F7E16EDA94D003E53A6 /* ST_Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Notifications.h; sourceTree = "<group>"; };
-		FE244F7F16EDA94D003E53A6 /* ST_Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Notify.h; sourceTree = "<group>"; };
 		FE244F8016EDA94D003E53A6 /* ST_Oembed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Oembed.h; sourceTree = "<group>"; };
 		FE244F8116EDA94D003E53A6 /* ST_Pages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Pages.h; sourceTree = "<group>"; };
 		FE244F8216EDA94D003E53A6 /* ST_People.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_People.h; sourceTree = "<group>"; };
-		FE244F8316EDA94D003E53A6 /* ST_PostCategoryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_PostCategoryList.h; sourceTree = "<group>"; };
 		FE244F8416EDA94D003E53A6 /* ST_Posts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Posts.h; sourceTree = "<group>"; };
-		FE244F8516EDA94D003E53A6 /* ST_ProfileList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_ProfileList.h; sourceTree = "<group>"; };
 		FE244F8616EDA94D003E53A6 /* ST_Tags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Tags.h; sourceTree = "<group>"; };
 		FE244F8716EDA94D003E53A6 /* ST_Teampages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_Teampages.h; sourceTree = "<group>"; };
 		FE244F8816EDA971003E53A6 /* ST_Actors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Actors.m; sourceTree = "<group>"; };
-		FE244F8916EDA971003E53A6 /* ST_AllFanPageList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_AllFanPageList.m; sourceTree = "<group>"; };
 		FE244F8A16EDA971003E53A6 /* ST_AspectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_AspectList.m; sourceTree = "<group>"; };
 		FE244F8B16EDA971003E53A6 /* ST_Attachments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Attachments.m; sourceTree = "<group>"; };
 		FE244F8C16EDA971003E53A6 /* ST_Comments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Comments.m; sourceTree = "<group>"; };
 		FE244F8D16EDA971003E53A6 /* ST_Fanpages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Fanpages.m; sourceTree = "<group>"; };
-		FE244F8E16EDA971003E53A6 /* ST_MemberList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_MemberList.m; sourceTree = "<group>"; };
 		FE244F8F16EDA971003E53A6 /* ST_Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Messages.m; sourceTree = "<group>"; };
 		FE244F9016EDA971003E53A6 /* ST_Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Notifications.m; sourceTree = "<group>"; };
-		FE244F9116EDA971003E53A6 /* ST_Notify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Notify.m; sourceTree = "<group>"; };
 		FE244F9216EDA971003E53A6 /* ST_Oembed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Oembed.m; sourceTree = "<group>"; };
 		FE244F9316EDA971003E53A6 /* ST_Pages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Pages.m; sourceTree = "<group>"; };
 		FE244F9416EDA971003E53A6 /* ST_People.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_People.m; sourceTree = "<group>"; };
-		FE244F9516EDA971003E53A6 /* ST_PostCategoryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_PostCategoryList.m; sourceTree = "<group>"; };
 		FE244F9616EDA971003E53A6 /* ST_Posts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Posts.m; sourceTree = "<group>"; };
-		FE244F9716EDA971003E53A6 /* ST_ProfileList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_ProfileList.m; sourceTree = "<group>"; };
 		FE244F9816EDA971003E53A6 /* ST_Tags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Tags.m; sourceTree = "<group>"; };
 		FE244F9916EDA971003E53A6 /* ST_Teampages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_Teampages.m; sourceTree = "<group>"; };
 		FE244FCB16EDF8E2003E53A6 /* Cam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cam.png; sourceTree = "<group>"; };
@@ -668,39 +648,29 @@
 			isa = PBXGroup;
 			children = (
 				FE244F7616EDA94D003E53A6 /* ST_Actors.h */,
-				FE244F7716EDA94D003E53A6 /* ST_AllFanPageList.h */,
 				FE244F7816EDA94D003E53A6 /* ST_AspectList.h */,
 				FE244F7916EDA94D003E53A6 /* ST_Attachments.h */,
 				FE244F7A16EDA94D003E53A6 /* ST_Comments.h */,
 				FE244F7B16EDA94D003E53A6 /* ST_Fanpages.h */,
-				FE244F7C16EDA94D003E53A6 /* ST_MemberList.h */,
 				FE244F7D16EDA94D003E53A6 /* ST_Messages.h */,
 				FE244F8816EDA971003E53A6 /* ST_Actors.m */,
-				FE244F8916EDA971003E53A6 /* ST_AllFanPageList.m */,
 				FE244F8A16EDA971003E53A6 /* ST_AspectList.m */,
 				FE244F8B16EDA971003E53A6 /* ST_Attachments.m */,
 				FE244F8C16EDA971003E53A6 /* ST_Comments.m */,
 				FE244F8D16EDA971003E53A6 /* ST_Fanpages.m */,
-				FE244F8E16EDA971003E53A6 /* ST_MemberList.m */,
 				FE244F8F16EDA971003E53A6 /* ST_Messages.m */,
 				FE244F9016EDA971003E53A6 /* ST_Notifications.m */,
-				FE244F9116EDA971003E53A6 /* ST_Notify.m */,
 				FE244F9216EDA971003E53A6 /* ST_Oembed.m */,
 				FE244F9316EDA971003E53A6 /* ST_Pages.m */,
 				FE244F9416EDA971003E53A6 /* ST_People.m */,
-				FE244F9516EDA971003E53A6 /* ST_PostCategoryList.m */,
 				FE244F9616EDA971003E53A6 /* ST_Posts.m */,
-				FE244F9716EDA971003E53A6 /* ST_ProfileList.m */,
 				FE244F9816EDA971003E53A6 /* ST_Tags.m */,
 				FE244F9916EDA971003E53A6 /* ST_Teampages.m */,
 				FE244F7E16EDA94D003E53A6 /* ST_Notifications.h */,
-				FE244F7F16EDA94D003E53A6 /* ST_Notify.h */,
 				FE244F8016EDA94D003E53A6 /* ST_Oembed.h */,
 				FE244F8116EDA94D003E53A6 /* ST_Pages.h */,
 				FE244F8216EDA94D003E53A6 /* ST_People.h */,
-				FE244F8316EDA94D003E53A6 /* ST_PostCategoryList.h */,
 				FE244F8416EDA94D003E53A6 /* ST_Posts.h */,
-				FE244F8516EDA94D003E53A6 /* ST_ProfileList.h */,
 				FE244F8616EDA94D003E53A6 /* ST_Tags.h */,
 				FE244F8716EDA94D003E53A6 /* ST_Teampages.h */,
 			);
@@ -1403,21 +1373,16 @@
 				FE244F6F16EDA867003E53A6 /* RestAPI.m in Sources */,
 				FE244F7316EDA89C003E53A6 /* UIPlaceHolderTextView.m in Sources */,
 				FE244F9A16EDA971003E53A6 /* ST_Actors.m in Sources */,
-				FE244F9C16EDA971003E53A6 /* ST_AllFanPageList.m in Sources */,
 				FE244F9E16EDA971003E53A6 /* ST_AspectList.m in Sources */,
 				FE244FA016EDA971003E53A6 /* ST_Attachments.m in Sources */,
 				FE244FA216EDA971003E53A6 /* ST_Comments.m in Sources */,
 				FE244FA416EDA971003E53A6 /* ST_Fanpages.m in Sources */,
-				FE244FA616EDA971003E53A6 /* ST_MemberList.m in Sources */,
 				FE244FA816EDA971003E53A6 /* ST_Messages.m in Sources */,
 				FE244FAA16EDA971003E53A6 /* ST_Notifications.m in Sources */,
-				FE244FAC16EDA971003E53A6 /* ST_Notify.m in Sources */,
 				FE244FAE16EDA971003E53A6 /* ST_Oembed.m in Sources */,
 				FE244FB016EDA971003E53A6 /* ST_Pages.m in Sources */,
 				FE244FB216EDA971003E53A6 /* ST_People.m in Sources */,
-				FE244FB416EDA971003E53A6 /* ST_PostCategoryList.m in Sources */,
 				FE244FB616EDA971003E53A6 /* ST_Posts.m in Sources */,
-				FE244FB816EDA971003E53A6 /* ST_ProfileList.m in Sources */,
 				FE244FBA16EDA971003E53A6 /* ST_Tags.m in Sources */,
 				FE244FBC16EDA971003E53A6 /* ST_Teampages.m in Sources */,
 				FE88624416EEB5E000162AA7 /* LoginView.m in Sources */,
@@ -1495,21 +1460,16 @@
 				FE244F7016EDA867003E53A6 /* RestAPI.m in Sources */,
 				FE244F7416EDA89C003E53A6 /* UIPlaceHolderTextView.m in Sources */,
 				FE244F9B16EDA971003E53A6 /* ST_Actors.m in Sources */,
-				FE244F9D16EDA971003E53A6 /* ST_AllFanPageList.m in Sources */,
 				FE244F9F16EDA971003E53A6 /* ST_AspectList.m in Sources */,
 				FE244FA116EDA971003E53A6 /* ST_Attachments.m in Sources */,
 				FE244FA316EDA971003E53A6 /* ST_Comments.m in Sources */,
 				FE244FA516EDA971003E53A6 /* ST_Fanpages.m in Sources */,
-				FE244FA716EDA971003E53A6 /* ST_MemberList.m in Sources */,
 				FE244FA916EDA971003E53A6 /* ST_Messages.m in Sources */,
 				FE244FAB16EDA971003E53A6 /* ST_Notifications.m in Sources */,
-				FE244FAD16EDA971003E53A6 /* ST_Notify.m in Sources */,
 				FE244FAF16EDA971003E53A6 /* ST_Oembed.m in Sources */,
 				FE244FB116EDA971003E53A6 /* ST_Pages.m in Sources */,
 				FE244FB316EDA971003E53A6 /* ST_People.m in Sources */,
-				FE244FB516EDA971003E53A6 /* ST_PostCategoryList.m in Sources */,
 				FE244FB716EDA971003E53A6 /* ST_Posts.m in Sources */,
-				FE244FB916EDA971003E53A6 /* ST_ProfileList.m in Sources */,
 				FE244FBB16EDA971003E53A6 /* ST_Tags.m in Sources */,
 				FE244FBD16EDA971003E53A6 /* ST_Teampages.m in Sources */,
 				FE88624516EEB5E000162AA7 /* LoginView.m in Sources */,
