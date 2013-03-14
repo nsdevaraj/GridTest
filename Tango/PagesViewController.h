@@ -14,6 +14,6 @@ typedef void (^PRevealBlock)();
 @private
 	PRevealBlock _revealBlock;
 }
-
+- (id)setWithTitle:(NSString *)title;
 - (id)initWithTitle:(NSString *)title withRevealBlock:(PRevealBlock)revealBlock;
 @end

@@ -10,5 +10,5 @@ typedef void (^DSRevealBlock)();
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) UIButton *largeButton;
 - (id)initWithTitle:(NSString *)title withRevealBlock:(DSRevealBlock)revealBlock;
-
+- (id)setWithTitle:(NSString *)title;
 @end

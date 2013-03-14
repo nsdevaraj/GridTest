@@ -50,6 +50,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (id)setWithTitle:(NSString *)title {
+    self.title = title;
+    return self;
+}
+
 - (id)initWithTitle:(NSString *)title withRevealBlock:(DSRevealBlock)revealBlock {
     if (self = [super initWithNibName:nil bundle:nil]) {
 		self.title = title;
@@ -80,7 +85,7 @@
     }
     lazyScrollView.backScrollEnabled = NO;
 }
- 
+
 -(void)setPage: (id) res : (NSUInteger)vpgno{
     [res performSelector:@selector(setPageNo:) withObject:[NSString stringWithFormat:@"%d",vpgno]];
 }

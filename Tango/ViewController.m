@@ -43,6 +43,7 @@
 	return self;
 }
 
+
 #pragma mark Memory Management
 - (id)initWithTitle:(NSString *)title {
 	if (self = [super initWithNibName:nil bundle:nil]) {
@@ -124,14 +125,14 @@
         NSObject *mobj =@{kSidebarCellImageKey:dict[kSidebarCellImageKey],kSidebarCellTextKey:dict[kSidebarCellTextKey], kSidebarSettingKey:[NSString stringWithFormat:@"%@", [appDelegate.rest.notifyArr objectAtIndex:0]]};
         [self infoArray:3 :0 :mobj];
     }
-    // fill aspects    
+    // fill aspects
     NSMutableArray *arr= appDelegate.menuController._controllers[4];
     NSMutableArray *carr= appDelegate.menuController._cellInfos[4];
     if([appDelegate.rest.aspectArr count]>0 && [arr count]==0){
         UINavigationController *aspectcontrol = [[UINavigationController alloc] initWithRootViewController:[[[SettingViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Aspects" withRevealBlock:_revealBlock]];
         for(int i=0; i<[appDelegate.rest.aspectArr count]; i++){
             ST_AspectList *aspect = [appDelegate.rest.aspectArr objectAtIndex:i];
-            [arr addObject: aspectcontrol];            
+            [arr addObject: aspectcontrol];
             NSObject *mobj =@{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"],kSidebarCellTextKey:aspect.groupName,kSidebarImgSettingKey:@"Post", kSidebarObjectKey:aspect};
             [carr addObject:mobj];
         }

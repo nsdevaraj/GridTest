@@ -9,7 +9,7 @@
 #import "PagesViewController.h"
 #import "Cell.h"
 #import "ViewController.h"
-#import "MPFoldTransition.h" 
+#import "MPFoldTransition.h"
 @interface PagesViewController ()
 
 @end
@@ -23,6 +23,11 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.collectionView addGestureRecognizer:tap];
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"MY_CELL"];
+}
+
+- (id)setWithTitle:(NSString *)title {
+    self.title = title;
+    return self;
 }
 
 - (void)tapped:(UITapGestureRecognizer *)sender
