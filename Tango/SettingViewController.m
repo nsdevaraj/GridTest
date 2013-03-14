@@ -49,9 +49,6 @@
 	_revealBlock();
 }
 
--(void)setObject:(id)obj{
-    NSLog(@"her asp %@",obj);
-}
 - (void)viewDidAppear:(BOOL)animated
 { 
 }

@@ -9,7 +9,7 @@
 #import "MenuCell.h"
 #import "GSSystem.h"
 #import "PostFullView.h"
-#import "SettingViewController.h"
+#import "DMViewController.h"
 #import "ST_AspectList.h"
 #import <QuartzCore/QuartzCore.h>
 #define STAccountNumberKey		@"accountNumber"
@@ -129,7 +129,7 @@
     NSMutableArray *arr= appDelegate.menuController._controllers[4];
     NSMutableArray *carr= appDelegate.menuController._cellInfos[4];
     if([appDelegate.rest.aspectArr count]>0 && [arr count]==0){
-        UINavigationController *aspectcontrol = [[UINavigationController alloc] initWithRootViewController:[[[SettingViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Aspects" withRevealBlock:_revealBlock]];
+        UINavigationController *aspectcontrol = [[UINavigationController alloc] initWithRootViewController:[[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Aspects" withRevealBlock:_revealBlock]];
         for(int i=0; i<[appDelegate.rest.aspectArr count]; i++){
             ST_AspectList *aspect = [appDelegate.rest.aspectArr objectAtIndex:i];
             [arr addObject: aspectcontrol];
@@ -153,7 +153,7 @@
 }
 
 -(void)setPageNo:(id)pgNo{
-    NSLog(@"her %@",pgNo);
+//    NSLog(@"her %@",pgNo);
 }
 
 - (void) infoArray :(int)index :(int)row :(NSObject*)mobj{

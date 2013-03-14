@@ -55,6 +55,10 @@
     return self;
 }
 
+-(void)setObject:(id)obj{
+    NSLog(@"her asp %@",obj);
+}
+
 - (id)initWithTitle:(NSString *)title withRevealBlock:(DSRevealBlock)revealBlock {
     if (self = [super initWithNibName:nil bundle:nil]) {
 		self.title = title;

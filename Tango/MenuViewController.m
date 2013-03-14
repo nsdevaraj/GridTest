@@ -175,8 +175,9 @@
     
 	NSDictionary *info = _cellInfos[indexPath.section][indexPath.row];
     if(info[kSidebarObjectKey] != nil){
-       [[(id)res.viewControllers objectAtIndex:0] performSelector:@selector(setObject:) withObject:info[kSidebarObjectKey] afterDelay:1];
+       [[(id)res.viewControllers objectAtIndex:0] performSelector:@selector(setObject:) withObject:info[kSidebarObjectKey]];
     }
+    [[(id)res.viewControllers objectAtIndex:0] performSelector:@selector(setWithTitle:) withObject:info[kSidebarCellTextKey]];
 }
 
 #pragma mark Public Methods

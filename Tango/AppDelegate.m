@@ -55,7 +55,10 @@
 		[self.revealController toggleSidebar:!self.revealController.sidebarShowing
 									duration:kGHRevealSidebarDefaultAnimationDuration];
 	};
-    
+    DMViewController *dmv = [[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock];
+    PagesViewController *pvc=  [[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Pages" withRevealBlock:revealBlock];
+    UINavigationController *nav=   [[UINavigationController alloc] initWithRootViewController:dmv];
+    UINavigationController *pnav=   [[UINavigationController alloc] initWithRootViewController:pvc];
 	NSMutableArray *headers = [NSMutableArray arrayWithArray:@[
                                [NSNull null],
                                @"STREAM",
@@ -65,24 +68,16 @@
                                ]];
 	NSArray *controllers = @[
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Profile" withRevealBlock:revealBlock]]
+                              nav
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Public" withRevealBlock:revealBlock]]
-                              //,[[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Polls" withRevealBlock:revealBlock]],
-                              //[[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Docs" withRevealBlock:revealBlock]]
+                              nav,nav
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Pages" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Contacts" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Tags" withRevealBlock:revealBlock]]
+                              pnav,pnav,pnav
                               ],
                           @[
-                              [[UINavigationController alloc] initWithRootViewController:[[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Notifications" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Mentions" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Comments" withRevealBlock:revealBlock]],
-                              [[UINavigationController alloc] initWithRootViewController:[[[ViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Likes" withRevealBlock:revealBlock]]
+                              pnav,nav,nav,nav
                               ],
                           [NSMutableArray arrayWithArray:@[
                            ]]
@@ -109,6 +104,7 @@
                                   [NSMutableArray arrayWithArray:@[
                                    ]]
                                   ]];
+    //polls, docs
     //@"Mentioned", @"Commented", @"Also Commented", @"Likes", @"Reshared", @"Page's Posts"
 	// Add drag feature to each root navigation controller
 	[controllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
