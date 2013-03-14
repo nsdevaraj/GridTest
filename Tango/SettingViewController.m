@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "CSLinearLayoutView.h"
+#import "ST_AspectList.h"
 #define STAccountNumberKey		@"accountNumber"
 #define STPinNumberKey			@"AccessTokenKey"
 @interface SettingViewController ()
@@ -44,13 +45,15 @@
     return composeItem;
 }
 
-
 - (void)revealSidebar {
 	_revealBlock();
 }
+
+-(void)setObject:(id)obj{
+    NSLog(@"her asp %@",obj);
+}
 - (void)viewDidAppear:(BOOL)animated
-{
-    NSLog(@"her");
+{ 
 }
 
 - (void)viewDidLoad

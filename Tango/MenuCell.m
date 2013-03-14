@@ -14,10 +14,10 @@ NSString const *kSidebarCellTextKey = @"CellText";
 NSString const *kSidebarCellImageKey = @"CellImage";
 NSString const *kSidebarSettingKey = @"CellSetting";
 NSString const *kSidebarImgSettingKey = @"CellImgSetting";
+NSString const *kSidebarObjectKey = @"CellObjSetting";
 #pragma mark -
 #pragma mark Implementation
-@implementation MenuCell
-
+@implementation MenuCell 
 #pragma mark Memory Management
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {

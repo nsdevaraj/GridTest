@@ -97,9 +97,10 @@
         [button setImage:btnImage forState:UIControlStateSelected];
         [button setImage:[UIImage imageNamed:@"Cam"] forState:UIControlStateNormal];
         button.tag = indexPath.row;
+        button.selected = YES;
         [button addTarget:self action:@selector(aspectSelector:) forControlEvents:UIControlEventTouchDown];
         cell.accessoryView =button;
-    }
+    } 
     return cell;
 }
 
@@ -170,6 +171,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	_sidebarVC.contentViewController = _controllers[indexPath.section][indexPath.row];
 	[_sidebarVC toggleSidebar:NO duration:kGHRevealSidebarDefaultAnimationDuration];
+    UINavigationController *res  = (UINavigationController*)_controllers[indexPath.section][indexPath.row];
+    
+	NSDictionary *info = _cellInfos[indexPath.section][indexPath.row];
+    if(info[kSidebarObjectKey] != nil){
+       [[(id)res.viewControllers objectAtIndex:0] performSelector:@selector(setObject:) withObject:info[kSidebarObjectKey] afterDelay:1];
+    }
 }
 
 #pragma mark Public Methods
@@ -180,5 +187,5 @@
 	}
 	_sidebarVC.contentViewController = _controllers[indexPath.section][indexPath.row];
 }
-
+ 
 @end

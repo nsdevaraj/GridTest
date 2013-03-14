@@ -132,7 +132,7 @@
         for(int i=0; i<[appDelegate.rest.aspectArr count]; i++){
             ST_AspectList *aspect = [appDelegate.rest.aspectArr objectAtIndex:i];
             [arr addObject: aspectcontrol];            
-            NSObject *mobj =@{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"],kSidebarCellTextKey:aspect.groupName,kSidebarImgSettingKey:@"Post"};
+            NSObject *mobj =@{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"],kSidebarCellTextKey:aspect.groupName,kSidebarImgSettingKey:@"Post", kSidebarObjectKey:aspect};
             [carr addObject:mobj];
         }
     }
@@ -149,6 +149,10 @@
     [self infoArray:0 :0 :pobj];
     [appDelegate.menuController reloadData];
     NSLog(@"%d %d %d %d %@" , [appDelegate.rest.pageArr count],[appDelegate.rest.aspectArr count],[appDelegate.rest.tagArr count],    [appDelegate.rest.contactArr count],[appDelegate.rest.notifyArr objectAtIndex:0]);
+}
+
+-(void)setPageNo:(id)pgNo{
+    NSLog(@"her %@",pgNo);
 }
 
 - (void) infoArray :(int)index :(int)row :(NSObject*)mobj{

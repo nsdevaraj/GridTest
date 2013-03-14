@@ -1,7 +1,7 @@
 #import "DMViewController.h"
 #import "DMLazyScrollView.h"
 #import "ViewController.h"
-
+#import "ST_AspectList.h"
 #define ARC4RANDOM_MAX	0x100000000
 @interface DMViewController () <DMLazyScrollViewDelegate> {
     DMLazyScrollView* lazyScrollView;
@@ -80,9 +80,9 @@
     }
     lazyScrollView.backScrollEnabled = NO;
 }
-
+ 
 -(void)setPage: (id) res : (NSUInteger)vpgno{
-    //[res setPageNo: vpgno];
+    [res performSelector:@selector(setPageNo:) withObject:[NSString stringWithFormat:@"%d",vpgno]];
 }
 
 - (void) virtualControllerAtIndex:(NSInteger) index {
