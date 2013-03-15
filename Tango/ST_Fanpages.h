@@ -1,6 +1,6 @@
 
 #import <Foundation/Foundation.h>
-#import "ST_Pages.h"
+#import "ST_Pages.h" 
 
 @interface ST_Fanpages : ST_Pages
 {
@@ -22,5 +22,4 @@
 @property(nonatomic,retain) NSString *ownerUrl;
 @property(nonatomic,retain) NSString *ownerImageUrl;
 @property(nonatomic,retain) NSMutableArray *people;
-
 @end

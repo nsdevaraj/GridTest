@@ -57,6 +57,7 @@
 	};
     DMViewController *dmv = [[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock];
     PagesViewController *pvc=  [[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Pages" withRevealBlock:revealBlock];
+    pvc.vc = dmv;
     UINavigationController *nav=   [[UINavigationController alloc] initWithRootViewController:dmv];
     UINavigationController *pnav=   [[UINavigationController alloc] initWithRootViewController:pvc];
 	NSMutableArray *headers = [NSMutableArray arrayWithArray:@[

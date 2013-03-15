@@ -8,14 +8,13 @@
 
 #import "PagesViewController.h"
 #import "Cell.h"
-#import "DMViewController.h"
 #import "MPFoldTransition.h"
 @interface PagesViewController ()
 
 @end
 
 @implementation PagesViewController
-
+@synthesize vc;
 -(void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -34,9 +33,9 @@
 {
     NSIndexPath* pinchedCellPath = [self.collectionView indexPathForItemAtPoint:[sender locationInView:self.collectionView]];
     NSLog(@"%@",pinchedCellPath);
-    NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"];
-	DMViewController *vc = [[DMViewController alloc] setWithTitle:vcTitle];
+    NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"]; 
     [self.navigationController pushViewController:vc foldStyle:MPFoldStyleFlipFoldBit(MPFoldStyleCubic)];
+    [vc setTitle:vcTitle];
 }
 
 - (NSInteger)collectionView:(PSUICollectionView *)view numberOfItemsInSection:(NSInteger)section;
