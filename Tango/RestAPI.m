@@ -17,6 +17,7 @@
 #import "ST_People.h"
 #import "ST_Actors.h"
 #import "ST_Tags.h"
+#import "MenuCell.h"
 #define GETMETHOD @"GET"
 #define POSTMETHOD @"POST"
 #define PUTMETHOD @"PUT"
@@ -29,7 +30,21 @@
 @synthesize authorization;
 @synthesize currentuserid;
 @synthesize currentperson;
-@synthesize pageArr,aspectArr,tagArr,contactArr,notifyArr;
+@synthesize pageArr,aspectArr,tagArr,contactArr,notifyArr,notifyCatArr;
+
+-(id) init{
+    self = [super init];
+    self.notifyCatArr = [NSMutableArray arrayWithArray:@[
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Mentioned"},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Commented"},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Also Commented"},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Likes"},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Reshared"},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Page's Posts"}                         
+                         ]]; 
+    return  self;
+}
+
 - (id) jsonResponse:(NSString *) myServerUrl :(NSString *) postString :(NSString *) type{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[myServerUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:300.0];
@@ -55,6 +70,7 @@
         return [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:nil];
     }
 }
+
 - (void) login:(NSString *) userid :  (NSString *) pwd{
     currentuserid = userid;
     NSString *type = POSTMETHOD;

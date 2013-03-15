@@ -14,7 +14,7 @@
         self.label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, frame.size.height*2/3, frame.size.width, frame.size.height/3)];
         self.label.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         self.label.textAlignment = UITextAlignmentCenter;
-        self.label.font = [UIFont boldSystemFontOfSize:50.0];
+        self.label.font = [UIFont boldSystemFontOfSize:16.0];
         self.contentView.backgroundColor = [UIColor underPageBackgroundColor];
         self.label.textColor = [UIColor blackColor];
         [self.contentView addSubview:self.label];        

@@ -6,19 +6,11 @@
 //
 
 #import <Foundation/Foundation.h> 
-#import "AppDelegate.h" 
-typedef void (^RevealBlock)();
+#import "AppDelegate.h"  
 
-@interface ViewController : UIViewController {
-@private
-	RevealBlock _revealBlock;
-}
-
+@interface ViewController : UIViewController 
 @property (strong, retain) ST_Posts *myPost;
-@property (nonatomic, strong) AppDelegate *appDelegate;
-- (id)initWithTitle:(NSString *)title;
-- (id)initWithTitle:(NSString *)title withRevealBlock:(RevealBlock)revealBlock;
--(void) displayLogin;
+@property (nonatomic, strong) AppDelegate *appDelegate;  
 
 - (void)loadWebURL: (NSString*)url;
 - (void)likeAction: (NSString*)likeurl;

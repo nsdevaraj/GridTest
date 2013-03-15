@@ -7,7 +7,9 @@
 
 #import "PagesViewController.h"
 #import "LineLayout.h"
-@interface AppDelegate () <UISearchBarDelegate>
+@interface AppDelegate () <UISearchBarDelegate>{
+    DMViewController *dmv;
+}
 @property (nonatomic, strong) UISearchBar *searchBar;
 @end
 
@@ -19,7 +21,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)ssearchBar;
 {
-    NSLog(@"%@",ssearchBar.text);
+    [dmv setTitle:[@"Search Results - " stringByAppendingString:ssearchBar.text ]];
 	[ssearchBar resignFirstResponder];
 }
 
@@ -49,16 +51,15 @@
 	self.revealController = [[SideViewController alloc] initWithNibName:nil bundle:nil];
     LineLayout* lineLayout = [[LineLayout alloc] init];
     
-    
 	self.revealController.view.backgroundColor = bgColor;
-	RevealBlock revealBlock = ^(){
+	DSRevealBlock revealBlock = ^(){
 		[self.revealController toggleSidebar:!self.revealController.sidebarShowing
 									duration:kGHRevealSidebarDefaultAnimationDuration];
 	};
-    DMViewController *dmv = [[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock];
+    dmv = [[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:revealBlock];
     PagesViewController *pvc=  [[[PagesViewController alloc] initWithCollectionViewLayout:lineLayout] initWithTitle:@"Pages" withRevealBlock:revealBlock];
-    pvc.vc = dmv;
     UINavigationController *nav=   [[UINavigationController alloc] initWithRootViewController:dmv];
+    dmv.delegate = nav;
     UINavigationController *pnav=   [[UINavigationController alloc] initWithRootViewController:pvc];
 	NSMutableArray *headers = [NSMutableArray arrayWithArray:@[
                                [NSNull null],
@@ -68,21 +69,21 @@
                                @"ASPECTS"
                                ]];
 	NSArray *controllers = @[
-                          @[
-                              nav
-                              ],
-                          @[
-                              nav,nav
-                              ],
-                          @[
-                              pnav,pnav,pnav
-                              ],
-                          @[
-                              pnav,nav,nav,nav
-                              ],
-                          [NSMutableArray arrayWithArray:@[
-                           ]]
-                          ];
+    @[
+    nav
+    ],
+    @[
+    nav,nav
+    ],
+    @[
+    pnav,pnav,pnav
+    ],
+    @[
+    pnav,nav,nav,nav
+    ],
+    [NSMutableArray arrayWithArray:@[
+     ]]
+    ];
 	NSMutableArray *cellInfos =  [NSMutableArray arrayWithArray:@[
                                   @[
                                   @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Profile"}
@@ -105,8 +106,7 @@
                                   [NSMutableArray arrayWithArray:@[
                                    ]]
                                   ]];
-    //polls, docs
-    //@"Mentioned", @"Commented", @"Also Commented", @"Likes", @"Reshared", @"Page's Posts"
+    //polls, docs 
 	// Add drag feature to each root navigation controller
 	[controllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
 		[((NSArray *)obj) enumerateObjectsUsingBlock:^(id obj2, NSUInteger idx2, BOOL *stop2){

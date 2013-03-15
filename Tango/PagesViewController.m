@@ -8,46 +8,58 @@
 
 #import "PagesViewController.h"
 #import "Cell.h"
+#import "MenuCell.h"
 #import "MPFoldTransition.h"
-@interface PagesViewController ()
-
+@interface PagesViewController (){
+    NSMutableArray *spaceArr;
+}
 @end
 
 @implementation PagesViewController
-@synthesize vc;
+@synthesize vc,appDelegate;
 -(void)viewDidLoad
 {
 	[super viewDidLoad];
+    
     self.collectionView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self.collectionView addGestureRecognizer:tap];
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"MY_CELL"];
 }
+-(void)viewDidAppear:(BOOL)animated{
+    
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(self.title == @"Notifications"){
+        spaceArr = appDelegate.rest.notifyCatArr;
+    }
+    [self.collectionView reloadData];
+}
 
 - (id)setWithTitle:(NSString *)title {
     self.title = title;
+    
+    if(vc.isWithBackBtn) [vc dismissView];
     return self;
 }
 
 - (void)tapped:(UITapGestureRecognizer *)sender
 {
     NSIndexPath* pinchedCellPath = [self.collectionView indexPathForItemAtPoint:[sender locationInView:self.collectionView]];
-    NSLog(@"%@",pinchedCellPath);
-    NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"]; 
-    [self.navigationController pushViewController:vc foldStyle:MPFoldStyleFlipFoldBit(MPFoldStyleCubic)];
-    [vc setTitle:vcTitle];
+    NSString *vcTitle;
+    vcTitle = [spaceArr objectAtIndex:pinchedCellPath.item][kSidebarCellTextKey];
+    [self.navigationController pushViewController:[vc initWithTitle:vcTitle] foldStyle:MPFoldStyleFlipFoldBit(MPFoldStyleCubic)];
 }
 
 - (NSInteger)collectionView:(PSUICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-    return 60;
+    return [spaceArr count];
 }
 
 - (PSUICollectionViewCell *)collectionView:(PSUICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
     Cell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"MY_CELL" forIndexPath:indexPath];
-    cell.label.text = [NSString stringWithFormat:@"%d",indexPath.item];
-    cell.imgView.image = [UIImage imageNamed:@"user.png"];
+    cell.label.text = [spaceArr objectAtIndex: indexPath.item][kSidebarCellTextKey];
+    cell.imgView.image = [spaceArr objectAtIndex: indexPath.item][kSidebarCellImageKey];
     return cell;
 }
 
@@ -59,6 +71,7 @@
     if (self = [super initWithNibName:nil bundle:nil]) {
 		self.title = title;
 		_revealBlock = [revealBlock copy];
+        vc = [[[DMViewController alloc] initWithNibName:nil bundle:nil] initWithTitle:@"Stream" withRevealBlock:_revealBlock];
 		self.navigationItem.leftBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(revealSidebar)];
 	}

@@ -13,17 +13,17 @@
 }
 @synthesize _headers,_cellInfos,_controllers;
 #pragma mark Memory Management
-- (id)initWithSidebarViewController:(SideViewController *)sidebarVC 
-					  withSearchBar:(UISearchBar *)searchBar 
+- (id)initWithSidebarViewController:(SideViewController *)sidebarVC
+					  withSearchBar:(UISearchBar *)searchBar
 						withHeaders:(NSMutableArray *)headers
-					withControllers:(NSMutableArray *)controllers 
+					withControllers:(NSMutableArray *)controllers
 					  withCellInfos:(NSMutableArray *)cellInfos {
 	if (self = [super initWithNibName:nil bundle:nil]) {
 		_sidebarVC = sidebarVC;
 		_searchBar = searchBar;
 		_headers = headers;
 		_controllers = controllers;
-		_cellInfos = cellInfos;		
+		_cellInfos = cellInfos;
 		_sidebarVC.sidebarViewController = self;
 		_sidebarVC.contentViewController = _controllers[0][0];
 	}
@@ -38,7 +38,7 @@
 	
 	[self.view addSubview:_searchBar];
 	
-	_menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 44.0f, kGHRevealSidebarWidth, CGRectGetHeight(self.view.bounds) - 44.0f) 
+	_menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 44.0f, kGHRevealSidebarWidth, CGRectGetHeight(self.view.bounds) - 44.0f)
 												  style:UITableViewStylePlain];
 	_menuTableView.delegate = self;
 	_menuTableView.dataSource = self;
@@ -56,8 +56,8 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
 	return (orientation == UIInterfaceOrientationPortraitUpsideDown)
-		? (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-		: YES;
+    ? (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    : YES;
 }
 
 #pragma mark UITableViewDataSource
@@ -79,14 +79,14 @@
 	cell.textLabel.text =info[kSidebarCellTextKey];
 	cell.imageView.image =info[kSidebarCellImageKey];
     cell.accessoryView =nil;
-    if(info[kSidebarSettingKey] != nil){         
+    if(info[kSidebarSettingKey] != nil){
         //UIImage *btnImage = [UIImage imageNamed:info[kSidebarSettingKey]];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         CGRect frame = CGRectMake(0.0, 0.0, 15,15);
         button.frame = frame;
         //[button setImage:btnImage forState:UIControlStateNormal];
         [button setTitle:info[kSidebarSettingKey] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(actionSelector) forControlEvents:UIControlEventTouchDown]; 
+        [button addTarget:self action:@selector(actionSelector) forControlEvents:UIControlEventTouchDown];
         cell.accessoryView =button;
     }
     if(info[kSidebarImgSettingKey] != nil){
@@ -100,7 +100,7 @@
         button.selected = YES;
         [button addTarget:self action:@selector(aspectSelector:) forControlEvents:UIControlEventTouchDown];
         cell.accessoryView =button;
-    } 
+    }
     return cell;
 }
 
@@ -127,8 +127,8 @@
 		CAGradientLayer *gradient = [CAGradientLayer layer];
 		gradient.frame = headerView.bounds;
 		gradient.colors = @[
-			(id)[UIColor colorWithRed:(67.0f/255.0f) green:(74.0f/255.0f) blue:(94.0f/255.0f) alpha:1.0f].CGColor,
-			(id)[UIColor colorWithRed:(57.0f/255.0f) green:(64.0f/255.0f) blue:(82.0f/255.0f) alpha:1.0f].CGColor,
+        (id)[UIColor colorWithRed:(67.0f/255.0f) green:(74.0f/255.0f) blue:(94.0f/255.0f) alpha:1.0f].CGColor,
+        (id)[UIColor colorWithRed:(57.0f/255.0f) green:(64.0f/255.0f) blue:(82.0f/255.0f) alpha:1.0f].CGColor,
 		];
 		[headerView.layer insertSublayer:gradient atIndex:0];
 		
@@ -151,7 +151,7 @@
         UIControlEvents capture = UIControlEventTouchDown;
         capture |= UIControlEventTouchDown;
         capture |= UIControlEventTouchUpInside;
-        capture |= UIControlEventTouchUpOutside; 
+        capture |= UIControlEventTouchUpOutside;
         [headerView addTarget:self action:@selector(touch:) forControlEvents:capture];
 	}
 	return headerView;
@@ -162,22 +162,22 @@
 }
 
 - (void) reloadData{
-[_menuTableView reloadData];
+    [_menuTableView reloadData];
 }
-- (void) touch:(UIControl *)sender { 
+- (void) touch:(UIControl *)sender {
     NSLog(@"%@",sender.subviews);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	_sidebarVC.contentViewController = _controllers[indexPath.section][indexPath.row];
-	[_sidebarVC toggleSidebar:NO duration:kGHRevealSidebarDefaultAnimationDuration];
     UINavigationController *res  = (UINavigationController*)_controllers[indexPath.section][indexPath.row];
     
 	NSDictionary *info = _cellInfos[indexPath.section][indexPath.row];
-    if(info[kSidebarObjectKey] != nil){
-       [[(id)res.viewControllers objectAtIndex:0] performSelector:@selector(setObject:) withObject:info[kSidebarObjectKey]];
-    }
     [[(id)res.viewControllers objectAtIndex:0] performSelector:@selector(setWithTitle:) withObject:info[kSidebarCellTextKey]];
+	_sidebarVC.contentViewController = _controllers[indexPath.section][indexPath.row];
+	[_sidebarVC toggleSidebar:NO duration:kGHRevealSidebarDefaultAnimationDuration];
+    if(info[kSidebarObjectKey] != nil){
+        [[(id)res.viewControllers objectAtIndex:0] performSelector:@selector(setObject:) withObject:info[kSidebarObjectKey]];
+    }
 }
 
 #pragma mark Public Methods
@@ -188,5 +188,5 @@
 	}
 	_sidebarVC.contentViewController = _controllers[indexPath.section][indexPath.row];
 }
- 
+
 @end

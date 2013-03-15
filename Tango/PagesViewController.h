@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PSTCollectionView.h"
 #import "DMViewController.h"
+#import "AppDelegate.h"
 typedef void (^PRevealBlock)();
 
 @interface PagesViewController : PSUICollectionViewController<PSTCollectionViewDelegate>{
@@ -18,5 +19,6 @@ typedef void (^PRevealBlock)();
 - (id)setWithTitle:(NSString *)title;
 - (id)initWithTitle:(NSString *)title withRevealBlock:(PRevealBlock)revealBlock;
 
+@property (nonatomic, strong) AppDelegate *appDelegate;
 @property(nonatomic,retain) DMViewController *vc;
 @end
