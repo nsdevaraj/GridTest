@@ -23,6 +23,28 @@
 #define DEFAULT_TOP_MARGIN      10.0 
 #define CORNER_RADIUS            4.0
 
+#define STAccountNumberKey		@"accountNumber"
+#define STPinNumberKey			@"AccessTokenKey"
+
+#define STNotificationMentioned @"Mentioned"
+#define STNotificationComment @"Commented"
+#define STNotificationAlsoComment @"Also Commented"
+#define STNotificationLike @"Likes"
+#define STNotificationReshare @"Reshared"
+#define STNotificationPgPost @"Page's Posts"
+
+#define STMenuNotification @"Notifications"
+#define STMenuContact @"Contacts"
+#define STMenuTag @"Tags"
+#define STMenuPage @"Pages"
+
+#define STMenuStream @"Stream"
+#define STMenuPublic @"Public"
+#define STMenuMention @"Mentions"
+#define STMenuComment @"Comments"
+#define STMenuLike @"Likes" 
+
+
 @interface Constants : NSObject
 
 @end

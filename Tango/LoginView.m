@@ -8,8 +8,7 @@
 
 #import "LoginView.h"
 #import "CSLinearLayoutView.h"
-#define STAccountNumberKey		@"accountNumber"
-#define STPinNumberKey			@"AccessTokenKey"
+#import "Constants.h"
 @implementation LoginView
 
 @synthesize linearLayoutView;

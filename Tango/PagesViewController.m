@@ -1,14 +1,10 @@
-//
-//  PagesViewController.m
-//  Tango
-//
-//  Created by Devaraj NS on 12/03/13.
-//  Copyright (c) 2013 Devaraj NS. All rights reserved.
-//
-
 #import "PagesViewController.h"
 #import "Cell.h"
 #import "MenuCell.h"
+#import "ST_Pages.h"
+#import "ST_Tags.h"
+#import "ST_People.h"
+#import "Constants.h"
 #import "MPFoldTransition.h"
 @interface PagesViewController (){
     NSMutableArray *spaceArr;
@@ -26,18 +22,33 @@
     [self.collectionView addGestureRecognizer:tap];
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"MY_CELL"];
 }
+
 -(void)viewDidAppear:(BOOL)animated{
-    
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if(self.title == @"Notifications"){
-        spaceArr = appDelegate.rest.notifyCatArr;
-    }
-    [self.collectionView reloadData];
+    [self setWithTitle:self.title];
 }
 
 - (id)setWithTitle:(NSString *)title {
     self.title = title;
-    
+    if(self.title == STMenuNotification){
+        spaceArr = appDelegate.rest.notifyCatArr;
+    }else if(self.title == STMenuPage){
+        spaceArr = [NSMutableArray new];
+        for(ST_Pages *pg in appDelegate.rest.pageArr){
+            [spaceArr addObject: @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: pg.title}];
+        } 
+    }else if(self.title == STMenuContact){
+        spaceArr = [NSMutableArray new];
+        for(ST_People *ppl in appDelegate.rest.contactArr){
+            [spaceArr addObject: @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: ppl.displayName}];
+        }
+    }else if(self.title == STMenuTag){
+        spaceArr = [NSMutableArray new];
+        for(ST_Tags *tag in appDelegate.rest.tagArr){
+            [spaceArr addObject: @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: tag.name}];
+        } 
+    }
+    [self.collectionView reloadData];
     if(vc.isWithBackBtn) [vc dismissView];
     return self;
 }

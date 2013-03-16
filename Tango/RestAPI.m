@@ -18,6 +18,7 @@
 #import "ST_Actors.h"
 #import "ST_Tags.h"
 #import "MenuCell.h"
+#import "Constants.h"
 #define GETMETHOD @"GET"
 #define POSTMETHOD @"POST"
 #define PUTMETHOD @"PUT"
@@ -35,12 +36,12 @@
 -(id) init{
     self = [super init];
     self.notifyCatArr = [NSMutableArray arrayWithArray:@[
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Mentioned"},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Commented"},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Also Commented"},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Likes"},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Reshared"},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: @"Page's Posts"}                         
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationMentioned},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationComment},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationAlsoComment},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationLike},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationReshare},
+                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationPgPost}
                          ]]; 
     return  self;
 }

@@ -10,11 +10,7 @@
 
 #import "PopoverView.h"
 #import "MenuCell.h"
-
-#define ARC4RANDOM_MAX	0x100000000
-
-#define STAccountNumberKey		@"accountNumber"
-#define STPinNumberKey			@"AccessTokenKey"
+#import "Constants.h"
 @interface DMViewController () <DMLazyScrollViewDelegate,QBImagePickerControllerDelegate,PopoverViewDelegate> {
     DMLazyScrollView* lazyScrollView;
     NSMutableArray*    viewControllerArray;
@@ -83,7 +79,7 @@
         }];
         //set profile image
         UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
-        NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name };
+        NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name ,kSidebarImgSettingKey:@"Post"};
         [self infoArray:0 :0 :pobj];
         
         [appDelegate.menuController reloadData];
@@ -99,6 +95,7 @@
 -(void) loggedIn{
     [GSMainSystem createPoints:self.view :false];
     [self performSelectorInBackground:@selector(loadUserData) withObject:nil];
+    appDelegate.loggedIn = YES;
 }
 // on login handler
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
@@ -110,7 +107,7 @@
     if(appDelegate.rest.authorization.length >2 && ![appDelegate.rest.authorization isEqual: @"no network"] ){
         [popoverView showImage:[UIImage imageNamed:@"success"] withMessage:@"ST"];
         [popoverView performSelector:@selector(dismiss) withObject:nil afterDelay:0.5f];
-        [self loggedIn];
+        if(!appDelegate.loggedIn)[self loggedIn];
     }
 }
 
@@ -121,8 +118,9 @@
     [self loginSuccess];
     login= [[LoginView alloc]init];
     if(appDelegate.rest.authorization.length <2 || [appDelegate.rest.authorization isEqual: @"no network"] ){
-        // [self displayLogin];
-    }else{
+        appDelegate.loggedIn = NO;
+       // [self displayLogin];
+    }else if(!appDelegate.loggedIn){
         [self loggedIn];
     }
 }
@@ -187,12 +185,56 @@
         [self dismissView];
     }
     self.title = title;
+    if(self.title==appDelegate.rest.currentperson.name){
+        self.navigationItem.rightBarButtonItem = [self logoutButton];
+    }else if(self.title == STMenuPublic){
+    }else if(self.title == STMenuStream){
+    }else if(self.title == STMenuMention){
+    }else if(self.title == STMenuComment){
+    }else if(self.title == STMenuLike){
+    }
     return self;
+}
+
+//markas read handler
+-(UIBarButtonItem*) markAsReadButton{
+    UIButton* logoutButton = [UIButton buttonWithType:102];
+    [logoutButton addTarget:self action:@selector(ReadButtonReleased:) forControlEvents:UIControlEventTouchUpInside];
+    [logoutButton setTitle:@"Mark as Read" forState:UIControlStateNormal];
+    UIBarButtonItem* composeItem = [[UIBarButtonItem alloc] initWithCustomView:logoutButton];
+    return composeItem;
+}
+
+//read action
+- (IBAction) ReadButtonReleased:(id)sender {
+}
+
+//logout handler
+-(UIBarButtonItem*) logoutButton{
+    UIButton* logoutButton = [UIButton buttonWithType:102];
+    [logoutButton addTarget:self action:@selector(ButtonReleased:) forControlEvents:UIControlEventTouchUpInside];
+    [logoutButton setTitle:@"Logout" forState:UIControlStateNormal];
+    UIBarButtonItem* composeItem = [[UIBarButtonItem alloc] initWithCustomView:logoutButton];
+    return composeItem;
+}
+
+//logout action
+- (IBAction) ButtonReleased:(id)sender {
+    appDelegate.rest.authorization = nil;
+    appDelegate.rest.currentuserid = nil;
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.rest.authorization forKey:STPinNumberKey];
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.rest.currentuserid forKey:STAccountNumberKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDelegate.menuController relogin];
 }
 
 // on call of any menu change
 -(void)setObject:(id)obj{
     NSLog(@"her asp %@",obj);
+    
+    if ([obj isKindOfClass:[ST_AspectList class]]){
+        
+    }
 }
 // init
 - (id)initWithTitle:(NSString *)title withRevealBlock:(DSRevealBlock)revealBlock {
@@ -222,6 +264,19 @@
     UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backItem;
     self.navigationItem.rightBarButtonItem = [self composeButton];
+    if(self.title == STNotificationAlsoComment){
+        self.navigationItem.rightBarButtonItem = [self markAsReadButton];
+    }else if(self.title == STNotificationComment){
+        self.navigationItem.rightBarButtonItem = [self markAsReadButton];
+    }else if(self.title == STNotificationLike){
+        self.navigationItem.rightBarButtonItem = [self markAsReadButton];
+    }else if(self.title == STNotificationMentioned){
+        self.navigationItem.rightBarButtonItem = [self markAsReadButton];
+    }else if(self.title == STNotificationPgPost){
+        self.navigationItem.rightBarButtonItem = [self markAsReadButton];
+    }else if(self.title == STNotificationReshare){
+        self.navigationItem.rightBarButtonItem = [self markAsReadButton];
+    }
 	return self;
 }
 // on back for pages

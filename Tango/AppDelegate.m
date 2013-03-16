@@ -1,7 +1,6 @@
 #import "AppDelegate.h"
 #import "MenuCell.h"
-#import "ViewController.h"
-#import "SettingViewController.h"
+#import "ViewController.h" 
 #import "SideViewController.h"
 #import "DMViewController.h"
 

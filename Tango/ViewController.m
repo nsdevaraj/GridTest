@@ -9,6 +9,7 @@
 @interface ViewController ()<UIScrollViewDelegate>{
     GSSystem *GSMainSystem;
     PostFullView *fullView;
+    UIButton *pushButton;
 }
 @property (nonatomic, retain) QBPopupMenu *popupMenu; 
 @end
@@ -16,9 +17,8 @@
 @implementation ViewController
 @synthesize appDelegate,myPost;
 
-
 -(void)setPageNo:(id)pgNo{
-   NSLog(@"her %@",pgNo);
+    pushButton.titleLabel.text = [@"Push" stringByAppendingString:pgNo ];
 }
 
 - (void)actionsController {
@@ -34,7 +34,7 @@
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
     
-	UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	pushButton= [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
 	[pushButton addTarget:self action:@selector(actionsController) forControlEvents:UIControlEventTouchUpInside];
 	[pushButton sizeToFit];

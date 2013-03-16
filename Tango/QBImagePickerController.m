@@ -136,7 +136,7 @@
             
             self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
             self.navigationController.navigationBar.translucent = YES;
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];
             
             CGFloat top = 0;
             if(![[UIApplication sharedApplication] isStatusBarHidden]) top = top + 20;
