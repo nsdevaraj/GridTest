@@ -79,7 +79,7 @@
         }];
         //set profile image
         UIImage*profileImg = [UIImage imageWithData: [NSData dataWithContentsOfURL: [NSURL URLWithString: appDelegate.rest.currentperson.thumbnailurl]]];
-        NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name ,kSidebarImgSettingKey:@"Post"};
+        NSObject *pobj =@{kSidebarCellImageKey:profileImg,kSidebarCellTextKey:appDelegate.rest.currentperson.name };
         [self infoArray:0 :0 :pobj];
         
         [appDelegate.menuController reloadData];
@@ -189,11 +189,11 @@
     self.title = title;
     if(self.title==appDelegate.rest.currentperson.name){
         self.navigationItem.rightBarButtonItem = [self logoutButton];
-    }else if(self.title == STMenuPublic){
-    }else if(self.title == STMenuStream){
-    }else if(self.title == STMenuMention){
-    }else if(self.title == STMenuComment){
-    }else if(self.title == STMenuLike){
+    }else if([self.title isEqual: STMenuPublic]){
+    }else if([self.title isEqual: STMenuStream]){
+    }else if([self.title isEqual: STMenuMention]){
+    }else if([self.title isEqual: STMenuComment]){
+    }else if([self.title isEqual: STMenuLike]){
     }
     return self;
 }
@@ -266,17 +266,17 @@
     UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backItem;
     self.navigationItem.rightBarButtonItem = [self composeButton];
-    if(self.title == STNotificationAlsoComment){
+    if([self.title isEqual: STNotificationAlsoComment]){
         self.navigationItem.rightBarButtonItem = [self markAsReadButton];
-    }else if(self.title == STNotificationComment){
+    }else if([self.title isEqual: STNotificationComment]){
         self.navigationItem.rightBarButtonItem = [self markAsReadButton];
-    }else if(self.title == STNotificationLike){
+    }else if([self.title isEqual: STNotificationLike]){
         self.navigationItem.rightBarButtonItem = [self markAsReadButton];
-    }else if(self.title == STNotificationMentioned){
+    }else if([self.title isEqual: STNotificationMentioned]){
         self.navigationItem.rightBarButtonItem = [self markAsReadButton];
-    }else if(self.title == STNotificationPgPost){
+    }else if([self.title isEqual: STNotificationPgPost]){
         self.navigationItem.rightBarButtonItem = [self markAsReadButton];
-    }else if(self.title == STNotificationReshare){
+    }else if([self.title isEqual: STNotificationReshare]){
         self.navigationItem.rightBarButtonItem = [self markAsReadButton];
     }
 	return self;

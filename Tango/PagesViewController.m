@@ -5,6 +5,7 @@
 #import "ST_Tags.h"
 #import "ST_People.h"
 #import "Constants.h"
+#import "HJManagedImageV.h"
 #import "MPFoldTransition.h"
 @interface PagesViewController (){
     NSMutableArray *spaceArr;
@@ -28,24 +29,41 @@
     [self setWithTitle:self.title];
 }
 
+-(void) managedImageSet:(HJManagedImageV*)mi
+{
+    mi.imageView.contentMode = UIViewContentModeScaleAspectFit;
+}
+
 - (id)setWithTitle:(NSString *)title {
     self.title = title;
-    if(self.title == STMenuNotification){
+    if([self.title isEqual: STMenuNotification]){
         spaceArr = appDelegate.rest.notifyCatArr;
-    }else if(self.title == STMenuPage){
+    }else if([self.title isEqual: STMenuPage]){
         spaceArr = [NSMutableArray new];
-        for(ST_Pages *pg in appDelegate.rest.pageArr){
-            [spaceArr addObject: @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: pg.title}];
+        for(ST_Pages *pg in appDelegate.rest.pageArr){            
+            HJManagedImageV *_tileImageView = [[HJManagedImageV alloc] init];
+            [_tileImageView showLoadingWheel];
+            _tileImageView.url = [NSURL URLWithString:pg.logo];
+            _tileImageView.callbackOnSetImage = (id)self;
+            [appDelegate.imgMan manage:_tileImageView];
+            [spaceArr addObject: @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: pg.title}];
         } 
-    }else if(self.title == STMenuContact){
+    }else if([self.title isEqual: STMenuContact]){
         spaceArr = [NSMutableArray new];
-        for(ST_People *ppl in appDelegate.rest.contactArr){
-            [spaceArr addObject: @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: ppl.displayName}];
+        for(ST_People *ppl in appDelegate.rest.contactArr){          
+            HJManagedImageV *_tileImageView = [[HJManagedImageV alloc] init];
+            [_tileImageView showLoadingWheel];
+            _tileImageView.url = [NSURL URLWithString:ppl.thumbnailurl];
+            _tileImageView.callbackOnSetImage = (id)self;
+            [appDelegate.imgMan manage:_tileImageView];
+            [spaceArr addObject: @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: ppl.displayName}];
         }
-    }else if(self.title == STMenuTag){
-        spaceArr = [NSMutableArray new];
+    }else if([self.title isEqual: STMenuTag]){
+        spaceArr = [NSMutableArray new];                
+        HJManagedImageV *_tileImageView = [[HJManagedImageV alloc] init];
+        _tileImageView.image = [UIImage imageNamed:@"user.png"];
         for(ST_Tags *tag in appDelegate.rest.tagArr){
-            [spaceArr addObject: @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: tag.name}];
+            [spaceArr addObject: @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: tag.name}];
         } 
     }
     [self.collectionView reloadData];
@@ -70,7 +88,8 @@
 {
     Cell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"MY_CELL" forIndexPath:indexPath];
     cell.label.text = [spaceArr objectAtIndex: indexPath.item][kSidebarCellTextKey];
-    cell.imgView.image = [spaceArr objectAtIndex: indexPath.item][kSidebarCellImageKey];
+    HJManagedImageV *_tileImageView =[spaceArr objectAtIndex: indexPath.item][kSidebarCellImageKey];
+    cell.imgView.image = _tileImageView.image;
     return cell;
 }
 

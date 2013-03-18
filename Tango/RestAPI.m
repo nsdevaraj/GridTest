@@ -19,6 +19,7 @@
 #import "ST_Tags.h"
 #import "MenuCell.h"
 #import "Constants.h"
+#import "HJManagedImageV.h"
 #define GETMETHOD @"GET"
 #define POSTMETHOD @"POST"
 #define PUTMETHOD @"PUT"
@@ -35,13 +36,15 @@
 
 -(id) init{
     self = [super init];
+    HJManagedImageV *_tileImageView = [[HJManagedImageV alloc] init];
+    _tileImageView.image = [UIImage imageNamed:@"user.png"];
     self.notifyCatArr = [NSMutableArray arrayWithArray:@[
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationMentioned},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationComment},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationAlsoComment},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationLike},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationReshare},
-                         @{kSidebarCellImageKey: [UIImage imageNamed:@"user.png"], kSidebarCellTextKey: STNotificationPgPost}
+                         @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: STNotificationMentioned},
+                         @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: STNotificationComment},
+                         @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: STNotificationAlsoComment},
+                         @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: STNotificationLike},
+                         @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: STNotificationReshare},
+                         @{kSidebarCellImageKey: _tileImageView, kSidebarCellTextKey: STNotificationPgPost}
                          ]]; 
     return  self;
 }
