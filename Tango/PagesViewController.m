@@ -26,7 +26,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self setWithTitle:self.title];
+    [self performSelectorInBackground:@selector(setWithTitle:) withObject:self.title ];
 }
 
 -(void) managedImageSet:(HJManagedImageV*)mi
