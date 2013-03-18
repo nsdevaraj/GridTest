@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8433185016EAE66B0007E84B /* MGMushParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433184F16EAE66B0007E84B /* MGMushParser.m */; };
 		84E1E00D16EADC870086DF15 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E00C16EADC870086DF15 /* Constants.m */; };
+		8D47C9C816F6D93100921917 /* PostView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D47C9C716F6D93100921917 /* PostView.m */; };
 		FE12774516EA2C17009BB9EB /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE12774316EA2C17009BB9EB /* home@2x.png */; };
 		FE12774616EA2C17009BB9EB /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = FE12774416EA2C17009BB9EB /* home.png */; };
 		FE12778716EA3040009BB9EB /* MGBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FE12777D16EA3040009BB9EB /* MGBox.m */; };
@@ -297,6 +298,8 @@
 		8433185116EAE6740007E84B /* MGMushParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMushParser.h; sourceTree = "<group>"; };
 		84E1E00B16EADC870086DF15 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		84E1E00C16EADC870086DF15 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		8D47C9C616F6D93100921917 /* PostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostView.h; sourceTree = "<group>"; };
+		8D47C9C716F6D93100921917 /* PostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostView.m; sourceTree = "<group>"; };
 		FE12774316EA2C17009BB9EB /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
 		FE12774416EA2C17009BB9EB /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		FE12777C16EA3040009BB9EB /* MGBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBox.h; sourceTree = "<group>"; };
@@ -1076,6 +1079,8 @@
 				FEB1D27416E9ACA600137C28 /* SideView */,
 				FE244F7116EDA89C003E53A6 /* UIPlaceHolderTextView.h */,
 				FE244F7216EDA89C003E53A6 /* UIPlaceHolderTextView.m */,
+				8D47C9C616F6D93100921917 /* PostView.h */,
+				8D47C9C716F6D93100921917 /* PostView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1393,6 +1398,7 @@
 				FE88631D16EF570C00162AA7 /* PostImageView.m in Sources */,
 				FE3EF86B16F0878C003E161C /* DMLazyScrollView.m in Sources */,
 				FE3EF86F16F087BA003E161C /* DMViewController.m in Sources */,
+				8D47C9C816F6D93100921917 /* PostView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

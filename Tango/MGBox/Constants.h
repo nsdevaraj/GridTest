@@ -22,6 +22,7 @@
  
 #define DEFAULT_TOP_MARGIN      10.0 
 #define CORNER_RADIUS            4.0
+#define ANIM_SPEED 0.6
 
 #define STAccountNumberKey		@"accountNumber"
 #define STPinNumberKey			@"AccessTokenKey"

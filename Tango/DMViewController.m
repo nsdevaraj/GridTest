@@ -91,12 +91,14 @@
         
     }
 }
+
 //post login
 -(void) loggedIn{
     [GSMainSystem createPoints:self.view :false];
     [self performSelectorInBackground:@selector(loadUserData) withObject:nil];
     appDelegate.loggedIn = YES;
 }
+
 // on login handler
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
 {
@@ -119,7 +121,7 @@
     login= [[LoginView alloc]init];
     if(appDelegate.rest.authorization.length <2 || [appDelegate.rest.authorization isEqual: @"no network"] ){
         appDelegate.loggedIn = NO;
-       // [self displayLogin];
+        [self displayLogin];
     }else if(!appDelegate.loggedIn){
         [self loggedIn];
     }
